@@ -34,7 +34,8 @@
   --nav-mobile-background-color: #040b14; /* Used as the background color for mobile navigation menu */
   --nav-dropdown-background-color: #040b14; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
   --nav-dropdown-color: #a8a9b4; /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: #ffffff; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+  --nav-dropdown-hover-color: #ffffff;
+  --nav-bgcolor-hover: #323636; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
@@ -161,7 +162,8 @@ h6 {
   margin: 15px auto;
   display: block;
   width: 120px;
-  border: 8px solid color-mix(in srgb, var(--default-color), transparent 85%);
+  height: 150px;
+  border: 5px solid color-mix(in srgb, var(--default-color), transparent 85%);
 }
 
 .header .logo {
@@ -310,6 +312,9 @@ h6 {
 .navmenu .active,
 .navmenu .active:focus {
   color: var(--nav-hover-color);
+  background-color: #05749644;
+  border-radius: 20px;
+  font-weight: normal;
 }
 
 .navmenu a:hover .navicon,
@@ -1312,8 +1317,49 @@ section,
 }
 
 .brand {
-  width: 160px;
+  width: 100px;
   height: auto;
   border-radius: 100%;
   border: 8px solid rgba(229, 237, 245, 0.884);
+}
+
+.opacity {
+  opacity: 60%;
+}
+
+.text-justify-sty {
+  text-align: justify;
+  background-color: #214750f8;
+  color: #ffffff;
+  border-radius: 15px;
+}
+
+.text-justify-styX {
+  text-align: justify;
+  border: 2px solid #666968;
+  color: #000000;
+  border-radius: 15px;
+}
+
+.bordered {
+  border-radius: 25px;
+}
+
+.bordered-10 {
+  border-radius: 20px;
+}
+
+.covered {
+  border-color: #149ddd;
+  border-radius: 25px;
+}
+
+.img-fluid {
+  width: 150px;
+  height: auto;
+  border-radius: 25px;
+}
+
+.img-fluid:hover {
+  border-radius: 25px;
 }
