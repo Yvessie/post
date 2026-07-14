@@ -1,3 +1,111 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const acc = document.getElementsByClassName("accordion");
+
+    for (let i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            // Basculer la classe "active" sur le bouton
+            this.classList.toggle("active");
+
+            // Récupérer le panneau suivant
+            const panel = this.nextElementSibling;
+
+            // Si le panneau a déjà la classe "open", on le ferme, sinon on l'ouvre
+            if (panel.classList.contains("open")) {
+                panel.classList.remove("open");
+                // On remet maxHeight à 0 pour la transition
+                panel.style.maxHeight = 0;
+            } else {
+                // Fermer tous les autres panneaux (optionnel, pour un accordéon classique)
+                // Si vous voulez un comportement "exclusif" (un seul ouvert à la fois), décommentez :
+                /*
+                const allPanels = document.querySelectorAll('.panel');
+                allPanels.forEach(p => {
+                    if (p !== panel) {
+                        p.classList.remove('open');
+                        p.style.maxHeight = 0;
+                        p.previousElementSibling.classList.remove('active');
+                    }
+                });
+                */
+
+                // Ouvrir le panneau : on ajoute la classe et on fixe maxHeight à scrollHeight
+                panel.classList.add("open");
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        });
+    }
+});
+
+
+// ==========================================================
+// GESTION DU FORMULAIRE DE CONTACT
+// ==========================================================
+
+// ----- GESTION DU FORMULAIRE (sauvegarde dans localStorage) -----
+function handleSubmit(event) {
+    event.preventDefault();
+
+    const name = document.getElementById('name-field').value.trim();
+    const email = document.getElementById('email-field').value.trim();
+    const subject = document.getElementById('subject-field').value.trim();
+    const message = document.getElementById('message-field').value.trim();
+
+    if (!name || !email || !subject || !message) {
+        const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+        errorModal.show();
+        return false;
+    }
+
+    // Préparer les données
+    const newMessage = {
+        date: new Date().toISOString().slice(0, 10) + ' ' + new Date().toTimeString().slice(0, 8),
+        name: name,
+        email: email,
+        subject: subject,
+        message: message
+    };
+
+    // Récupérer les anciens messages ou créer un tableau vide
+    let messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+    messages.push(newMessage);
+    localStorage.setItem('contactMessages', JSON.stringify(messages));
+
+    // Remplir la modale de confirmation
+    document.getElementById('confirmName').textContent = name;
+    document.getElementById('confirmEmail').textContent = email;
+    document.getElementById('confirmSubject').textContent = subject;
+    document.getElementById('confirmMessage').textContent = message;
+
+    const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+    successModal.show();
+
+    document.getElementById('contactForm').reset();
+
+    // Si l'admin est connecté, rafraîchir la liste des messages
+    if (sessionStorage.getItem('admin_logged') === 'true' && typeof loadMessages === 'function') {
+        loadMessages();
+    }
+
+    return false;
+}
+// ==========================================================
+// CHARGEMENT AUTO DES DONNÉES (facultatif)
+// ==========================================================
+// Si vous voulez pré-remplir avec les dernières données enregistrées
+// (décommentez pour activer)
+/*
+document.addEventListener('DOMContentLoaded', function() {
+    const saved = localStorage.getItem('lastContact');
+    if (saved) {
+        const data = JSON.parse(saved);
+        // Vous pouvez pré-remplir les champs si vous le souhaitez
+        // document.getElementById('name-field').value = data.name || '';
+        // etc.
+    }
+});
+*/
+
+
 const typedElement = document.querySelector('.typed');
         const items = typedElement.getAttribute('data-typed-items').split(', ');
         let currentIndex = 0;
@@ -270,10 +378,11 @@ function saveData() {
   var messages = document.getElementById('message-field').value;
 
   if (username == '' || email == '' || objects == '' || messages == '') {
-    alert("Il semble que tout les est vide");
+    alert("Il semble que tout les champs est vide");
   }
   else {
     alert("Donné bien enregistrer");
   }
   
 }
+
