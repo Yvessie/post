@@ -70,82 +70,392 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================
-   ACCORDÉONS (interligne réduite, professionnel)
+   ACCORDÉONS - STYLE PROFESSIONNEL MODERNE
+   Version épurée avec dégradés, ombres et animations fluides
    ========================================================== */
+
 .accordion-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 4px;               /* espace entre les boutons réduit à 4px */
+  gap: 10px;
   max-width: 900px;
   margin: 0 auto;
+  padding: 8px 0;
 }
 
+/* ==========================================================
+   BOUTON ACCORDÉON
+   ========================================================== */
 .accordion {
-  background-color: #1b5d83fb;
-  color: #ffffff;
+  background: linear-gradient(145deg, #1a2a3a, #0f1e2b);
+  color: #e8edf2;
   cursor: pointer;
-  padding: 10px 18px;      /* padding réduit */
+  padding: 16px 24px;
   width: 100%;
   text-align: left;
   border: none;
   outline: none;
-  font-size: 0.95rem;      /* légèrement plus petit pour un rendu compact */
+  font-size: 1rem;
   font-weight: 600;
-  transition: all 0.25s ease;
-  border-radius: 12px !important;
+  font-family: var(--heading-font, 'Raleway', sans-serif);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 16px !important;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  letter-spacing: 0.3px;
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  letter-spacing: 0.4px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Bandeau décoratif subtil sur le côté */
+.accordion::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #149ddd, #0a6a9a);
+  border-radius: 0 4px 4px 0;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.accordion:hover::before {
+  opacity: 1;
+}
+
+/* Effet de brillance subtil */
+.accordion::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.03) 0%, transparent 60%);
+  pointer-events: none;
 }
 
 .accordion:hover {
-  background-color: #3d4b5a;
-}
-.accordion.active {
-  background-color: #3d4b5a;
-  box-shadow: 0 4px 16px rgba(27, 93, 131, 0.4);
+  background: linear-gradient(145deg, #1f3447, #142433);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 30px rgba(20, 157, 221, 0.15),
+    0 2px 8px rgba(0, 0, 0, 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-/* Flèche (FontAwesome) */
+.accordion.active {
+  background: linear-gradient(145deg, #1b2f42, #0f1e2b);
+  box-shadow: 
+    0 4px 24px rgba(20, 157, 221, 0.20),
+    0 2px 8px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  border-radius: 16px 16px 0 0 !important;
+}
+
+.accordion.active::before {
+  opacity: 1;
+  width: 5px;
+  background: linear-gradient(180deg, #149ddd, #0e7ab0);
+  box-shadow: 0 0 20px rgba(20, 157, 221, 0.3);
+}
+
+/* Icône du texte */
+.accordion span {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.accordion span i {
+  font-size: 1.25rem;
+  color: #149ddd;
+  width: 28px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.accordion:hover span i {
+  transform: scale(1.1);
+  color: #4bb3e8;
+}
+
+.accordion.active span i {
+  color: #4bb3e8;
+  filter: drop-shadow(0 0 8px rgba(20, 157, 221, 0.3));
+}
+
+/* ==========================================================
+   FLÈCHE DE L'ACCORDÉON
+   ========================================================== */
 .arrow {
   font-size: 1.1rem;
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  margin-left: 8px;        /* réduit l'espace entre texte et flèche */
-}
-.accordion.active .arrow {
-  transform: rotate(180deg);
+  color: rgba(255, 255, 255, 0.4);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-left: 12px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Panneau */
+.accordion:hover .arrow {
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.10);
+}
+
+.accordion.active .arrow {
+  transform: rotate(180deg);
+  color: #149ddd;
+  background: rgba(20, 157, 221, 0.15);
+  box-shadow: 0 0 20px rgba(20, 157, 221, 0.10);
+}
+
+/* ==========================================================
+   PANEAU DE L'ACCORDÉON
+   ========================================================== */
 .panel {
-  background-color: #ffffff;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(4px);
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  padding: 0 18px;         /* padding horizontal réduit */
-  transition: max-height 0.4s ease,
-              opacity 0.3s ease,
-              padding 0.3s ease,
-              box-shadow 0.3s ease;
-  border-radius: 0 0 12px 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  padding: 0 22px;
+  transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  border-left: 1px solid rgba(20, 157, 221, 0.08);
+  border-right: 1px solid rgba(20, 157, 221, 0.08);
+  border-bottom: 1px solid rgba(20, 157, 221, 0.08);
 }
 
 /* Panneau ouvert */
 .panel.open {
-  max-height: 2000px;      /* fallback, sera écrasé par JS */
+  max-height: 2500px;
   opacity: 1;
-  padding: 14px 18px 28px 18px;  /* ← padding-bas augmenté pour aérer le bas */
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  padding: 20px 24px 30px 24px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.06),
+    0 2px 8px rgba(0, 0, 0, 0.03);
+  background: linear-gradient(180deg, #fafdff, #ffffff);
+  border: 1px solid rgba(20, 157, 221, 0.06);
+  border-top: none;
 }
 
-/* Ajustement du texte dans le panneau */
-.panel p {
+/* Texte d'introduction dans le panneau */
+.panel p:first-of-type {
   margin-top: 0;
-  margin-bottom: 10px;     /* espace réduit sous le paragraphe */
+  margin-bottom: 16px;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #2d3748;
+  padding: 12px 18px;
+  background: rgba(20, 157, 221, 0.04);
+  border-radius: 12px;
+  border-left: 3px solid #149ddd;
+  font-weight: 400;
 }
+
+/* ==========================================================
+   LOGOS DANS LES PANEAUX
+   ========================================================== */
+.panel .row.padding {
+  padding: 8px 0 16px 0;
+  margin: 0;
+}
+
+.brand {
+  width: 90px;
+  height: auto;
+  border-radius: 50%;
+  border: 3px solid rgba(20, 157, 221, 0.12);
+  padding: 4px;
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: grayscale(0.1);
+}
+
+.brand:hover {
+  transform: translateY(-4px) scale(1.05);
+  border-color: #149ddd;
+  box-shadow: 0 8px 30px rgba(20, 157, 221, 0.12);
+  filter: grayscale(0);
+}
+
+/* ==========================================================
+   SECTION TITRE - "Mes domaines d'expertise"
+   ========================================================== */
+.section-title-accordion {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.section-title-accordion h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #050d18;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+.section-title-accordion h2::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(90deg, #149ddd, #0a6a9a);
+  border-radius: 2px;
+}
+
+.section-title-accordion .subtitle {
+  font-size: 0.95rem;
+  color: #4a5568;
+  margin-top: 14px;
+  letter-spacing: 0.3px;
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+/* Tablettes */
+@media (max-width: 991px) {
+  .accordion-wrapper {
+    gap: 8px;
+    padding: 4px 0;
+  }
+  
+  .accordion {
+    padding: 14px 20px;
+    font-size: 0.95rem;
+    border-radius: 14px !important;
+  }
+  
+  .accordion span i {
+    font-size: 1.1rem;
+    width: 24px;
+  }
+  
+  .panel.open {
+    padding: 16px 18px 24px 18px;
+  }
+  
+  .brand {
+    width: 75px;
+  }
+}
+
+/* Mobiles */
+@media (max-width: 768px) {
+  .accordion-wrapper {
+    gap: 6px;
+    padding: 0;
+  }
+  
+  .accordion {
+    padding: 12px 16px;
+    font-size: 0.88rem;
+    border-radius: 12px !important;
+  }
+  
+  .accordion span i {
+    font-size: 1rem;
+    width: 20px;
+  }
+  
+  .accordion span {
+    gap: 10px;
+  }
+  
+  .arrow {
+    width: 28px;
+    height: 28px;
+    font-size: 0.9rem;
+    margin-left: 8px;
+  }
+  
+  .panel.open {
+    padding: 14px 14px 20px 14px;
+  }
+  
+  .panel p:first-of-type {
+    font-size: 0.88rem;
+    padding: 10px 14px;
+  }
+  
+  .brand {
+    width: 60px;
+    border-width: 2px;
+  }
+  
+  .section-title-accordion h2 {
+    font-size: 1.5rem;
+  }
+  
+  .section-title-accordion .subtitle {
+    font-size: 0.85rem;
+  }
+}
+
+/* Très petits écrans */
+@media (max-width: 480px) {
+  .accordion {
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    border-radius: 10px !important;
+  }
+  
+  .accordion span i {
+    font-size: 0.9rem;
+    width: 18px;
+  }
+  
+  .accordion span {
+    gap: 8px;
+  }
+  
+  .arrow {
+    width: 24px;
+    height: 24px;
+    font-size: 0.8rem;
+  }
+  
+  .panel.open {
+    padding: 12px 12px 18px 12px;
+  }
+  
+  .panel p:first-of-type {
+    font-size: 0.82rem;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+  }
+  
+  .brand {
+    width: 50px;
+    border-width: 2px;
+  }
+  
+  .panel .row.padding {
+    padding: 4px 0 12px 0;
+  }
+}
+
+
 
 /* ==========================================================
    AMÉLIORATION : Marge en bas pour la ligne des logos
@@ -1613,3 +1923,292 @@ h1, h2, h3, h4, h5, h6 {
     height: 22px;
   }
 }
+
+/* ==========================================================
+       STYLES POUR LE CARROUSEL DE TÉMOIGNAGES
+       ========================================================== */
+
+    /* --- Conteneur principal --- */
+    .testimonial-card-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 0;
+    }
+
+    /* --- Carte du témoignage --- */
+    .testimonial-card {
+      max-width: 820px;
+      width: 100%;
+      background: linear-gradient(145deg, #ffffff, #f8fafc);
+      border-radius: 24px;
+      padding: 40px 44px 32px;
+      box-shadow: 
+        0 12px 48px rgba(0, 0, 0, 0.06),
+        0 4px 16px rgba(0, 0, 0, 0.03),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(20, 157, 221, 0.06);
+      position: relative;
+      transition: box-shadow 0.3s ease;
+      text-align: center;
+    }
+
+    .testimonial-card:hover {
+      box-shadow: 
+        0 16px 60px rgba(20, 157, 221, 0.08),
+        0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    /* --- Bandeau décoratif en haut --- */
+    .testimonial-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #149ddd, #0a6a9a, #149ddd);
+      background-size: 200% 100%;
+      animation: shimmer 4s ease-in-out infinite;
+      border-radius: 24px 24px 0 0;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { background-position: 0% 0%; }
+      50% { background-position: 100% 0%; }
+    }
+
+    /* --- Icône guillemets --- */
+    .quote-icon {
+      margin-bottom: 16px;
+    }
+
+    .quote-icon i {
+      font-size: 2.2rem;
+      color: rgba(20, 157, 221, 0.15);
+      background: rgba(20, 157, 221, 0.06);
+      padding: 12px 14px;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .testimonial-card:hover .quote-icon i {
+      color: rgba(20, 157, 221, 0.25);
+      background: rgba(20, 157, 221, 0.10);
+      transform: scale(1.05);
+    }
+
+    /* --- Texte du témoignage (plus petit) --- */
+    .testimonial-text {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #2d3748;
+      margin: 0 0 20px 0;
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: 0.2px;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .testimonial-text.fade-out {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    .testimonial-text.fade-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- Auteur --- */
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .author-avatar {
+      flex-shrink: 0;
+    }
+
+    .author-avatar img {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(20, 157, 221, 0.12);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      transition: all 0.3s ease;
+    }
+
+    .testimonial-card:hover .author-avatar img {
+      border-color: rgba(20, 157, 221, 0.25);
+      box-shadow: 0 4px 20px rgba(20, 157, 221, 0.10);
+    }
+
+    .author-info {
+      text-align: left;
+    }
+
+    .author-info h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #050d18;
+      margin: 0 0 2px 0;
+      font-family: var(--heading-font, 'Raleway', sans-serif);
+    }
+
+    .author-info span {
+      font-size: 0.8rem;
+      color: #718096;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+    }
+
+    /* --- Dots (indicateurs) --- */
+    .testimonial-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      padding-top: 4px;
+    }
+
+    .testimonial-dots .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #d1d9e6;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
+      padding: 0;
+      flex-shrink: 0;
+    }
+
+    .testimonial-dots .dot:hover {
+      background: #a0b4c8;
+      transform: scale(1.2);
+    }
+
+    .testimonial-dots .dot.active {
+      background: linear-gradient(135deg, #149ddd, #0a6a9a);
+      width: 30px;
+      border-radius: 6px;
+      box-shadow: 0 2px 12px rgba(20, 157, 221, 0.25);
+    }
+
+    /* --- Animation de transition entre les slides --- */
+    .testimonial-text {
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    /* ==========================================================
+       RESPONSIVE
+       ========================================================== */
+
+    @media (max-width: 768px) {
+      .testimonial-card {
+        padding: 28px 22px 24px;
+        border-radius: 20px;
+      }
+
+      .testimonial-text {
+        font-size: 0.92rem;
+        line-height: 1.6;
+        min-height: 70px;
+      }
+
+      .quote-icon i {
+        font-size: 1.6rem;
+        padding: 10px 12px;
+      }
+
+      .author-avatar img {
+        width: 44px;
+        height: 44px;
+      }
+
+      .author-info h4 {
+        font-size: 0.9rem;
+      }
+
+      .author-info span {
+        font-size: 0.75rem;
+      }
+
+      .testimonial-dots .dot {
+        width: 8px;
+        height: 8px;
+      }
+
+      .testimonial-dots .dot.active {
+        width: 24px;
+      }
+
+      .section-title h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .testimonial-card {
+        padding: 20px 16px 20px;
+        border-radius: 16px;
+      }
+
+      .testimonial-text {
+        font-size: 0.85rem;
+        line-height: 1.5;
+        min-height: 60px;
+      }
+
+      .quote-icon i {
+        font-size: 1.3rem;
+        padding: 8px 10px;
+      }
+
+      .testimonial-author {
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .author-avatar img {
+        width: 38px;
+        height: 38px;
+      }
+
+      .author-info {
+        text-align: center;
+      }
+
+      .author-info h4 {
+        font-size: 0.85rem;
+      }
+
+      .author-info span {
+        font-size: 0.7rem;
+      }
+
+      .testimonial-dots {
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .testimonial-dots .dot {
+        width: 6px;
+        height: 6px;
+      }
+
+      .testimonial-dots .dot.active {
+        width: 20px;
+      }
+    }
