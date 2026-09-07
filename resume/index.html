@@ -26,6 +26,7 @@
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
   <link href="assets/css/accordion.css" rel="stylesheet">
+  <link href="assets/css/language.css" rel="stylesheet">
 
   <style>
     /* ==========================================================
@@ -116,6 +117,106 @@
     #adminMenuLink[style*="color: #28a745"] .navicon {
       color: #28a745;
     }
+
+    /* Language selector responsive */
+    .language-selector {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      z-index: 10;
+      display: flex;
+      gap: 6px;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 8px 12px;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .lang-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .lang-btn .flag-emoji {
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+
+    .lang-btn .lang-label {
+      display: none;
+      font-size: 0.7rem;
+    }
+
+    .lang-btn:hover {
+      background: rgba(255, 255, 255, 0.10);
+      color: rgba(255, 255, 255, 0.8);
+      transform: translateY(-2px);
+    }
+
+    .lang-btn.active {
+      background: rgba(20, 157, 221, 0.25);
+      color: #ffffff;
+      box-shadow: 0 0 20px rgba(20, 157, 221, 0.15);
+    }
+
+    .lang-btn.active .lang-label {
+      display: inline-block;
+    }
+
+    .lang-btn.active .flag-emoji {
+      filter: drop-shadow(0 0 8px rgba(20, 157, 221, 0.4));
+    }
+
+    @media (max-width: 768px) {
+      .language-selector {
+        top: 12px;
+        right: 16px;
+        padding: 5px 10px;
+        gap: 4px;
+      }
+      .lang-btn {
+        padding: 4px 8px;
+      }
+      .lang-btn .flag-emoji {
+        font-size: 1.1rem;
+      }
+      .lang-btn .lang-label {
+        display: none !important;
+      }
+      .lang-btn.active .lang-label {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .language-selector {
+        top: 10px;
+        right: 10px;
+        padding: 4px 8px;
+        gap: 3px;
+      }
+      .lang-btn {
+        padding: 3px 6px;
+      }
+      .lang-btn .flag-emoji {
+        font-size: 1rem;
+      }
+    }
   </style>
 
 </head>
@@ -142,13 +243,13 @@
 
     <nav id="navmenu" class="navmenu">
       <ul>
-        <li><a href="#hero" class="active"><i class="bi bi-house navicon"></i>Acceuil</a></li>
-        <li><a href="#about"><i class="bi bi-person navicon"></i> A proros</a></li>
-        <li><a href="#resume"><i class="bi bi-file-earmark-text navicon"></i> Resumé</a></li>
-        <li><a href="#portfolio"><i class="bi bi-images navicon"></i> Portfolio</a></li>
-        <li><a href="#services"><i class="bi bi-hdd-stack navicon"></i> Services</a></li>
-        <li><a href="#contact"><i class="bi bi-envelope navicon"></i> Contact</a></li>
-        <li><a href="#espca_x4" id="adminMenuLink"><i class="bi bi-hdd-stack navicon"></i> Espace Privée</a></li>
+        <li><a href="#hero" class="active"><i class="bi bi-house navicon"></i><span data-lang-key="nav_home">Accueil</span></a></li>
+        <li><a href="#about"><i class="bi bi-person navicon"></i><span data-lang-key="nav_about">À propos</span></a></li>
+        <li><a href="#resume"><i class="bi bi-file-earmark-text navicon"></i><span data-lang-key="nav_resume">Résumé</span></a></li>
+        <li><a href="#portfolio"><i class="bi bi-images navicon"></i><span data-lang-key="nav_portfolio">Portfolio</span></a></li>
+        <li><a href="#services"><i class="bi bi-hdd-stack navicon"></i><span data-lang-key="nav_services">Services</span></a></li>
+        <li><a href="#contact"><i class="bi bi-envelope navicon"></i><span data-lang-key="nav_contact">Contact</span></a></li>
+        <li><a href="#espca_x4" id="adminMenuLink"><i class="bi bi-hdd-stack navicon"></i><span data-lang-key="nav_private">Espace Privée</span></a></li>
       </ul>
     </nav>
 
@@ -156,29 +257,49 @@
 
   <main class="main">
 
-  <!-- Hero Section avec réseau abstrait + effet typed -->
-  <section id="hero" class="hero section dark-background">
-    <canvas id="networkCanvas"></canvas>
-    <div class="hero-overlay"></div>
+    <!-- Hero Section avec réseau abstrait + effet typed -->
+    <section id="hero" class="hero section dark-background">
+      <canvas id="networkCanvas"></canvas>
+      <div class="hero-overlay"></div>
 
-    <div class="container" data-aos="fade-up" data-aos-delay="100">
-      <h2>RAKOTONIAINA Harry Yves</h2>
-      <h4 class="h4">TECHNICIEN SUPPORT IT | SYSTÈMES & APPLICATIONS</h4>
-      <p>
-        Je suis 
-        <span class="typed" data-typed-items="Développeur, Technicien Support IT, Freelanceur"></span>
-      </p>
-    </div>
-  </section>
+      <!-- ====== SÉLECTEUR DE LANGUE ====== -->
+      <div class="language-selector">
+        <button class="lang-btn active" data-lang="fr" title="Français">
+          <span class="flag-emoji">🇫🇷</span>
+          <span class="lang-label">FR</span>
+        </button>
+        <button class="lang-btn" data-lang="en" title="English">
+          <span class="flag-emoji">🇬🇧</span>
+          <span class="lang-label">EN</span>
+        </button>
+        <button class="lang-btn" data-lang="de" title="Deutsch">
+          <span class="flag-emoji">🇩🇪</span>
+          <span class="lang-label">DE</span>
+        </button>
+        <button class="lang-btn" data-lang="mg" title="Malagasy">
+          <span class="flag-emoji">🇲🇬</span>
+          <span class="lang-label">MG</span>
+        </button>
+      </div>
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <h2 id="heroName">RAKOTONIAINA Harry Yves</h2>
+        <h4 class="h4" id="heroTitle"><strong>TECHNICIEN SUPPORT IT | SYSTÈMES & APPLICATIONS</strong></h4>
+        <h5 id="heroAvailability">- Disponible pour une mobilité internationale | Autorisation de travail requise -</h5>
+        <p id="heroTyped">
+          <span data-lang-key="hero_typed_prefix">Je suis </span>
+          <span class="typed" data-typed-items="Développeur, Technicien Support IT, Freelanceur"></span>
+        </p>
+      </div>
+    </section>
 
     <!-- About Section -->
     <section id="about" class="about section">
       <div class="container section-title" data-aos="fade-up">
-        <h2>À propos</h2>
-        <p class="p-3 text-justify-sty shadow-lg w-100" style="width: 100%; max-width: 100%; box-sizing: border-box;">
+        <h2 data-lang-key="about_title">À propos</h2>
+        <p class="p-3 text-justify-sty shadow-lg w-100" id="aboutText" style="width: 100%; max-width: 100%; box-sizing: border-box;">
           Passionné par l'informatique depuis toujours, j'ai concrétisé mon intérêt en obtenant un diplôme dans le domaine, avec une spécialisation en développement et en gestion des systèmes d'information (IT). Cette formation m'a permis d'acquérir de solides compétences techniques et une compréhension approfondie des enjeux informatiques actuels. Je suis constamment à la recherche de nouveaux défis et opportunités pour mettre en pratique mes connaissances et contribuer à des projets innovants.
         </p>
-</div>
       </div>
       <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row gy-4 justify-content-center align-items-stretch">
@@ -186,36 +307,36 @@
             <div class="about-image-wrapper">
               <img src="assets/img/iharrys.jpg" class="img-fluid about-img" alt="Photo de profil">
               <div class="image-overlay">
-                <span class="badge bg-primary">Open to #work</span>
+                <span class="badge bg-primary" data-lang-key="about_badge">Open to #work</span>
               </div>
             </div>
           </div>
           <div class="col-lg-8 col-md-6">
             <div class="about-content-wrapper">
-              <h2 class="about-title">De petits détails.</h2>
+              <h2 class="about-title" data-lang-key="about_subtitle">De petits détails.</h2>
               <hr class="about-divider">
               <div class="row info-grid">
                 <div class="col-lg-6">
                   <ul class="info-list">
-                    <li><i class="bi bi-telephone-fill"></i> <strong>Téléphone</strong></li>
-                    <li><i class="bi bi-geo-alt-fill"></i> <strong>Ville</strong></li>
-                    <li><i class="bi bi-briefcase-fill"></i> <strong>Freelance</strong></li>
-                    <li><i class="bi bi-award-fill"></i> <strong>Diplôme</strong></li>
-                    <li><i class="bi bi-envelope-fill"></i> <strong>Email</strong></li>
+                    <li><i class="bi bi-telephone-fill"></i> <strong data-lang-key="about_phone">Téléphone</strong></li>
+                    <li><i class="bi bi-geo-alt-fill"></i> <strong data-lang-key="about_city">Ville</strong></li>
+                    <li><i class="bi bi-briefcase-fill"></i> <strong data-lang-key="about_freelance">Freelance</strong></li>
+                    <li><i class="bi bi-award-fill"></i> <strong data-lang-key="about_diploma">Diplôme</strong></li>
+                    <li><i class="bi bi-envelope-fill"></i> <strong data-lang-key="about_email">Email</strong></li>
                   </ul>
                 </div>
                 <div class="col-lg-6">
                   <ul class="info-list values">
                     <li><span>+261 33 52 477 04</span></li>
                     <li><span>Antananarivo, Madagascar</span></li>
-                    <li><span>Disponible</span></li>
-                    <li><span>Licences en informatique + 4 ans d'Experience</span></li>
+                    <li><span data-lang-key="about_available">Disponible</span></li>
+                    <li><span data-lang-key="about_degree">Licence en informatique + 4 ans d'expérience</span></li>
                     <li><span>rakotoniainaharryyves@gmail.com</span></li>
                   </ul>
                 </div>
               </div>
               <div class="about-description">
-                <p class="p-3 shadow-lg">
+                <p class="p-3 shadow-lg" id="aboutDescription">
                   Développeur et technicien Support IT avec Licence 3 en informatique mention <strong>Risque et Décision</strong>. Je suis passionné par la création de solutions web et la résolution de problèmes techniques. Disponible pour des projets freelance, je suis toujours prêt à relever de nouveaux défis.
                 </p>
               </div>
@@ -227,88 +348,84 @@
 
     <!-- Stats Section -->
     <section id="stats" class="stats section">
-  <div class="container" data-aos="fade-up" data-aos-delay="100">
-    
-    <!-- Titre de la section -->
-    <div class="text-center mb-4">
-      <h2 class="section-title-stats">Ce que je peux apporter</h2>
-      <p class="text-muted">Des compétences et une expérience au service de vos projets</p>
-    </div>
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        
+        <div class="text-center mb-4">
+          <h2 class="section-title-stats" data-lang-key="stats_title">Ce que je peux apporter</h2>
+          <p class="text-muted" data-lang-key="stats_subtitle">Des compétences et une expérience au service de vos projets</p>
+        </div>
 
-    <div class="testimonial-card-wrapper">
-      <div class="testimonial-card w-100" id="testimonialCard" style="width: 100% !important; max-width: 100%;">
-        <div class="quote-icon">
-          <i class="fas fa-quote-left"></i>
-        </div>
-        
-        <!-- Texte du témoignage -->
-        <p class="testimonial-text" id="testimonialText">
-          Grâce à une expertise polyvalente en développement logiciel, administration de bases de données et support informatique, je suis capable d'intervenir sur différentes composantes d'un système d'information, de sa conception à sa maintenance.
-        </p>
-        
-        <!-- Auteur -->
-        <div class="testimonial-author">
-          <div class="author-avatar">
-            <img src="assets/img/iharrysh.jpg" alt="Harry Y.R">
+        <div class="testimonial-card-wrapper">
+          <div class="testimonial-card w-100" id="testimonialCard" style="width: 100% !important; max-width: 100%;">
+            <div class="quote-icon">
+              <i class="fas fa-quote-left"></i>
+            </div>
+            
+            <p class="testimonial-text" id="testimonialText">
+              Grâce à une expertise polyvalente en développement logiciel, administration de bases de données et support informatique, je suis capable d'intervenir sur différentes composantes d'un système d'information, de sa conception à sa maintenance.
+            </p>
+            
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <img src="assets/img/iharrysh.jpg" alt="Harry Y.R">
+              </div>
+              <div class="author-info">
+                <h4 id="authorName">RAKOTONIAINA Harry Yves</h4>
+                <span id="authorRole">Technicien Support IT & Applicatif</span>
+              </div>
+            </div>
+            
+            <div class="testimonial-dots" id="testimonialDots">
+              <span class="dot active" data-index="0"></span>
+              <span class="dot" data-index="1"></span>
+              <span class="dot" data-index="2"></span>
+              <span class="dot" data-index="3"></span>
+              <span class="dot" data-index="4"></span>
+            </div>
           </div>
-          <div class="author-info">
-            <h4 id="authorName">RAKOTONIAINA Harry Yves</h4>
-            <span id="authorRole">Coordinateur Support IT & Développeur</span>
-          </div>
-        </div>
-        
-        <!-- Indicateurs -->
-        <div class="testimonial-dots" id="testimonialDots">
-          <span class="dot active" data-index="0"></span>
-          <span class="dot" data-index="1"></span>
-          <span class="dot" data-index="2"></span>
-          <span class="dot" data-index="3"></span>
-          <span class="dot" data-index="4"></span>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
     <!-- Skills Section -->
     <section id="skills" class="skills section light-background">
       <div class="container section-title" data-aos="fade-up">
-        <h2>Compétences</h2>
-            <p class="p-3 text-justify-sty shadow-lg w-100" style="width: 100% !important; max-width: 100% !important; display: block; box-sizing: border-box; text-align: justify; background-color: rgba(80, 80, 80, 0.95); color: #ffffff; border-radius: 15px; padding: 24px 30px !important; line-height: 1.8; font-size: 1.05rem; margin: 0 auto;">
-              Un ensemble des compétences en constante évolution pour relever les défis de demain.
-            </p>
+        <h2 data-lang-key="skills_title">Compétences</h2>
+        <p class="p-3 text-justify-sty shadow-lg w-100" id="skillsText" style="width: 100% !important; max-width: 100% !important; display: block; box-sizing: border-box; text-align: justify; background-color: rgba(80, 80, 80, 0.95); color: #ffffff; border-radius: 15px; padding: 24px 30px !important; line-height: 1.8; font-size: 1.05rem; margin: 0 auto;">
+          Un ensemble des compétences en constante évolution pour relever les défis de demain.
+        </p>
       </div>
       <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row skills-content skills-animation">
           <div class="col-lg-6 card p-4 bordered text-black">
             <h6 class="text-black fw-bold bg-info p-3 rounded-5 text-white shadow-lg">
-              <i class="fas fa-desktop me-2"></i>Compétences en IT Support
+              <i class="fas fa-desktop me-2"></i><span data-lang-key="skills_support_title">Compétences en IT Support</span>
             </h6>
-            <ul class="list-unstyled">
-              <li class="py-0">•<i class="fas fa-check-circle text-primary me-2"></i>Gestion des systèmes d'exploitation (Windows, Linux).</li>
-              <li class="py-0">•<i class="fas fa-check-circle text-primary me-2"></i>Gestion des tickets <strong>(GLPI*)</strong> et incidents.</li>
-              <li class="py-0">•<i class="fas fa-check-circle text-primary me-2"></i>Maintenance des équipements IT.</li>
-              <li class="py-0">•<i class="fas fa-check-circle text-primary me-2"></i>Support technique et assistance aux utilisateurs.</li>
-              <li class="py-0">•<i class="fas fa-check-circle text-primary me-2"></i>Gestion S. Active Directory.</li>
-              <li class="py-0">•<i class="fas fa-check-circle text-primary me-2"></i>Administration Microsoft ES 365.</li>
-              <li class="py-0">•<i class="fas fa-check-circle text-primary me-2"></i>Paramétrage et déploiement du matériel IT.</li>
-              <li class="py-0">•<i class="fas fa-ellipsis-h text-primary me-2"></i>Reseau TCP/IP, DHCP, DNS, LAN.</li>
+            <ul class="list-unstyled" id="skillsSupportList">
+              <li class="py-0">•<i class="fas fa-check-circle text-primary me-2"></i><span data-lang-key="skills_support_1">Gestion des systèmes d'exploitation (Windows, Linux).</span></li>
+              <li class="py-0">•<i class="fas fa-check-circle text-primary me-2"></i><span data-lang-key="skills_support_2">Gestion des tickets <strong>(GLPI*)</strong> et incidents.</span></li>
+              <li class="py-0">•<i class="fas fa-check-circle text-primary me-2"></i><span data-lang-key="skills_support_3">Maintenance des équipements IT.</span></li>
+              <li class="py-0">•<i class="fas fa-check-circle text-primary me-2"></i><span data-lang-key="skills_support_4">Support technique et assistance aux utilisateurs.</span></li>
+              <li class="py-0">•<i class="fas fa-check-circle text-primary me-2"></i><span data-lang-key="skills_support_5">Gestion Active Directory.</span></li>
+              <li class="py-0">•<i class="fas fa-check-circle text-primary me-2"></i><span data-lang-key="skills_support_6">Administration Microsoft ES 365.</span></li>
+              <li class="py-0">•<i class="fas fa-check-circle text-primary me-2"></i><span data-lang-key="skills_support_7">Paramétrage et déploiement du matériel IT.</span></li>
+              <li class="py-0">•<i class="fas fa-ellipsis-h text-primary me-2"></i><span data-lang-key="skills_support_8">Réseau TCP/IP, DHCP, DNS, LAN.</span></li>
             </ul>
           </div>
           <div class="col-lg-6 card p-4 bordered text-black">
             <h6 class="text-black fw-bold bg-info p-3 rounded-5 text-white shadow-lg">
-              <i class="fas fa-code me-2"></i>Compétences en applicatifs
+              <i class="fas fa-code me-2"></i><span data-lang-key="skills_apps_title">Compétences en applicatifs</span>
             </h6>
-            <ul class="list-unstyled">
-              <li class="py-1"><i class="fas fa-laptop me-2 text-primary"></i><strong>Application de bureau :</strong> ES 365</li>
-              <li class="py-1 mt-2"><i class="fas fa-database me-2 text-primary"></i><strong>Base de données :</strong>
+            <ul class="list-unstyled" id="skillsAppsList">
+              <li class="py-1"><i class="fas fa-laptop me-2 text-primary"></i><strong data-lang-key="skills_apps_1">Application de bureau :</strong> ES 365</li>
+              <li class="py-1 mt-2"><i class="fas fa-database me-2 text-primary"></i><strong data-lang-key="skills_apps_2">Base de données :</strong>
                 <ul class="list-unstyled ps-4">
                   <li class="py-0">• SQL Server</li>
                   <li class="py-0">• PostgreSQL</li>
                   <li class="py-0">• Informix</li>
                 </ul>
               </li>
-              <li class="py-1 mt-2"><i class="fas fa-terminal me-2 text-primary"></i><strong>Langages de programmation :</strong>
+              <li class="py-1 mt-2"><i class="fas fa-terminal me-2 text-primary"></i><strong data-lang-key="skills_apps_3">Langages de programmation :</strong>
                 <ul class="list-unstyled ps-4">
                   <li class="py-0">• HTML5, CSS3, JavaScript (React JS*, Bootstrap)</li>
                   <li class="py-0">• Python (Django*, Flask)</li>
@@ -320,71 +437,72 @@
           </div>
         </div>
 
-        
-<section class="py-5">
-  <h2 class="text-center mb-4 fw-bold" style="color: #050d18;">Mes domaines d'expertise</h2>
-  <p class="text-center text-muted mb-5">Cliquez sur une section pour explorer en détail</p>
-  
-  <div class="accordion-wrapper">
-    <!-- Accordéon 1 -->
-    <button class="accordion fw-bold active">
-      <span><i class="fas fa-laptop-code me-3"></i>Compétences Techniques</span>
-      <i class="fas fa-chevron-down arrow"></i>
-    </button>
-    <div class="panel active">
-      <p class="fw-semibold">Découvrez les technologies, outils et domaines d'expertise que j'utilise pour concevoir, développer et maintenir des solutions informatiques performantes.</p>
-      <div class="row padding text-center">
-        <div class="col-sm-2 mt-2"><img src="assets/img/htmlcss.webp" alt="HTML/CSS" class="brand"></div>
-        <div class="col-sm-2 mt-2"><img src="assets/img/vue.png" alt="Vue.js" class="brand"></div>
-        <div class="col-sm-2 mt-2"><img src="assets/img/python_18894.webp" alt="Python" class="brand"></div>
-        <div class="col-sm-2 mt-2"><img src="assets/img/django.png" alt="Django" class="brand"></div>
-        <div class="col-sm-2 mt-2"><img src="assets/img/flask.jpg" alt="Flask" class="brand"></div>
-        <div class="col-sm-2 mt-2"><img src="assets/img/git.png" alt="Git" class="brand"></div>
-        <div class="col-sm-2 mt-2"><img src="assets/img/react.webp" alt="React" class="brand"></div>
-        <div class="col-sm-2 mt-2"><img src="assets/img/dotnet.png" alt=".NET" class="brand"></div>
-      </div>
-    </div>
+        <section class="py-5">
+          <h2 class="text-center mb-4 fw-bold" style="color: #050d18;" data-lang-key="expertise_title">Mes domaines d'expertise</h2>
+          <p class="text-center text-muted mb-5" data-lang-key="expertise_subtitle">Cliquez sur une section pour explorer en détail</p>
+          
+          <div class="accordion-wrapper">
+            <!-- Accordéon 1 -->
+            <button class="accordion fw-bold active">
+              <span><i class="fas fa-laptop-code me-3"></i><span data-lang-key="accordion_1_title">Compétences Techniques</span></span>
+              <i class="fas fa-chevron-down arrow"></i>
+            </button>
+            <div class="panel active">
+              <p class="fw-semibold" data-lang-key="accordion_1_text">Découvrez les technologies, outils et domaines d'expertise que j'utilise pour concevoir, développer et maintenir des solutions informatiques performantes.</p>
+              <div class="row padding text-center">
+                <div class="col-sm-2 mt-2"><img src="assets/img/htmlcss.webp" alt="HTML/CSS" class="brand"></div>
+                <div class="col-sm-2 mt-2"><img src="assets/img/vue.png" alt="Vue.js" class="brand"></div>
+                <div class="col-sm-2 mt-2"><img src="assets/img/python_18894.webp" alt="Python" class="brand"></div>
+                <div class="col-sm-2 mt-2"><img src="assets/img/django.png" alt="Django" class="brand"></div>
+                <div class="col-sm-2 mt-2"><img src="assets/img/flask.jpg" alt="Flask" class="brand"></div>
+                <div class="col-sm-2 mt-2"><img src="assets/img/git.png" alt="Git" class="brand"></div>
+                <div class="col-sm-2 mt-2"><img src="assets/img/react.webp" alt="React" class="brand"></div>
+                <div class="col-sm-2 mt-2"><img src="assets/img/dotnet.png" alt=".NET" class="brand"></div>
+              </div>
+            </div>
 
-    <!-- Accordéon 2 -->
-    <button class="accordion fw-bold">
-      <span><i class="fas fa-database me-3"></i>Domaines d'Expertise</span>
-      <i class="fas fa-chevron-down arrow"></i>
-    </button>
-    <div class="panel">
-      <p class="fw-semibold">Une vue d'ensemble de mes compétences en développement logiciel, administration de bases de données et gestion des systèmes informatiques.</p>
-      <div class="row padding text-center">
-        <div class="col-sm-2 mt-2"><img src="assets/img/dot.webp" alt="MySQL" class="brand"></div>
-        <div class="col-sm-2 mt-2"><img src="assets/img/postgres.jpg" alt="PostgreSQL" class="brand"></div>
-        <div class="col-sm-2 mt-2"><img src="assets/img/sql.svg" alt="SQL Server" class="brand"></div>
-      </div>
-    </div>
+            <!-- Accordéon 2 -->
+            <button class="accordion fw-bold">
+              <span><i class="fas fa-database me-3"></i><span data-lang-key="accordion_2_title">Domaines d'Expertise</span></span>
+              <i class="fas fa-chevron-down arrow"></i>
+            </button>
+            <div class="panel">
+              <p class="fw-semibold" data-lang-key="accordion_2_text">Une vue d'ensemble de mes compétences en développement logiciel, administration de bases de données et gestion des systèmes informatiques.</p>
+              <div class="row padding text-center">
+                <div class="col-sm-2 mt-2"><img src="assets/img/dot.webp" alt="MySQL" class="brand"></div>
+                <div class="col-sm-2 mt-2"><img src="assets/img/postgres.jpg" alt="PostgreSQL" class="brand"></div>
+                <div class="col-sm-2 mt-2"><img src="assets/img/sql.svg" alt="SQL Server" class="brand"></div>
+              </div>
+            </div>
 
-    <!-- Accordéon 3 -->
-    <button class="accordion fw-bold">
-      <span><i class="fas fa-network-wired me-3"></i>IT & Technologies & Savoir-Faire</span>
-      <i class="fas fa-chevron-down arrow"></i>
-    </button>
-    <div class="panel">
-      <p class="fw-semibold">Solutions, frameworks et technologies utilisés pour le développement d'applications, la gestion des données et l'administration des infrastructures IT</p>
-      <div class="row padding text-center">
-        <div class="col-sm-2 mt-2"><img src="assets/img/images.jpeg" alt="Réseau" class="brand"></div>
-        <div class="col-sm-2 mt-2"><img src="assets/img/Windows-10-Linux.jpg" alt="Windows/Linux" class="brand"></div>
-        <div class="col-sm-2 mt-2"><img src="assets/img/ad.png" alt="Active Directory" class="brand"></div>
-        <div class="col-sm-2 mt-2"><img src="assets/img/support.jpg" alt="Support" class="brand"></div>
-        <div class="col-sm-2 mt-2"><img src="assets/img/office.jpeg" alt="Office 365" class="brand"></div>
-        <div class="col-sm-2 mt-2"><img src="assets/img/bashpower.jpg" alt="Bash/PowerShell" class="brand"></div>
-        <div class="col-sm-2 mt-2"><img src="assets/img/setting.jpg" alt="Configuration" class="brand"></div>
-        <div class="col-sm-2 mt-2"><img src="assets/img/wind.png" alt="Windows Server" class="brand"></div>
+            <!-- Accordéon 3 -->
+            <button class="accordion fw-bold">
+              <span><i class="fas fa-network-wired me-3"></i><span data-lang-key="accordion_3_title">IT & Technologies & Savoir-Faire</span></span>
+              <i class="fas fa-chevron-down arrow"></i>
+            </button>
+            <div class="panel">
+              <p class="fw-semibold" data-lang-key="accordion_3_text">Solutions, frameworks et technologies utilisés pour le développement d'applications, la gestion des données et l'administration des infrastructures IT</p>
+              <div class="row padding text-center">
+                <div class="col-sm-2 mt-2"><img src="assets/img/images.jpeg" alt="Réseau" class="brand"></div>
+                <div class="col-sm-2 mt-2"><img src="assets/img/Windows-10-Linux.jpg" alt="Windows/Linux" class="brand"></div>
+                <div class="col-sm-2 mt-2"><img src="assets/img/ad.png" alt="Active Directory" class="brand"></div>
+                <div class="col-sm-2 mt-2"><img src="assets/img/support.jpg" alt="Support" class="brand"></div>
+                <div class="col-sm-2 mt-2"><img src="assets/img/office.jpeg" alt="Office 365" class="brand"></div>
+                <div class="col-sm-2 mt-2"><img src="assets/img/bashpower.jpg" alt="Bash/PowerShell" class="brand"></div>
+                <div class="col-sm-2 mt-2"><img src="assets/img/setting.jpg" alt="Configuration" class="brand"></div>
+                <div class="col-sm-2 mt-2"><img src="assets/img/wind.png" alt="Windows Server" class="brand"></div>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
     <!-- Resume Section -->
     <section id="resume" class="resume section">
       <div class="container section-title" data-aosX="fade-up">
-        <h2>Resumé</h2>
-        <p class="p-3 text-justify-sty shadow-lg w-100 text-black" 
+        <h2 data-lang-key="resume_title">Résumé</h2>
+        <p class="p-3 text-justify-sty shadow-lg w-100 text-black" id="resumeText" 
          style="width: 100% !important; 
                 max-width: 100% !important; 
                 display: block; 
@@ -407,67 +525,67 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-6 text-black" data-aosX="fade-up" data-aosX-delay="100">
-            <h3 class="resume-title">Objectif</h3>
+            <h3 class="resume-title" data-lang-key="resume_objective">Objectif</h3>
             <div class="resume-item pb-0">
               <h4>RAKOTONIAINA Harry Yves</h4>
-              <p><em>Coordinateur Support Informatique et Applicatifs, autonome et rigoureux, je souhaite mettre mes compétences en gestion du support et en optimisation des processus au service de votre entreprise, tout en développant mon expertise.</em></p>
+              <p id="resumeObjectiveText"><em>Coordinateur Support Informatique et Applicatifs, autonome et rigoureux, je souhaite mettre mes compétences en gestion du support et en optimisation des processus au service de votre entreprise, tout en développant mon expertise.</em></p>
               <ul>
                 <li>Antananarivo, Madagascar</li>
                 <li>+261 33 52 477 04</li>
                 <li>rakotoniainaharryyves@gmail.com</li>
               </ul>
             </div>
-            <h3 class="resume-title">Education | Formation</h3>
-            <div class="resume-item">
-              <h4>Formation Deutsch: Actuellement chez DLMZ Tsimbazaza</h4>
+            <h3 class="resume-title" data-lang-key="resume_education">Education | Formation</h3>
+            <div class="resume-item" id="resumeEducation">
+              <h4 data-lang-key="resume_edu_1">Formation Deutsch: Actuellement chez DLMZ Tsimbazaza</h4>
               <h5>Octobre 2025 - </h5>
               <p><em>DLMZ (Deutsch Lernen Mit Ziel)</em></p>
             </div>
             <div class="resume-item">
-              <h4>Formation Online: Certificat de réussite pour Advanced Technical SQL</h4>
+              <h4 data-lang-key="resume_edu_2">Formation Online: Certificat de réussite pour Advanced Technical SQL</h4>
               <h5>Novembre 2024 - Février 2025 | Codefinity</h5>
             </div>
             <div class="resume-item">
-              <h4>Formation Anglais: Certificat de scolarité pour les cours</h4>
+              <h4 data-lang-key="resume_edu_3">Formation Anglais: Certificat de scolarité pour les cours</h4>
               <h5>Janvier 2024 - Février 2024 | Antananarivo, Madagascar</h5>
               <p><em>ITTI (Internationale TEFL/TESOL Training Institute)</em></p>
             </div>
             <div class="resume-item">
-              <h4>Licence: Informatique Risque et Décision</h4>
+              <h4 data-lang-key="resume_edu_4">Licence: Informatique Risque et Décision</h4>
               <h5>2021 - 2023 | Antananarivo, Madagascar</h5>
               <p><em>ESMIA (École Supérieur de Management et de l'Informatique Appliqué)</em></p>
             </div>
             <div class="resume-item">
-              <h4>Attestation de réussite: 1ère Année Développement Web</h4>
+              <h4 data-lang-key="resume_edu_5">Attestation de réussite: 1ère Année Développement Web</h4>
               <h5>2019 - 2020 | Antananarivo, Madagascar</h5>
               <p><em>ESTIIM 67Ha (cecam)</em></p>
             </div>
             <div class="resume-item">
-              <h4>Baccalauréat : Enseignement général.</h4>
+              <h4 data-lang-key="resume_edu_6">Baccalauréat : Enseignement général.</h4>
               <h5>2017 - 2018 | Antananarivo, Madagascar</h5>
               <p><em>LPR (Lycée Privé Ranaivosoa)</em></p>
             </div>
             <hr class="">
             <button type="button" class="fw-bold btn btn-lg btn-info bordered-10" data-bs-toggle="modal" data-bs-target="#myModal">
-              télécharger mon cv
+              <span data-lang-key="resume_download_btn">Télécharger mon CV</span>
             </button>
             <div class="modal fade" id="myModal">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h4 class="modal-title">Téléchargement</h4>
+                    <h4 class="modal-title" data-lang-key="resume_download_title">Téléchargement</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"><i class="fw-bold bi bi-x-lg"></i></button>
                   </div>
                   <div class="modal-body">
                     <ul class="list-group">
                       <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <a target="_blank" href="./HARRY YVES RAKOTONIAINA-Fr.pdf">🖹 CV Version Fr</a><i class="bi-cloud-download"></i>
+                        <a target="_blank" href="./HARRY YVES RAKOTONIAINA-Fr.pdf">🖹 <span data-lang-key="resume_cv_fr">CV Version Fr</span></a><i class="bi-cloud-download"></i>
                       </li>
                       <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <a target="_blank" href="./HARRY YVES RAKOTONIAINA-Fr_bild.pdf">🖹 CV Version Fr photo</a><i class="bi-cloud-download"></i>
+                        <a target="_blank" href="./HARRY YVES RAKOTONIAINA-Fr_bild.pdf">🖹 <span data-lang-key="resume_cv_fr_photo">CV Version Fr photo</span></a><i class="bi-cloud-download"></i>
                       </li>
                       <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <a target="_blank" href="./HARRY YVES RAKOTONIAINA-EN.pdf">🖹 CV Version En</a><i class="bi-cloud-download"></i>
+                        <a target="_blank" href="./HARRY YVES RAKOTONIAINA-EN.pdf">🖹 <span data-lang-key="resume_cv_en">CV Version En</span></a><i class="bi-cloud-download"></i>
                       </li>
                     </ul>
                   </div>
@@ -476,74 +594,72 @@
             </div>
           </div>
           <div class="col-lg-6 text-black" data-aosX="fade-up" data-aosX-delay="200">
-            <h3 class="resume-title">Professional Experience</h3>
-            <div class="resume-item">
-              <h4>Stagiaire Developpeur S.I</h4>
-              <h5>Ravinala Airports | Mars 2026 au Septembre 2026.</h5>
+            <h3 class="resume-title" data-lang-key="resume_experience">Professional Experience</h3>
+            <div class="resume-item" id="resumeExperience">
+              <h4 data-lang-key="resume_exp_1_title">Stagiaire Developpeur S.I</h4>
+              <h5 data-lang-key="resume_exp_1_date">Ravinala Airports | Mars 2026 au Septembre 2026.</h5>
               <ul>
-                <li>Dévéloppement d'application dedié au Resource Humaine de Ravinala Airports.</li>
-                <li>
-                    <ul>
-                      <li>Déploiement de la nouvelle version V2.0</li>
-                      <li>Correctifs de securité.</li>
-                      <li>Développement et intégration d'une nouvelle fonctionnalité.</li>
-                    </ul>
-                </li>
-              </ul>
-              <h4>Support IT & Developpeur</h4>
-              <h5>Freelance | Juillet 2025 - Fevrier 2026.</h5>
-              <ul>
-                <li>Assistant technique des utilisateurs spécifiques.</li>
-                <li>Maintenance / réparation des matériels informatiques.</li>
-                <li>Développement web, apps (collaboration).</li>
-              </ul>
-            </div>
-            <div class="resume-item">
-              <h4>Chargé de Support IT et la Télécompensation</h4>
-              <h5>BGFIBank Madagascar | Avril 2024 - Mars 2025</h5>
-              <ul>
-                <li>Fourniture de support et assistance aux utilisateurs au quotidien.</li>
-                <li>Administration des comptes Active Directory et le portail Microsoft 365.</li>
-                <li>Responsable télécompensation.</li>
-                <li>Configuration des imprimantes et déploiement des nouvelles machines.</li>
-                <li>Gestion d'incident et résolution des tickets.</li>
-                <li>Support technique et aide aux utilisateurs.</li>
-              </ul>
-              <h5>Support Applicatif (Remplacement des démissionnaires)</h5>
-              <ul>
-                <li>Traitement des virements Multiples</li>
-                <li>Support Amplitude Bank</li>
-                <li>Développement et gestion annuaire bancaires.</li>
-                <li>Configuration des imprimantes et déploiement des nouvelles machines.</li>
-                <li>Administrateur serveur d'application ( annuaire, sms Banking).</li>
-              </ul>
-            </div>
-            <div class="resume-item">
-              <h4>Assistant IT</h4>
-              <h5>Mada-Marketing Call-Center | Novembre 2022 au Février 2023</h5>
-              <ul>
-                <li>Assistance et support aux utilisateurs.</li>
-                <li>Déploiement et paramétrage des nouvelles machines.</li>
-                <li>Maintenance des équipements informatiques.</li>
-                <li>Administrateur des systèmes Linux.</li>
-              </ul>
-            </div>
-            <div class="resume-item">
-              <h4>Support IT</h4>
-              <h5>Aide en Imprimerie M1Com| Septembre 2020 au Mars 2022</h5>
-              <ul>
-                <li>Maintenance des équipements informatiques.</li>
-                <li>Helpdesk.</li>
-              </ul>
-            </div>
-            <div class="resume-item">
-              <h4>Stagiaire Développeur</h4>
-              <h5>Compagnie Assurance Aro | Avril 2022 au Juin 2022</h5>
-              <ul>
-                <li>Développement de l'application du catalogue des documents de la compagnie.</li>
+                <li data-lang-key="resume_exp_1_1">Développement d'application dédié aux Ressources Humaines de Ravinala Airports.</li>
                 <ul>
-                  <li><span class="text-black">Langage utilisé:</span> Python avec framework Django</li>
-                  <li><span class="text-black">Base de donnée :</span> PostgreSQL avec outils GIT</li>
+                  <li data-lang-key="resume_exp_1_2">Déploiement de la nouvelle version V2.0</li>
+                  <li data-lang-key="resume_exp_1_3">Correctifs de sécurité.</li>
+                  <li data-lang-key="resume_exp_1_4">Développement et intégration d'une nouvelle fonctionnalité.</li>
+                </ul>
+              </ul>
+              <h4 data-lang-key="resume_exp_2_title">Support IT & Developpeur</h4>
+              <h5 data-lang-key="resume_exp_2_date">Freelance | Juillet 2025 - Février 2026.</h5>
+              <ul>
+                <li data-lang-key="resume_exp_2_1">Assistant technique des utilisateurs spécifiques.</li>
+                <li data-lang-key="resume_exp_2_2">Maintenance / réparation des matériels informatiques.</li>
+                <li data-lang-key="resume_exp_2_3">Développement web, apps (collaboration).</li>
+              </ul>
+            </div>
+            <div class="resume-item">
+              <h4 data-lang-key="resume_exp_3_title">Chargé de Support IT et de la Télécompensation</h4>
+              <h5 data-lang-key="resume_exp_3_date">BGFIBank Madagascar | Avril 2024 - Mars 2025</h5>
+              <ul>
+                <li data-lang-key="resume_exp_3_1">Fourniture de support et assistance aux utilisateurs au quotidien.</li>
+                <li data-lang-key="resume_exp_3_2">Administration des comptes Active Directory et du portail Microsoft 365.</li>
+                <li data-lang-key="resume_exp_3_3">Responsable de la télécompensation.</li>
+                <li data-lang-key="resume_exp_3_4">Configuration des imprimantes et déploiement des nouvelles machines.</li>
+                <li data-lang-key="resume_exp_3_5">Gestion d'incidents et résolution des tickets.</li>
+                <li data-lang-key="resume_exp_3_6">Support technique et aide aux utilisateurs.</li>
+              </ul>
+              <h5 data-lang-key="resume_exp_3_subtitle">Support Applicatif (Remplacement des démissionnaires)</h5>
+              <ul>
+                <li data-lang-key="resume_exp_3_7">Traitement des virements multiples</li>
+                <li data-lang-key="resume_exp_3_8">Support Amplitude Bank</li>
+                <li data-lang-key="resume_exp_3_9">Développement et gestion de l'annuaire bancaire.</li>
+                <li data-lang-key="resume_exp_3_10">Configuration des imprimantes et déploiement des nouvelles machines.</li>
+                <li data-lang-key="resume_exp_3_11">Administrateur du serveur d'applications (annuaire, SMS Banking).</li>
+              </ul>
+            </div>
+            <div class="resume-item">
+              <h4 data-lang-key="resume_exp_4_title">Assistant IT</h4>
+              <h5 data-lang-key="resume_exp_4_date">Mada-Marketing Call-Center | Novembre 2022 au Février 2023</h5>
+              <ul>
+                <li data-lang-key="resume_exp_4_1">Assistance et support aux utilisateurs.</li>
+                <li data-lang-key="resume_exp_4_2">Déploiement et paramétrage des nouvelles machines.</li>
+                <li data-lang-key="resume_exp_4_3">Maintenance des équipements informatiques.</li>
+                <li data-lang-key="resume_exp_4_4">Administrateur des systèmes Linux.</li>
+              </ul>
+            </div>
+            <div class="resume-item">
+              <h4 data-lang-key="resume_exp_5_title">Support IT</h4>
+              <h5 data-lang-key="resume_exp_5_date">Aide en Imprimerie M1Com | Septembre 2020 au Mars 2022</h5>
+              <ul>
+                <li data-lang-key="resume_exp_5_1">Maintenance des équipements informatiques.</li>
+                <li data-lang-key="resume_exp_5_2">Helpdesk.</li>
+              </ul>
+            </div>
+            <div class="resume-item">
+              <h4 data-lang-key="resume_exp_6_title">Stagiaire Développeur</h4>
+              <h5 data-lang-key="resume_exp_6_date">Compagnie Assurance Aro | Avril 2022 au Juin 2022</h5>
+              <ul>
+                <li data-lang-key="resume_exp_6_1">Développement de l'application du catalogue des documents de la compagnie.</li>
+                <ul>
+                  <li><span class="text-black" data-lang-key="resume_exp_6_lang">Langage utilisé :</span> Python avec framework Django</li>
+                  <li><span class="text-black" data-lang-key="resume_exp_6_db">Base de données :</span> PostgreSQL avec outils GIT</li>
                 </ul>
               </ul>
             </div>
@@ -555,8 +671,8 @@
     <!-- Portfolio Section -->
     <section id="portfolio" class="portfolio section light-background">
       <div class="container section-title" data-aosX="fade-up">
-        <h2>Portfolio</h2>
-        <p class="p-3 text-justify-sty shadow-lg w-100 text-black" 
+        <h2 data-lang-key="portfolio_title">Portfolio</h2>
+        <p class="p-3 text-justify-sty shadow-lg w-100 text-black" id="portfolioText" 
            style="width: 100% !important; 
                   max-width: 100% !important; 
                   display: block; 
@@ -579,7 +695,7 @@
       <div class="container">
         <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
           <ul class="portfolio-filters isotope-filters" data-aosX="fade-up" data-aosX-delay="100">
-            <li data-filter="*" class="filter-active text-black fw-bold">Tous ces développements sont disponibles sur mon GitLab ainsi les autre project. ( <i class="bi bi-gitlab" data-bs-toggle="tooltip" title="iharry RAKOTONIAINA - @iharrysh"></i> ) </li>
+            <li data-filter="*" class="filter-active text-black fw-bold" data-lang-key="portfolio_filter">Tous ces développements sont disponibles sur mon GitLab ainsi que d'autres projets. ( <i class="bi bi-gitlab" data-bs-toggle="tooltip" title="iharry RAKOTONIAINA - @iharrysh"></i> )</li>
             <li data-filter=".filter-app"></li>
             <li data-filter=".filter-product"></li>
             <li data-filter=".filter-branding"></li>
@@ -590,8 +706,8 @@
               <div class="portfolio-content h-100">
                 <img src="assets/img/catalogue.jpeg" class="img-fluid rounded-5" alt="">
                 <div class="portfolio-info">
-                  <h4>Durant stages</h4>
-                  <p class="">Stage de développement web apps Catalogue CDI (Centre de Documents et d'Information) de la compagnie Assurance Aro</p>
+                  <h4 data-lang-key="portfolio_item_1_title">Durant mon stage</h4>
+                  <p class="" data-lang-key="portfolio_item_1_text">Stage de développement d'une application web Catalogue CDI (Centre de Documentation et d'Information) pour la compagnie Assurance Aro</p>
                 </div>
               </div>
             </div>
@@ -599,8 +715,8 @@
               <div class="portfolio-content h-100">
                 <img src="assets/img/ann.png" class="rounded-5 img-fluid" alt="">
                 <div class="portfolio-info">
-                  <h4>Durant contract</h4>
-                  <p class="">Développement d'annuaire bancaire, une project interne chez BGFIBank Madagascar</p>
+                  <h4 data-lang-key="portfolio_item_2_title">Durant mon contrat</h4>
+                  <p class="" data-lang-key="portfolio_item_2_text">Développement d'un annuaire bancaire, un projet interne chez BGFIBank Madagascar</p>
                 </div>
               </div>
             </div>
@@ -608,8 +724,8 @@
               <div class="portfolio-content h-100">
                 <img src="assets/img/kar.png" class="rounded-5 img-fluid" alt="">
                 <div class="portfolio-info">
-                  <h4>Collaborations entre amis</h4>
-                  <p class="">Développement du site web d'Hôtel le karthala.Une site virtine presentation d'hôtel</p>
+                  <h4 data-lang-key="portfolio_item_3_title">Collaborations entre amis</h4>
+                  <p class="" data-lang-key="portfolio_item_3_text">Développement du site web de l'Hôtel Karthala. Un site vitrine pour la présentation de l'hôtel</p>
                 </div>
               </div>
             </div>
@@ -617,8 +733,8 @@
               <div class="portfolio-content h-100">
                 <img src="assets/img/choix.png" class="rounded-5 img-fluid" alt="">
                 <div class="portfolio-info">
-                  <h4>Collaborations entre amis</h4>
-                  <p class="">Participation au développement du site web de l'association Guide du choix 2024. Une association bénévolat</p>
+                  <h4 data-lang-key="portfolio_item_4_title">Collaborations entre amis</h4>
+                  <p class="" data-lang-key="portfolio_item_4_text">Participation au développement du site web de l'association Guide du Choix 2024. Une association bénévole</p>
                 </div>
               </div>
             </div>
@@ -626,8 +742,8 @@
               <div class="portfolio-content h-100">
                 <img src="assets/img/ecom.png" class="rounded-5 img-fluid" alt="">
                 <div class="portfolio-info">
-                  <h4>Collaborations entre amis</h4>
-                  <p class="">Création site e-commerce , une project d'amis de concevoir une site e-commerce pour ces produits</p>
+                  <h4 data-lang-key="portfolio_item_5_title">Collaborations entre amis</h4>
+                  <p class="" data-lang-key="portfolio_item_5_text">Création d'un site e-commerce, un projet entre amis pour concevoir une boutique en ligne pour leurs produits</p>
                 </div>
               </div>
             </div>
@@ -635,8 +751,8 @@
               <div class="portfolio-content h-100">
                 <img src="assets/img/dev.png" class="rounded-5 img-fluid" alt="">
                 <div class="portfolio-info">
-                  <h4>Durant stages</h4>
-                  <p class="">Application VINA - Une application evaluations des performances pour RH de Ravinala Airports</p>
+                  <h4 data-lang-key="portfolio_item_6_title">Durant mon stage</h4>
+                  <p class="" data-lang-key="portfolio_item_6_text">Application VINA - Une application d'évaluation des performances pour les RH de Ravinala Airports</p>
                 </div>
               </div>
             </div>
@@ -648,8 +764,8 @@
     <!-- Services Section -->
     <section id="services" class="services section">
       <div class="container section-title" data-aosX="fade-up">
-        <h2>Services</h2>
-        <p class="p-3 text-justify-sty shadow-lg w-100" 
+        <h2 data-lang-key="services_title">Services</h2>
+        <p class="p-3 text-justify-sty shadow-lg w-100" id="servicesText" 
            style="width: 100% !important; 
                   max-width: 100% !important; 
                   display: block; 
@@ -674,29 +790,29 @@
           <div class="col-lg-4 col-md-6 service-item d-flex" data-aosX="fade-up" data-aosX-delay="100">
             <div class="icon flex-shrink-0"><i class="bi bi-code"></i></div>
             <div>
-              <h4 class="title"><a href="" class="stretched-link">Developpement Web / Apps</a></h4>
-              <p class="description">Je développe des sites web et applications adaptés à vos besoins.</p>
+              <h4 class="title"><a href="" class="stretched-link" data-lang-key="service_1_title">Développement Web / Apps</a></h4>
+              <p class="description" data-lang-key="service_1_text">Je développe des sites web et applications adaptés à vos besoins.</p>
             </div>
           </div>
           <div class="col-lg-4 col-md-6 service-item d-flex" data-aosX="fade-up" data-aosX-delay="200">
             <div class="icon flex-shrink-0"><i class="bi bi-telephone"></i></div>
             <div>
-              <h4 class="title"><a href="" class="stretched-link">Support IT</a></h4>
-              <p class="description">Assistance informatique à distance.</p>
+              <h4 class="title"><a href="" class="stretched-link" data-lang-key="service_2_title">Support IT</a></h4>
+              <p class="description" data-lang-key="service_2_text">Assistance informatique à distance.</p>
             </div>
           </div>
           <div class="col-lg-4 col-md-6 service-item d-flex" data-aosX="fade-up" data-aosX-delay="300">
             <div class="icon flex-shrink-0"><i class="bi bi-gear"></i></div>
             <div>
-              <h4 class="title"><a href="" class="stretched-link">Maintenance IT</a></h4>
-              <p class="description">La vérification et la réparation des équipements informatiques.</p>
+              <h4 class="title"><a href="" class="stretched-link" data-lang-key="service_3_title">Maintenance IT</a></h4>
+              <p class="description" data-lang-key="service_3_text">La vérification et la réparation des équipements informatiques.</p>
             </div>
           </div>
           <div class="col-lg-4 col-md-6 service-item d-flex" data-aosX="fade-up" data-aosX-delay="400">
             <div class="icon flex-shrink-0"><i class="bi bi-house"></i></div>
             <div>
-              <h4 class="title"><a href="" class="stretched-link">Freelance</a></h4>
-              <p class="description">Disponible en freelance</p>
+              <h4 class="title"><a href="" class="stretched-link" data-lang-key="service_4_title">Freelance</a></h4>
+              <p class="description" data-lang-key="service_4_text">Disponible en freelance.</p>
             </div>
           </div>
         </div>
@@ -706,8 +822,8 @@
     <!-- Contact Section -->
     <section id="contact" class="contact section light-background" style="background-color: transparent;">
       <div class="container section-title" data-aosX="fade-up">
-        <h2>Contact</h2>
-        <p class="p-3 text-justify-sty shadow-lg w-100 text-black" 
+        <h2 data-lang-key="contact_title">Contact</h2>
+        <p class="p-3 text-justify-sty shadow-lg w-100 text-black" id="contactText" 
            style="width: 100% !important; 
                   max-width: 100% !important; 
                   display: block; 
@@ -734,21 +850,21 @@
               <div class="info-item d-flex" data-aosX="fade-up" data-aosX-delay="200">
                 <i class="bi bi-geo-alt flex-shrink-0"></i>
                 <div>
-                  <h3>Adresse</h3>
+                  <h3 data-lang-key="contact_address">Adresse</h3>
                   <p>Antananarivo, Madagascar</p>
                 </div>
               </div>
               <div class="info-item d-flex" data-aosX="fade-up" data-aosX-delay="300">
                 <i class="bi bi-telephone flex-shrink-0"></i>
                 <div>
-                  <h3>Contacter</h3>
+                  <h3 data-lang-key="contact_phone">Contacter</h3>
                   <p><a href="https://wa.me/261349217224">+261 33 52 477 04</a></p>
                 </div>
               </div>
               <div class="info-item d-flex" data-aosX="fade-up" data-aosX-delay="400">
                 <i class="bi bi-envelope flex-shrink-0"></i>
                 <div>
-                  <h3>Email</h3>
+                  <h3 data-lang-key="contact_email_label">Email</h3>
                   <p>rakotoniainaharryyves@gmail.com</p>
                 </div>
               </div>
@@ -759,24 +875,24 @@
             <form id="contactForm" class="rounded-5 php-email-form" data-aosX="fade-up" data-aosX-delay="200" onsubmit="return handleSubmit(event)">
               <div class="row gy-4">
                 <div class="col-md-6">
-                  <label for="name-field" class="pb-2">Votre nom</label>
+                  <label for="name-field" class="pb-2" data-lang-key="contact_form_name">Votre nom</label>
                   <input type="text" name="name" id="name-field" class="form-control rounded-5" required>
                 </div>
                 <div class="col-md-6">
-                  <label for="email-field" class="pb-2">Votre Email</label>
+                  <label for="email-field" class="pb-2" data-lang-key="contact_form_email">Votre Email</label>
                   <input type="email" class="form-control rounded-5" name="email" id="email-field" required>
                 </div>
                 <div class="col-md-12">
-                  <label for="subject-field" class="pb-2">Objet</label>
+                  <label for="subject-field" class="pb-2" data-lang-key="contact_form_subject">Objet</label>
                   <input type="text" class="form-control rounded-5" name="subject" id="subject-field" required>
                 </div>
                 <div class="col-md-12">
-                  <label for="message-field" class="pb-2">Message</label>
+                  <label for="message-field" class="pb-2" data-lang-key="contact_form_message">Message</label>
                   <textarea class="form-control rounded-5" name="message" rows="10" id="message-field" required></textarea>
                 </div>
                 <div class="col-md-12 text-center">
                   <button type="submit" class="btn btn-primary rounded-5" style="width: 50%;">
-                    <i class="fas fa-paper-plane me-2"></i>Envoyer
+                    <i class="fas fa-paper-plane me-2"></i><span data-lang-key="contact_form_send">Envoyer</span>
                   </button>
                 </div>
               </div>
@@ -796,22 +912,22 @@
       <div class="modal-content">
         <div class="modal-header" style="background: linear-gradient(135deg, #28a745, #20c997); border-bottom: none;">
           <h5 class="modal-title text-white" id="successModalLabel">
-            <i class="fas fa-check-circle me-2"></i>Message envoyé !
+            <i class="fas fa-check-circle me-2"></i><span data-lang-key="modal_success_title">Message envoyé !</span>
           </h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
         </div>
         <div class="modal-body text-center py-4">
           <i class="fas fa-envelope-open-text" style="font-size: 4rem; color: #28a745;"></i>
-          <h4 class="mt-3">Votre message a bien été envoyé</h4>
-          <p class="text-muted">Je vous répondrai dans les plus brefs délais.</p>
+          <h4 class="mt-3" data-lang-key="modal_success_body">Votre message a bien été envoyé</h4>
+          <p class="text-muted" data-lang-key="modal_success_text">Je vous répondrai dans les plus brefs délais.</p>
           <hr>
-          <p class="small text-muted"><strong>Nom :</strong> <span id="confirmName"></span></p>
-          <p class="small text-muted"><strong>Email :</strong> <span id="confirmEmail"></span></p>
-          <p class="small text-muted"><strong>Sujet :</strong> <span id="confirmSubject"></span></p>
-          <p class="small text-muted"><strong>Message :</strong> <span id="confirmMessage"></span></p>
+          <p class="small text-muted"><strong data-lang-key="modal_success_name">Nom :</strong> <span id="confirmName"></span></p>
+          <p class="small text-muted"><strong data-lang-key="modal_success_email">Email :</strong> <span id="confirmEmail"></span></p>
+          <p class="small text-muted"><strong data-lang-key="modal_success_subject">Sujet :</strong> <span id="confirmSubject"></span></p>
+          <p class="small text-muted"><strong data-lang-key="modal_success_message">Message :</strong> <span id="confirmMessage"></span></p>
         </div>
         <div class="modal-footer" style="border-top: none; justify-content: center;">
-          <button type="button" class="btn btn-success rounded-pill px-4" data-bs-dismiss="modal">Fermer</button>
+          <button type="button" class="btn btn-success rounded-pill px-4" data-bs-dismiss="modal"><span data-lang-key="modal_close">Fermer</span></button>
         </div>
       </div>
     </div>
@@ -822,17 +938,17 @@
       <div class="modal-content">
         <div class="modal-header" style="background: linear-gradient(135deg, #dc3545, #e74c3c); border-bottom: none;">
           <h5 class="modal-title text-white" id="errorModalLabel">
-            <i class="fas fa-exclamation-circle me-2"></i>Erreur
+            <i class="fas fa-exclamation-circle me-2"></i><span data-lang-key="modal_error_title">Erreur</span>
           </h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
         </div>
         <div class="modal-body text-center py-4">
           <i class="fas fa-times-circle" style="font-size: 4rem; color: #dc3545;"></i>
-          <h4 class="mt-3">Tous les champs sont obligatoires</h4>
-          <p class="text-muted">Veuillez remplir tous les champs du formulaire avant de l'envoyer.</p>
+          <h4 class="mt-3" data-lang-key="modal_error_body">Tous les champs sont obligatoires</h4>
+          <p class="text-muted" data-lang-key="modal_error_text">Veuillez remplir tous les champs du formulaire avant de l'envoyer.</p>
         </div>
         <div class="modal-footer" style="border-top: none; justify-content: center;">
-          <button type="button" class="btn btn-danger rounded-pill px-4" data-bs-dismiss="modal">Fermer</button>
+          <button type="button" class="btn btn-danger rounded-pill px-4" data-bs-dismiss="modal"><span data-lang-key="modal_close">Fermer</span></button>
         </div>
       </div>
     </div>
@@ -843,19 +959,19 @@
     <div class="modal-dialog modal-dialog-centered modal-sm">
       <div class="modal-content">
         <div class="modal-header bg-dark text-white">
-          <h5 class="modal-title"><i class="fas fa-shield-alt me-2"></i>Accès administrateur</h5>
+          <h5 class="modal-title"><i class="fas fa-shield-alt me-2"></i><span data-lang-key="admin_title">Accès administrateur</span></h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body text-center py-4">
           <i class="fas fa-key" style="font-size: 2.5rem; color: #6c757d;"></i>
-          <p class="mt-3 mb-2">Entrez le mot de passe :</p>
+          <p class="mt-3 mb-2" data-lang-key="admin_password_label">Entrez le mot de passe :</p>
           <input type="password" id="adminPassword" class="form-control form-control-lg" placeholder="Mot de passe">
-          <div id="adminError" class="text-danger mt-2 small" style="display: none;">❌ Mot de passe incorrect.</div>
+          <div id="adminError" class="text-danger mt-2 small" style="display: none;">❌ <span data-lang-key="admin_error">Mot de passe incorrect.</span></div>
         </div>
         <div class="modal-footer border-0 justify-content-center">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><span data-lang-key="admin_cancel">Annuler</span></button>
           <button type="button" id="adminLoginBtn" class="btn btn-primary px-4">
-            <i class="fas fa-sign-in-alt me-2"></i>Valider
+            <i class="fas fa-sign-in-alt me-2"></i><span data-lang-key="admin_validate">Valider</span>
           </button>
         </div>
       </div>
@@ -870,7 +986,7 @@
       <div class="modal-content">
         <div class="modal-header" id="infoModalHeader" style="border-bottom: none; background: #149ddd;">
           <h5 class="modal-title text-white" id="infoModalTitle">
-            <i class="fas fa-info-circle me-2"></i>Information
+            <i class="fas fa-info-circle me-2"></i><span data-lang-key="info_title">Information</span>
           </h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
@@ -881,7 +997,7 @@
           </p>
         </div>
         <div class="modal-footer border-0 justify-content-center">
-          <button type="button" class="btn btn-primary rounded-pill px-4" data-bs-dismiss="modal">OK</button>
+          <button type="button" class="btn btn-primary rounded-pill px-4" data-bs-dismiss="modal"><span data-lang-key="modal_close">OK</span></button>
         </div>
       </div>
     </div>
@@ -893,42 +1009,39 @@
   </button>
 
   <!-- Stored Messages Container -->
-  <!-- ==========================================================
-     SECTION DES MESSAGES - STYLE AMÉLIORÉ
-     ========================================================== -->
-<div class="messages-section-wrapper" id="messagesSectionWrapper">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="mt-4 p-4 bg-white rounded-3 shadow-sm" id="storedMessagesContainer" style="display: none;">
-          <h5 class="fw-bold text-primary d-flex align-items-center">
-            <i class="fas fa-archive me-2"></i>
-            <span>Messages enregistrés</span>
-            <span class="badge bg-primary ms-2" id="messageCount">0</span>
-          </h5>
-          <hr class="my-3">
-          <div id="messagesList" class="mt-3">
-            <div class="text-center py-4">
-              <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
-              <p class="text-muted">Aucun message enregistré.</p>
+  <div class="messages-section-wrapper" id="messagesSectionWrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="mt-4 p-4 bg-white rounded-3 shadow-sm" id="storedMessagesContainer" style="display: none;">
+            <h5 class="fw-bold text-primary d-flex align-items-center">
+              <i class="fas fa-archive me-2"></i>
+              <span data-lang-key="messages_title">Messages enregistrés</span>
+              <span class="badge bg-primary ms-2" id="messageCount">0</span>
+            </h5>
+            <hr class="my-3">
+            <div id="messagesList" class="mt-3">
+              <div class="text-center py-4">
+                <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                <p class="text-muted" data-lang-key="messages_empty">Aucun message enregistré.</p>
+              </div>
             </div>
-          </div>
-          <div class="d-flex flex-wrap gap-2 mt-4 pt-2 border-top">
-            <button type="button" class="btn btn-outline-primary rounded-pill px-4" onclick="downloadMessages()">
-              <i class="fas fa-download me-2"></i>Télécharger (.txt)
-            </button>
-            <button type="button" class="btn btn-outline-danger rounded-pill px-4" onclick="clearMessages()">
-              <i class="fas fa-trash me-2"></i>Effacer tout
-            </button>
-            <button type="button" class="btn btn-outline-secondary rounded-pill px-4" onclick="logout()">
-              <i class="fas fa-sign-out-alt me-2"></i>Déconnexion
-            </button>
+            <div class="d-flex flex-wrap gap-2 mt-4 pt-2 border-top">
+              <button type="button" class="btn btn-outline-primary rounded-pill px-4" onclick="downloadMessages()">
+                <i class="fas fa-download me-2"></i><span data-lang-key="messages_download">Télécharger (.txt)</span>
+              </button>
+              <button type="button" class="btn btn-outline-danger rounded-pill px-4" onclick="clearMessages()">
+                <i class="fas fa-trash me-2"></i><span data-lang-key="messages_clear">Effacer tout</span>
+              </button>
+              <button type="button" class="btn btn-outline-secondary rounded-pill px-4" onclick="logout()">
+                <i class="fas fa-sign-out-alt me-2"></i><span data-lang-key="messages_logout">Déconnexion</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
   <footer id="footer" class="footer position-relative light-background">
     <div class="container">
@@ -936,7 +1049,7 @@
         <p>© <span>Copyright</span> <strong class="px-1 sitename">Hiz'arT</strong> <span>All Rights Reserved</span></p>
       </div>
       <div class="credits">
-        Harry Y.R <a href="#">v1-01.092026</a>
+        Harry Y.R <a href="#">v1.0-07.092026</a>
       </div>
     </div>
   </footer>
@@ -949,281 +1062,835 @@
   <script src="assets/js/main.js"></script>
 
   <!-- ==========================================================
-       SCRIPT UNIQUEMENT POUR L'ESPACE PRIVÉ
+       SCRIPT DE TRADUCTION COMPLET
        ========================================================== -->
   <script>
     // ==========================================================
-    // ESPACE PRIVÉ - FONCTIONNALITÉS SPÉCIFIQUES
+    // TRADUCTIONS - FRANÇAIS, ANGLAIS, ALLEMAND, MALGACHE
     // ==========================================================
 
-    // ----- MOT DE PASSE -----
-    const ADMIN_PASSWORD = "admin123";
+    var TRANSLATIONS = {
+      fr: {
+        // Navigation
+        nav_home: 'Accueil',
+        nav_about: 'À propos',
+        nav_resume: 'Résumé',
+        nav_portfolio: 'Portfolio',
+        nav_services: 'Services',
+        nav_contact: 'Contact',
+        nav_private: 'Espace Privée',
+        // Hero
+        hero_typed_prefix: 'Je suis ',
+        hero_typed_items: 'Développeur, Technicien Support IT, Freelanceur',
+        // About
+        about_title: 'À propos',
+        about_badge: 'Open to #work',
+        about_subtitle: 'De petits détails.',
+        about_phone: 'Téléphone',
+        about_city: 'Ville',
+        about_freelance: 'Freelance',
+        about_diploma: 'Diplôme',
+        about_email: 'Email',
+        about_available: 'Disponible',
+        about_degree: 'Licence en informatique + 4 ans d\'expérience',
+        // Stats
+        stats_title: 'Ce que je peux apporter',
+        stats_subtitle: 'Des compétences et une expérience au service de vos projets',
+        // Skills
+        skills_title: 'Compétences',
+        skills_support_title: 'Compétences en IT Support',
+        skills_support_1: 'Gestion des systèmes d\'exploitation (Windows, Linux).',
+        skills_support_2: 'Gestion des tickets <strong>(GLPI*)</strong> et incidents.',
+        skills_support_3: 'Maintenance des équipements IT.',
+        skills_support_4: 'Support technique et assistance aux utilisateurs.',
+        skills_support_5: 'Gestion Active Directory.',
+        skills_support_6: 'Administration Microsoft ES 365.',
+        skills_support_7: 'Paramétrage et déploiement du matériel IT.',
+        skills_support_8: 'Réseau TCP/IP, DHCP, DNS, LAN.',
+        skills_apps_title: 'Compétences en applicatifs',
+        skills_apps_1: 'Application de bureau :',
+        skills_apps_2: 'Base de données :',
+        skills_apps_3: 'Langages de programmation :',
+        // Expertise
+        expertise_title: 'Mes domaines d\'expertise',
+        expertise_subtitle: 'Cliquez sur une section pour explorer en détail',
+        accordion_1_title: 'Compétences Techniques',
+        accordion_1_text: 'Découvrez les technologies, outils et domaines d\'expertise que j\'utilise pour concevoir, développer et maintenir des solutions informatiques performantes.',
+        accordion_2_title: 'Domaines d\'Expertise',
+        accordion_2_text: 'Une vue d\'ensemble de mes compétences en développement logiciel, administration de bases de données et gestion des systèmes informatiques.',
+        accordion_3_title: 'IT & Technologies & Savoir-Faire',
+        accordion_3_text: 'Solutions, frameworks et technologies utilisés pour le développement d\'applications, la gestion des données et l\'administration des infrastructures IT.',
+        // Resume
+        resume_title: 'Résumé',
+        resume_objective: 'Objectif',
+        resume_education: 'Éducation | Formation',
+        resume_edu_1: 'Formation Deutsch : Actuellement chez DLMZ Tsimbazaza',
+        resume_edu_2: 'Formation en ligne : Certificat de réussite pour Advanced Technical SQL',
+        resume_edu_3: 'Formation Anglais : Certificat de scolarité pour les cours',
+        resume_edu_4: 'Licence : Informatique Risque et Décision',
+        resume_edu_5: 'Attestation de réussite : 1ère Année Développement Web',
+        resume_edu_6: 'Baccalauréat : Enseignement général.',
+        resume_download_btn: 'Télécharger mon CV',
+        resume_download_title: 'Téléchargement',
+        resume_cv_fr: 'CV Version Fr',
+        resume_cv_fr_photo: 'CV Version Fr photo',
+        resume_cv_en: 'CV Version En',
+        resume_experience: 'Expérience professionnelle',
+        resume_exp_1_title: 'Stagiaire Développeur S.I',
+        resume_exp_1_date: 'Ravinala Airports | Mars 2026 - Septembre 2026',
+        resume_exp_1_1: 'Développement d\'application dédiée aux Ressources Humaines de Ravinala Airports.',
+        resume_exp_1_2: 'Déploiement de la nouvelle version V2.0',
+        resume_exp_1_3: 'Correctifs de sécurité.',
+        resume_exp_1_4: 'Développement et intégration d\'une nouvelle fonctionnalité.',
+        resume_exp_2_title: 'Support IT & Développeur',
+        resume_exp_2_date: 'Freelance | Juillet 2025 - Février 2026',
+        resume_exp_2_1: 'Assistant technique des utilisateurs spécifiques.',
+        resume_exp_2_2: 'Maintenance et réparation des matériels informatiques.',
+        resume_exp_2_3: 'Développement web et applications (collaboration).',
+        resume_exp_3_title: 'Chargé de Support IT et de la Télécompensation',
+        resume_exp_3_date: 'BGFIBank Madagascar | Avril 2024 - Mars 2025',
+        resume_exp_3_1: 'Support et assistance aux utilisateurs au quotidien.',
+        resume_exp_3_2: 'Administration des comptes Active Directory et du portail Microsoft 365.',
+        resume_exp_3_3: 'Responsable de la télécompensation.',
+        resume_exp_3_4: 'Configuration des imprimantes et déploiement des nouvelles machines.',
+        resume_exp_3_5: 'Gestion d\'incidents et résolution des tickets.',
+        resume_exp_3_6: 'Support technique et aide aux utilisateurs.',
+        resume_exp_3_subtitle: 'Support Applicatif (Remplacement des démissionnaires)',
+        resume_exp_3_7: 'Traitement des virements multiples.',
+        resume_exp_3_8: 'Support Amplitude Bank.',
+        resume_exp_3_9: 'Développement et gestion de l\'annuaire bancaire.',
+        resume_exp_3_10: 'Configuration des imprimantes et déploiement des nouvelles machines.',
+        resume_exp_3_11: 'Administrateur du serveur d\'applications (annuaire, SMS Banking).',
+        resume_exp_4_title: 'Assistant IT',
+        resume_exp_4_date: 'Mada-Marketing Call-Center | Novembre 2022 - Février 2023',
+        resume_exp_4_1: 'Assistance et support aux utilisateurs.',
+        resume_exp_4_2: 'Déploiement et paramétrage des nouvelles machines.',
+        resume_exp_4_3: 'Maintenance des équipements informatiques.',
+        resume_exp_4_4: 'Administrateur des systèmes Linux.',
+        resume_exp_5_title: 'Support IT',
+        resume_exp_5_date: 'Aide en Imprimerie M1Com | Septembre 2020 - Mars 2022',
+        resume_exp_5_1: 'Maintenance des équipements informatiques.',
+        resume_exp_5_2: 'Helpdesk.',
+        resume_exp_6_title: 'Stagiaire Développeur',
+        resume_exp_6_date: 'Compagnie Assurance Aro | Avril 2022 - Juin 2022',
+        resume_exp_6_1: 'Développement de l\'application du catalogue des documents de la compagnie.',
+        resume_exp_6_lang: 'Langage utilisé :',
+        resume_exp_6_db: 'Base de données :',
+        // Portfolio
+        portfolio_title: 'Portfolio',
+        portfolio_filter: 'Tous ces développements sont disponibles sur mon GitLab ainsi que d\'autres projets.',
+        portfolio_item_1_title: 'Durant mon stage',
+        portfolio_item_1_text: 'Stage de développement d\'une application web Catalogue CDI (Centre de Documentation et d\'Information) pour la compagnie Assurance Aro',
+        portfolio_item_2_title: 'Durant mon contrat',
+        portfolio_item_2_text: 'Développement d\'un annuaire bancaire, un projet interne chez BGFIBank Madagascar',
+        portfolio_item_3_title: 'Collaborations entre amis',
+        portfolio_item_3_text: 'Développement du site web de l\'Hôtel Karthala. Un site vitrine pour la présentation de l\'hôtel',
+        portfolio_item_4_title: 'Collaborations entre amis',
+        portfolio_item_4_text: 'Participation au développement du site web de l\'association Guide du Choix 2024. Une association bénévole',
+        portfolio_item_5_title: 'Collaborations entre amis',
+        portfolio_item_5_text: 'Création d\'un site e-commerce, un projet entre amis pour concevoir une boutique en ligne pour leurs produits',
+        portfolio_item_6_title: 'Durant mon stage',
+        portfolio_item_6_text: 'Application VINA - Une application d\'évaluation des performances pour les RH de Ravinala Airports',
+        // Services
+        services_title: 'Services',
+        service_1_title: 'Développement Web / Apps',
+        service_1_text: 'Je développe des sites web et applications adaptés à vos besoins.',
+        service_2_title: 'Support IT',
+        service_2_text: 'Assistance informatique à distance.',
+        service_3_title: 'Maintenance IT',
+        service_3_text: 'Vérification et réparation des équipements informatiques.',
+        service_4_title: 'Freelance',
+        service_4_text: 'Disponible en freelance.',
+        // Contact
+        contact_title: 'Contact',
+        contact_address: 'Adresse',
+        contact_phone: 'Contacter',
+        contact_email_label: 'Email',
+        contact_form_name: 'Votre nom',
+        contact_form_email: 'Votre Email',
+        contact_form_subject: 'Objet',
+        contact_form_message: 'Message',
+        contact_form_send: 'Envoyer',
+        // Modals
+        modal_success_title: 'Message envoyé !',
+        modal_success_body: 'Votre message a bien été envoyé',
+        modal_success_text: 'Je vous répondrai dans les plus brefs délais.',
+        modal_success_name: 'Nom :',
+        modal_success_email: 'Email :',
+        modal_success_subject: 'Sujet :',
+        modal_success_message: 'Message :',
+        modal_error_title: 'Erreur',
+        modal_error_body: 'Tous les champs sont obligatoires',
+        modal_error_text: 'Veuillez remplir tous les champs du formulaire avant de l\'envoyer.',
+        modal_close: 'Fermer',
+        // Admin
+        admin_title: 'Accès administrateur',
+        admin_password_label: 'Entrez le mot de passe :',
+        admin_error: 'Mot de passe incorrect.',
+        admin_cancel: 'Annuler',
+        admin_validate: 'Valider',
+        info_title: 'Information',
+        // Messages
+        messages_title: 'Messages enregistrés',
+        messages_empty: 'Aucun message enregistré.',
+        messages_download: 'Télécharger (.txt)',
+        messages_clear: 'Effacer tout',
+        messages_logout: 'Déconnexion'
+      },
+      en: {
+        // Navigation
+        nav_home: 'Home',
+        nav_about: 'About',
+        nav_resume: 'Resume',
+        nav_portfolio: 'Portfolio',
+        nav_services: 'Services',
+        nav_contact: 'Contact',
+        nav_private: 'Private Space',
+        // Hero
+        hero_typed_prefix: 'I am ',
+        hero_typed_items: 'Developer, IT Support Technician, Freelancer',
+        // About
+        about_title: 'About',
+        about_badge: 'Open to #work',
+        about_subtitle: 'Small details.',
+        about_phone: 'Phone',
+        about_city: 'City',
+        about_freelance: 'Freelance',
+        about_diploma: 'Diploma',
+        about_email: 'Email',
+        about_available: 'Available',
+        about_degree: 'Computer Science Degree + 4 years experience',
+        // Stats
+        stats_title: 'What I can bring',
+        stats_subtitle: 'Skills and experience at the service of your projects',
+        // Skills
+        skills_title: 'Skills',
+        skills_support_title: 'IT Support Skills',
+        skills_support_1: 'Operating systems management (Windows, Linux).',
+        skills_support_2: 'Ticket management <strong>(GLPI*)</strong> and incidents.',
+        skills_support_3: 'IT equipment maintenance.',
+        skills_support_4: 'Technical support and user assistance.',
+        skills_support_5: 'Active Directory management.',
+        skills_support_6: 'Microsoft ES 365 administration.',
+        skills_support_7: 'IT equipment configuration and deployment.',
+        skills_support_8: 'TCP/IP, DHCP, DNS, LAN networks.',
+        skills_apps_title: 'Application Skills',
+        skills_apps_1: 'Desktop Application:',
+        skills_apps_2: 'Databases:',
+        skills_apps_3: 'Programming Languages:',
+        // Expertise
+        expertise_title: 'My areas of expertise',
+        expertise_subtitle: 'Click on a section to explore in detail',
+        accordion_1_title: 'Technical Skills',
+        accordion_1_text: 'Discover the technologies, tools and expertise I use to design, develop and maintain high-performance IT solutions.',
+        accordion_2_title: 'Areas of Expertise',
+        accordion_2_text: 'An overview of my skills in software development, database administration and IT systems management.',
+        accordion_3_title: 'IT & Technologies & Know-How',
+        accordion_3_text: 'Solutions, frameworks and technologies used for application development, data management and IT infrastructure administration.',
+        // Resume
+        resume_title: 'Resume',
+        resume_objective: 'Objective',
+        resume_education: 'Education | Training',
+        resume_edu_1: 'German Training: Currently at DLMZ Tsimbazaza',
+        resume_edu_2: 'Online Training: Certificate of achievement for Advanced Technical SQL',
+        resume_edu_3: 'English Training: School certificate for courses',
+        resume_edu_4: 'Bachelor: Computer Science Risk and Decision',
+        resume_edu_5: 'Certificate of achievement: 1st Year Web Development',
+        resume_edu_6: 'Baccalaureate: General Education.',
+        resume_download_btn: 'Download my CV',
+        resume_download_title: 'Download',
+        resume_cv_fr: 'CV Version Fr',
+        resume_cv_fr_photo: 'CV Version Fr photo',
+        resume_cv_en: 'CV Version En',
+        resume_experience: 'Professional Experience',
+        resume_exp_1_title: 'S.I Developer Intern',
+        resume_exp_1_date: 'Ravinala Airports | March 2026 - September 2026',
+        resume_exp_1_1: 'Development of application dedicated to Human Resources of Ravinala Airports.',
+        resume_exp_1_2: 'Deployment of new version V2.0',
+        resume_exp_1_3: 'Security fixes.',
+        resume_exp_1_4: 'Development and integration of new features.',
+        resume_exp_2_title: 'IT Support & Developer',
+        resume_exp_2_date: 'Freelance | July 2025 - February 2026',
+        resume_exp_2_1: 'Technical assistance for specific users.',
+        resume_exp_2_2: 'Maintenance and repair of computer equipment.',
+        resume_exp_2_3: 'Web and app development (collaboration).',
+        resume_exp_3_title: 'IT Support and Telecompensation Officer',
+        resume_exp_3_date: 'BGFIBank Madagascar | April 2024 - March 2025',
+        resume_exp_3_1: 'Daily support and assistance to users.',
+        resume_exp_3_2: 'Active Directory account management and Microsoft 365 portal.',
+        resume_exp_3_3: 'Responsible for telecompensation.',
+        resume_exp_3_4: 'Printer configuration and new machine deployment.',
+        resume_exp_3_5: 'Incident management and ticket resolution.',
+        resume_exp_3_6: 'Technical support and user assistance.',
+        resume_exp_3_subtitle: 'Application Support (Replacement of resigning staff)',
+        resume_exp_3_7: 'Processing multiple transfers.',
+        resume_exp_3_8: 'Amplitude Bank Support.',
+        resume_exp_3_9: 'Development and management of banking directory.',
+        resume_exp_3_10: 'Printer configuration and new machine deployment.',
+        resume_exp_3_11: 'Application server administrator (directory, SMS Banking).',
+        resume_exp_4_title: 'IT Assistant',
+        resume_exp_4_date: 'Mada-Marketing Call-Center | November 2022 - February 2023',
+        resume_exp_4_1: 'User assistance and support.',
+        resume_exp_4_2: 'Deployment and configuration of new machines.',
+        resume_exp_4_3: 'Maintenance of computer equipment.',
+        resume_exp_4_4: 'Linux systems administrator.',
+        resume_exp_5_title: 'IT Support',
+        resume_exp_5_date: 'M1Com Printing House | September 2020 - March 2022',
+        resume_exp_5_1: 'Maintenance of computer equipment.',
+        resume_exp_5_2: 'Helpdesk.',
+        resume_exp_6_title: 'Developer Intern',
+        resume_exp_6_date: 'Aro Insurance Company | April 2022 - June 2022',
+        resume_exp_6_1: 'Development of the document catalog application for the company.',
+        resume_exp_6_lang: 'Language used:',
+        resume_exp_6_db: 'Database:',
+        // Portfolio
+        portfolio_title: 'Portfolio',
+        portfolio_filter: 'All these developments are available on my GitLab as well as other projects.',
+        portfolio_item_1_title: 'During my internship',
+        portfolio_item_1_text: 'Web app development internship - CDI (Documentation and Information Center) for Aro Insurance Company',
+        portfolio_item_2_title: 'During my contract',
+        portfolio_item_2_text: 'Banking directory development, an internal project at BGFIBank Madagascar',
+        portfolio_item_3_title: 'Friends collaborations',
+        portfolio_item_3_text: 'Development of the Karthala Hotel website. A showcase website for hotel presentation',
+        portfolio_item_4_title: 'Friends collaborations',
+        portfolio_item_4_text: 'Participation in the development of the Guide du Choix 2024 association website. A volunteer association',
+        portfolio_item_5_title: 'Friends collaborations',
+        portfolio_item_5_text: 'E-commerce site creation, a friends project to design an online store for their products',
+        portfolio_item_6_title: 'During my internship',
+        portfolio_item_6_text: 'VINA Application - A performance evaluation application for HR of Ravinala Airports',
+        // Services
+        services_title: 'Services',
+        service_1_title: 'Web / Apps Development',
+        service_1_text: 'I develop websites and applications tailored to your needs.',
+        service_2_title: 'IT Support',
+        service_2_text: 'Remote IT assistance.',
+        service_3_title: 'IT Maintenance',
+        service_3_text: 'Checking and repairing computer equipment.',
+        service_4_title: 'Freelance',
+        service_4_text: 'Available as a freelancer.',
+        // Contact
+        contact_title: 'Contact',
+        contact_address: 'Address',
+        contact_phone: 'Contact',
+        contact_email_label: 'Email',
+        contact_form_name: 'Your name',
+        contact_form_email: 'Your Email',
+        contact_form_subject: 'Subject',
+        contact_form_message: 'Message',
+        contact_form_send: 'Send',
+        // Modals
+        modal_success_title: 'Message sent!',
+        modal_success_body: 'Your message has been sent',
+        modal_success_text: 'I will get back to you as soon as possible.',
+        modal_success_name: 'Name:',
+        modal_success_email: 'Email:',
+        modal_success_subject: 'Subject:',
+        modal_success_message: 'Message:',
+        modal_error_title: 'Error',
+        modal_error_body: 'All fields are required',
+        modal_error_text: 'Please fill in all fields before sending.',
+        modal_close: 'Close',
+        // Admin
+        admin_title: 'Administrator access',
+        admin_password_label: 'Enter password:',
+        admin_error: 'Incorrect password.',
+        admin_cancel: 'Cancel',
+        admin_validate: 'Validate',
+        info_title: 'Information',
+        // Messages
+        messages_title: 'Saved messages',
+        messages_empty: 'No messages saved.',
+        messages_download: 'Download (.txt)',
+        messages_clear: 'Clear all',
+        messages_logout: 'Logout'
+      },
+      de: {
+        // Navigation
+        nav_home: 'Startseite',
+        nav_about: 'Über mich',
+        nav_resume: 'Lebenslauf',
+        nav_portfolio: 'Portfolio',
+        nav_services: 'Dienstleistungen',
+        nav_contact: 'Kontakt',
+        nav_private: 'Privater Bereich',
+        // Hero
+        hero_typed_prefix: 'Ich bin ',
+        hero_typed_items: 'Entwickler, IT-Support-Techniker, Freiberufler',
+        // About
+        about_title: 'Über mich',
+        about_badge: 'Offen für #Arbeit',
+        about_subtitle: 'Kleine Details.',
+        about_phone: 'Telefon',
+        about_city: 'Stadt',
+        about_freelance: 'Freiberuflich',
+        about_diploma: 'Diplom',
+        about_email: 'E-Mail',
+        about_available: 'Verfügbar',
+        about_degree: 'Informatik-Abschluss + 4 Jahre Erfahrung',
+        // Stats
+        stats_title: 'Was ich bieten kann',
+        stats_subtitle: 'Fähigkeiten und Erfahrung für Ihre Projekte',
+        // Skills
+        skills_title: 'Fähigkeiten',
+        skills_support_title: 'IT-Support Fähigkeiten',
+        skills_support_1: 'Betriebssystemverwaltung (Windows, Linux).',
+        skills_support_2: 'Ticketverwaltung <strong>(GLPI*)</strong> und Vorfälle.',
+        skills_support_3: 'Wartung von IT-Geräten.',
+        skills_support_4: 'Technischer Support und Benutzerhilfe.',
+        skills_support_5: 'Active Directory Verwaltung.',
+        skills_support_6: 'Microsoft ES 365 Verwaltung.',
+        skills_support_7: 'Konfiguration und Bereitstellung von IT-Geräten.',
+        skills_support_8: 'TCP/IP, DHCP, DNS, LAN Netzwerke.',
+        skills_apps_title: 'Anwendungsfähigkeiten',
+        skills_apps_1: 'Desktop-Anwendung:',
+        skills_apps_2: 'Datenbanken:',
+        skills_apps_3: 'Programmiersprachen:',
+        // Expertise
+        expertise_title: 'Meine Fachgebiete',
+        expertise_subtitle: 'Klicken Sie auf einen Bereich, um ihn im Detail zu erkunden',
+        accordion_1_title: 'Technische Fähigkeiten',
+        accordion_1_text: 'Entdecken Sie die Technologien, Werkzeuge und Fachgebiete, die ich verwende, um leistungsstarke IT-Lösungen zu konzipieren, entwickeln und warten.',
+        accordion_2_title: 'Fachgebiete',
+        accordion_2_text: 'Ein Überblick über meine Fähigkeiten in der Softwareentwicklung, Datenbankverwaltung und IT-Systemverwaltung.',
+        accordion_3_title: 'IT & Technologien & Know-how',
+        accordion_3_text: 'Lösungen, Frameworks und Technologien für die Anwendungsentwicklung, Datenverwaltung und IT-Infrastrukturverwaltung.',
+        // Resume
+        resume_title: 'Lebenslauf',
+        resume_objective: 'Ziel',
+        resume_education: 'Ausbildung | Fortbildung',
+        resume_edu_1: 'Deutschkurs: Derzeit bei DLMZ Tsimbazaza',
+        resume_edu_2: 'Online-Kurs: Zertifikat für Advanced Technical SQL',
+        resume_edu_3: 'Englischkurs: Schulbescheinigung für Kurse',
+        resume_edu_4: 'Bachelor: Informatik Risiko und Entscheidung',
+        resume_edu_5: 'Teilnahmebestätigung: 1. Jahr Webentwicklung',
+        resume_edu_6: 'Abitur: Allgemeine Hochschulreife.',
+        resume_download_btn: 'Lebenslauf herunterladen',
+        resume_download_title: 'Herunterladen',
+        resume_cv_fr: 'CV Version Fr',
+        resume_cv_fr_photo: 'CV Version Fr Foto',
+        resume_cv_en: 'CV Version En',
+        resume_experience: 'Berufserfahrung',
+        resume_exp_1_title: 'S.I Entwickler Praktikant',
+        resume_exp_1_date: 'Ravinala Airports | März 2026 - September 2026',
+        resume_exp_1_1: 'Entwicklung einer Anwendung für das Personalwesen von Ravinala Airports.',
+        resume_exp_1_2: 'Bereitstellung der neuen Version V2.0',
+        resume_exp_1_3: 'Sicherheitskorrekturen.',
+        resume_exp_1_4: 'Entwicklung und Integration neuer Funktionen.',
+        resume_exp_2_title: 'IT-Support & Entwickler',
+        resume_exp_2_date: 'Freiberuflich | Juli 2025 - Februar 2026',
+        resume_exp_2_1: 'Technischer Assistent für bestimmte Benutzer.',
+        resume_exp_2_2: 'Wartung und Reparatur von Computergeräten.',
+        resume_exp_2_3: 'Web- und App-Entwicklung (Zusammenarbeit).',
+        resume_exp_3_title: 'IT-Support und Telekompensationsbeauftragter',
+        resume_exp_3_date: 'BGFIBank Madagascar | April 2024 - März 2025',
+        resume_exp_3_1: 'Tägliche Unterstützung und Hilfe für Benutzer.',
+        resume_exp_3_2: 'Active Directory Kontoverwaltung und Microsoft 365 Portal.',
+        resume_exp_3_3: 'Verantwortlich für Telekompensation.',
+        resume_exp_3_4: 'Druckerkonfiguration und Bereitstellung neuer Maschinen.',
+        resume_exp_3_5: 'Vorfallmanagement und Ticketlösung.',
+        resume_exp_3_6: 'Technischer Support und Benutzerhilfe.',
+        resume_exp_3_subtitle: 'Anwendungssupport (Ersatz für ausscheidende Mitarbeiter)',
+        resume_exp_3_7: 'Bearbeitung von Mehrfachüberweisungen.',
+        resume_exp_3_8: 'Amplitude Bank Support.',
+        resume_exp_3_9: 'Entwicklung und Verwaltung von Bankverzeichnissen.',
+        resume_exp_3_10: 'Druckerkonfiguration und Bereitstellung neuer Maschinen.',
+        resume_exp_3_11: 'Anwendungsserver-Administrator (Verzeichnis, SMS Banking).',
+        resume_exp_4_title: 'IT-Assistent',
+        resume_exp_4_date: 'Mada-Marketing Call-Center | November 2022 - Februar 2023',
+        resume_exp_4_1: 'Benutzerunterstützung und -hilfe.',
+        resume_exp_4_2: 'Bereitstellung und Konfiguration neuer Maschinen.',
+        resume_exp_4_3: 'Wartung von IT-Geräten.',
+        resume_exp_4_4: 'Linux-Systemadministrator.',
+        resume_exp_5_title: 'IT-Support',
+        resume_exp_5_date: 'M1Com Druckerei | September 2020 - März 2022',
+        resume_exp_5_1: 'Wartung von IT-Geräten.',
+        resume_exp_5_2: 'Helpdesk.',
+        resume_exp_6_title: 'Entwickler Praktikant',
+        resume_exp_6_date: 'Aro Versicherungsgesellschaft | April 2022 - Juni 2022',
+        resume_exp_6_1: 'Entwicklung der Dokumentenkataloganwendung des Unternehmens.',
+        resume_exp_6_lang: 'Verwendete Sprache:',
+        resume_exp_6_db: 'Datenbank:',
+        // Portfolio
+        portfolio_title: 'Portfolio',
+        portfolio_filter: 'Alle diese Entwicklungen sind auf meinem GitLab sowie andere Projekte verfügbar.',
+        portfolio_item_1_title: 'Während meines Praktikums',
+        portfolio_item_1_text: 'Praktikum zur Web-App-Entwicklung - CDI (Dokumentations- und Informationszentrum) für die Aro Versicherungsgesellschaft',
+        portfolio_item_2_title: 'Während meines Vertrags',
+        portfolio_item_2_text: 'Entwicklung eines Bankverzeichnisses, ein internes Projekt bei BGFIBank Madagascar',
+        portfolio_item_3_title: 'Freundschaftliche Zusammenarbeit',
+        portfolio_item_3_text: 'Entwicklung der Website des Hotels Karthala. Eine Showcase-Website zur Hotelpräsentation',
+        portfolio_item_4_title: 'Freundschaftliche Zusammenarbeit',
+        portfolio_item_4_text: 'Teilnahme an der Entwicklung der Website des Vereins Guide du Choix 2024. Ein ehrenamtlicher Verein',
+        portfolio_item_5_title: 'Freundschaftliche Zusammenarbeit',
+        portfolio_item_5_text: 'Erstellung einer E-Commerce-Website, ein Freundschaftsprojekt zur Gestaltung eines Online-Shops für ihre Produkte',
+        portfolio_item_6_title: 'Während meines Praktikums',
+        portfolio_item_6_text: 'VINA Anwendung - Eine Leistungsbewertungsanwendung für HR von Ravinala Airports',
+        // Services
+        services_title: 'Dienstleistungen',
+        service_1_title: 'Web / Apps Entwicklung',
+        service_1_text: 'Ich entwickle Websites und Anwendungen, die auf Ihre Bedürfnisse zugeschnitten sind.',
+        service_2_title: 'IT-Support',
+        service_2_text: 'Fern-IT-Unterstützung.',
+        service_3_title: 'IT-Wartung',
+        service_3_text: 'Überprüfung und Reparatur von IT-Geräten.',
+        service_4_title: 'Freiberuflich',
+        service_4_text: 'Als Freiberufler verfügbar.',
+        // Contact
+        contact_title: 'Kontakt',
+        contact_address: 'Adresse',
+        contact_phone: 'Kontaktieren',
+        contact_email_label: 'E-Mail',
+        contact_form_name: 'Ihr Name',
+        contact_form_email: 'Ihre E-Mail',
+        contact_form_subject: 'Betreff',
+        contact_form_message: 'Nachricht',
+        contact_form_send: 'Senden',
+        // Modals
+        modal_success_title: 'Nachricht gesendet!',
+        modal_success_body: 'Ihre Nachricht wurde gesendet',
+        modal_success_text: 'Ich werde mich so schnell wie möglich bei Ihnen melden.',
+        modal_success_name: 'Name:',
+        modal_success_email: 'E-Mail:',
+        modal_success_subject: 'Betreff:',
+        modal_success_message: 'Nachricht:',
+        modal_error_title: 'Fehler',
+        modal_error_body: 'Alle Felder sind erforderlich',
+        modal_error_text: 'Bitte füllen Sie alle Felder aus, bevor Sie senden.',
+        modal_close: 'Schließen',
+        // Admin
+        admin_title: 'Administratorzugang',
+        admin_password_label: 'Passwort eingeben:',
+        admin_error: 'Falsches Passwort.',
+        admin_cancel: 'Abbrechen',
+        admin_validate: 'Bestätigen',
+        info_title: 'Information',
+        // Messages
+        messages_title: 'Gespeicherte Nachrichten',
+        messages_empty: 'Keine Nachrichten gespeichert.',
+        messages_download: 'Herunterladen (.txt)',
+        messages_clear: 'Alles löschen',
+        messages_logout: 'Abmelden'
+      },
+      mg: {
+        // Navigation
+        nav_home: 'Fandraisana',
+        nav_about: 'Momba ahy',
+        nav_resume: 'Fintinarana',
+        nav_portfolio: 'Portfolio',
+        nav_services: 'Tolotra',
+        nav_contact: 'Fifandraisana',
+        nav_private: 'Toko manokana',
+        // Hero
+        hero_typed_prefix: 'Izaho dia ',
+        hero_typed_items: 'Mpamorona rindrambaiko, Teknisiana Fanohanana IT, Freelanceur',
+        // About
+        about_title: 'Momba ahy',
+        about_badge: 'Vonona hiasa',
+        about_subtitle: 'Zavatra kely.',
+        about_phone: 'Telefaona',
+        about_city: 'Tanàna',
+        about_freelance: 'Freelance',
+        about_diploma: 'Diploma',
+        about_email: 'Mailaka',
+        about_available: 'Misy',
+        about_degree: 'Diploma informatika + 4 taona traikefa',
+        // Stats
+        stats_title: 'Zavatra azoko omena',
+        stats_subtitle: 'Fahaizana sy traikefa hanompoana ny tetikasanao',
+        // Skills
+        skills_title: 'Fahaizana',
+        skills_support_title: 'Fahaizana momba ny IT Support',
+        skills_support_1: 'Fitantanana rafitra fiasa (Windows, Linux).',
+        skills_support_2: 'Fitantanana tickets <strong>(GLPI*)</strong> sy olana.',
+        skills_support_3: 'Fikojakojana fitaovana IT.',
+        skills_support_4: 'Fanohanana teknika sy fanampiana ny mpampiasa.',
+        skills_support_5: 'Fitantanana Active Directory.',
+        skills_support_6: 'Fitantanana Microsoft ES 365.',
+        skills_support_7: 'Fandrindrana sy fametrahana fitaovana IT.',
+        skills_support_8: 'Tambo TCP/IP, DHCP, DNS, LAN.',
+        skills_apps_title: 'Fahaizana momba ny rindranasa',
+        skills_apps_1: 'Rindranasa birao:',
+        skills_apps_2: 'Tahiry angona:',
+        skills_apps_3: 'Fiteny fandaharana:',
+        // Expertise
+        expertise_title: 'Ny sehatra ahafahako',
+        expertise_subtitle: 'Tsindrio ny sehatra iray hahitana antsipirihany',
+        accordion_1_title: 'Fahaizana Teknika',
+        accordion_1_text: 'Tadiavo ireo teknolojia, fitaovana ary sehatra ahafahako mamolavola, mamorona ary mitazona vahaolana informatika mahomby.',
+        accordion_2_title: 'Sehatra ahafahako',
+        accordion_2_text: 'Fijerena an\'habakabaka ny fahaizako amin\'ny famoronana rindrambaiko, fitantanana tahiry angona ary fitantanana rafitra informatika.',
+        accordion_3_title: 'IT & Teknolojia & Fahaizana',
+        accordion_3_text: 'Vahaolana, frameworks ary teknolojia ampiasaina amin\'ny famoronana rindranasa, fitantanana angona ary fitantanana fotodrafitrasa IT.',
+        // Resume
+        resume_title: 'Fintinarana',
+        resume_objective: 'Tanjona',
+        resume_education: 'Fianarana | Fanofanana',
+        resume_edu_1: 'Fianarana Alemana: Amin\'izao fotoana izao ao amin\'ny DLMZ Tsimbazaza',
+        resume_edu_2: 'Fianarana an-tserasera: Taratasy fanamarinana fahombiazana ho an\'ny Advanced Technical SQL',
+        resume_edu_3: 'Fianarana Anglisy: Taratasy fanamarinana fianarana ho an\'ny taranja',
+        resume_edu_4: 'Licence: Informatika Risika sy Fanapahan-kevitra',
+        resume_edu_5: 'Taratasy fanamarinana fahombiazana: 1ère Année Développement Web',
+        resume_edu_6: 'Baccalauréat: Fianarana ankapobeny.',
+        resume_download_btn: 'Alaina ny CV-ko',
+        resume_download_title: 'Fandefasana',
+        resume_cv_fr: 'CV Version Fr',
+        resume_cv_fr_photo: 'CV Version Fr sary',
+        resume_cv_en: 'CV Version En',
+        resume_experience: 'Traikefa matihanina',
+        resume_exp_1_title: 'Mpiofana Mpamorona S.I',
+        resume_exp_1_date: 'Ravinala Airports | Martsa 2026 - Septambra 2026',
+        resume_exp_1_1: 'Famoronana rindranasa natokana ho an\'ny Mpiasa ao amin\'ny Ravinala Airports.',
+        resume_exp_1_2: 'Fametrahana ny dika vaovao V2.0',
+        resume_exp_1_3: 'Fanitsiana fiarovana.',
+        resume_exp_1_4: 'Famoronana sy fampidirana endri-javatra vaovao.',
+        resume_exp_2_title: 'Fanohanana IT & Mpamorona',
+        resume_exp_2_date: 'Freelance | Jolay 2025 - Febroary 2026',
+        resume_exp_2_1: 'Mpanampy ara-teknika ho an\'ny mpampiasa manokana.',
+        resume_exp_2_2: 'Fikojakojana sy fanamboarana fitaovana informatika.',
+        resume_exp_2_3: 'Famoronana tranonkala sy rindranasa (fiaraha-miasa).',
+        resume_exp_3_title: 'Mpitantana Fanohanana IT sy Telecompensation',
+        resume_exp_3_date: 'BGFIBank Madagascar | Avrily 2024 - Martsa 2025',
+        resume_exp_3_1: 'Fanomezana fanohanana sy fanampiana isan\'andro ho an\'ny mpampiasa.',
+        resume_exp_3_2: 'Fitantanana kaonty Active Directory sy ny vavahady Microsoft 365.',
+        resume_exp_3_3: 'Mpitantana ny telecompensation.',
+        resume_exp_3_4: 'Fandrindrana mpanonta sy fametrahana milina vaovao.',
+        resume_exp_3_5: 'Fitantanana olana sy famahana tickets.',
+        resume_exp_3_6: 'Fanohanana teknika sy fanampiana ny mpampiasa.',
+        resume_exp_3_subtitle: 'Fanohanana rindranasa (Fisoloana ireo miala)',
+        resume_exp_3_7: 'Fikarakarana famindrana vola maro.',
+        resume_exp_3_8: 'Fanohanana Amplitude Bank.',
+        resume_exp_3_9: 'Famoronana sy fitantanana lisitry ny banky.',
+        resume_exp_3_10: 'Fandrindrana mpanonta sy fametrahana milina vaovao.',
+        resume_exp_3_11: 'Mpitantana mpizara rindranasa (lisitra, SMS Banking).',
+        resume_exp_4_title: 'Mpanampy IT',
+        resume_exp_4_date: 'Mada-Marketing Call-Center | Novambra 2022 - Febroary 2023',
+        resume_exp_4_1: 'Fanampiana sy fanohanana ny mpampiasa.',
+        resume_exp_4_2: 'Fametrahana sy fandrindrana milina vaovao.',
+        resume_exp_4_3: 'Fikojakojana fitaovana informatika.',
+        resume_exp_4_4: 'Mpitantana rafitra Linux.',
+        resume_exp_5_title: 'Fanohanana IT',
+        resume_exp_5_date: 'Mpanampy amin\'ny M1Com Printing House | Septambra 2020 - Martsa 2022',
+        resume_exp_5_1: 'Fikojakojana fitaovana informatika.',
+        resume_exp_5_2: 'Helpdesk.',
+        resume_exp_6_title: 'Mpiofana Mpamorona',
+        resume_exp_6_date: 'Orinasa Fiantohana Aro | Avrily 2022 - Jona 2022',
+        resume_exp_6_1: 'Famoronana rindranasa katalaogy antontan-taratasin\'ny orinasa.',
+        resume_exp_6_lang: 'Fiteny ampiasaina:',
+        resume_exp_6_db: 'Tahiry angona:',
+        // Portfolio
+        portfolio_title: 'Portfolio',
+        portfolio_filter: 'Ireo famoronana rehetra ireo dia hita ao amin\'ny GitLab-ko ary koa ny tetikasa hafa.',
+        portfolio_item_1_title: 'Nandritra ny fiofanana',
+        portfolio_item_1_text: 'Fiofanana famoronana rindranasa tranonkala Catalogue CDI (Foibe antontan-taratasy sy fampahalalam-baovao) an\'ny Orinasa Fiantohana Aro',
+        portfolio_item_2_title: 'Nandritra ny fifanarahana',
+        portfolio_item_2_text: 'Famoronana lisitry ny banky, tetikasa anatiny ao amin\'ny BGFIBank Madagascar',
+        portfolio_item_3_title: 'Fiaraha-miasa amin\'ny namana',
+        portfolio_item_3_text: 'Famoronana tranonkalan\'ny Hotely Karthala. Tranonkala fampisehoana hotely',
+        portfolio_item_4_title: 'Fiaraha-miasa amin\'ny namana',
+        portfolio_item_4_text: 'Fandraisana anjara amin\'ny famoronana tranonkalan\'ny fikambanana Guide du Choix 2024. Fikambanana an-tsitrapo',
+        portfolio_item_5_title: 'Fiaraha-miasa amin\'ny namana',
+        portfolio_item_5_text: 'Famoronana tranonkala varotra an-tserasera, tetikasa namana hamoronana fivarotana an-tserasera ho an\'ny vokatra',
+        portfolio_item_6_title: 'Nandritra ny fiofanana',
+        portfolio_item_6_text: 'Rindranasa VINA - Rindranasa fanombanana ny zava-bitan\'ny mpiasa ho an\'ny HR an\'ny Ravinala Airports',
+        // Services
+        services_title: 'Tolotra',
+        service_1_title: 'Famoronana Web / Rindranasa',
+        service_1_text: 'Mamorona tranonkala sy rindranasa mifanaraka amin\'ny filanao aho.',
+        service_2_title: 'Fanohanana IT',
+        service_2_text: 'Fanampiana informatika lavitra.',
+        service_3_title: 'Fikojakojana IT',
+        service_3_text: 'Fandinihana sy fanamboarana fitaovana informatika.',
+        service_4_title: 'Freelance',
+        service_4_text: 'Misy ho freelance.',
+        // Contact
+        contact_title: 'Fifandraisana',
+        contact_address: 'Adiresy',
+        contact_phone: 'Fifandraisana',
+        contact_email_label: 'Mailaka',
+        contact_form_name: 'Anaranao',
+        contact_form_email: 'Mailakao',
+        contact_form_subject: 'Lohahevitra',
+        contact_form_message: 'Hafatra',
+        contact_form_send: 'Alefa',
+        // Modals
+        modal_success_title: 'Hafatra nalefa!',
+        modal_success_body: 'Nalefa tsara ny hafatrao',
+        modal_success_text: 'Hamerina aho amin\'ny fotoana fohy indrindra.',
+        modal_success_name: 'Anarana:',
+        modal_success_email: 'Mailaka:',
+        modal_success_subject: 'Lohahevitra:',
+        modal_success_message: 'Hafatra:',
+        modal_error_title: 'Hadisoana',
+        modal_error_body: 'Tsy maintsy feno ny saha rehetra',
+        modal_error_text: 'Fenoy ny saha rehetra alohan\'ny handefasana.',
+        modal_close: 'Hidy',
+        // Admin
+        admin_title: 'Fidirana administrateur',
+        admin_password_label: 'Ampidiro ny tenimiafina:',
+        admin_error: 'Tenimiafina diso.',
+        admin_cancel: 'Afoina',
+        admin_validate: 'Hamafisina',
+        info_title: 'Fampahalalana',
+        // Messages
+        messages_title: 'Hafatra voatahiry',
+        messages_empty: 'Tsy misy hafatra voatahiry.',
+        messages_download: 'Alaina (.txt)',
+        messages_clear: 'Fafana rehetra',
+        messages_logout: 'Hiala'
+      }
+    };
 
-    // ----- RÉFÉRENCES DOM -----
-    const adminMenuLink = document.getElementById('adminMenuLink');
-    const adminModalEl = document.getElementById('adminModal');
-    const adminPasswordInput = document.getElementById('adminPassword');
-    const adminLoginBtn = document.getElementById('adminLoginBtn');
-    const adminError = document.getElementById('adminError');
-    const storedMessagesContainer = document.getElementById('storedMessagesContainer');
-    const messagesList = document.getElementById('messagesList');
+    // ==========================================================
+    // FONCTION DE CHANGEMENT DE LANGUE
+    // ==========================================================
 
-    // ----- FONCTION MODALE D'INFORMATION -----
-    function showInfoModal(message, type) {
-      var modalEl = document.getElementById('infoModal');
-      var header = document.getElementById('infoModalHeader');
-      var icon = document.getElementById('infoModalIcon');
-      var title = document.getElementById('infoModalTitle');
-      var msg = document.getElementById('infoModalMessage');
-
-      var types = {
-        error: { color: '#dc3545', icon: 'fa-times-circle', title: 'Erreur' },
-        warning: { color: '#ffc107', icon: 'fa-exclamation-triangle', title: 'Attention' },
-        info: { color: '#149ddd', icon: 'fa-info-circle', title: 'Information' },
-        success: { color: '#28a745', icon: 'fa-check-circle', title: 'Succès' }
-      };
-
-      var config = types[type] || types.info;
-      header.style.background = config.color;
-      icon.className = 'fas ' + config.icon;
-      icon.style.color = config.color;
-      title.innerHTML = '<i class="fas ' + config.icon + ' me-2"></i>' + config.title;
-      msg.textContent = message;
-
-      var modal = new bootstrap.Modal(modalEl);
-      modal.show();
-    }
-
-    // ----- OUVERTURE DU MODAL ADMIN -----
-    if (adminMenuLink) {
-      adminMenuLink.addEventListener('click', function(event) {
-        event.preventDefault();
-        var modal = new bootstrap.Modal(adminModalEl);
-        modal.show();
-        adminPasswordInput.value = '';
-        adminError.style.display = 'none';
+    function setLanguage(lang) {
+      // Mettre à jour les boutons
+      document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
       });
-    }
 
-    // ----- CONNEXION ADMIN -----
-    if (adminLoginBtn) {
-      adminLoginBtn.addEventListener('click', function() {
-        var pwd = adminPasswordInput.value;
-        if (pwd === ADMIN_PASSWORD) {
-          var modal = bootstrap.Modal.getInstance(adminModalEl);
-          modal.hide();
+      var t = TRANSLATIONS[lang];
+      if (!t) return;
 
-          storedMessagesContainer.style.display = 'block';
-          loadMessages();
-
-          adminMenuLink.innerHTML = '<i class="bi bi-check-circle navicon"></i> Espace Privée(con)';
-          adminMenuLink.style.color = '#28a745';
-
-          var adminToggle = document.getElementById('adminToggle');
-          if (adminToggle) {
-            adminToggle.innerHTML = '<i class="fas fa-unlock"></i>';
-            adminToggle.classList.remove('btn-outline-secondary');
-            adminToggle.classList.add('btn-success');
-            adminToggle.style.color = '#fff';
-          }
-
-          sessionStorage.setItem('admin_logged', 'true');
-          showInfoModal('Connexion réussie ! Bienvenue dans l\'espace administrateur.', 'success');
-        } else {
-          adminError.style.display = 'block';
-          adminPasswordInput.value = '';
-          adminPasswordInput.focus();
-          showInfoModal('Mot de passe incorrect. Veuillez réessayer.', 'error');
+      // Mettre à jour tous les éléments avec data-lang-key
+      document.querySelectorAll('[data-lang-key]').forEach(function(el) {
+        var key = el.getAttribute('data-lang-key');
+        if (t[key] !== undefined) {
+          el.innerHTML = t[key];
         }
       });
+
+      // Mettre à jour les textes spécifiques sans data-lang-key
+      var heroName = document.getElementById('heroName');
+      var heroTitle = document.getElementById('heroTitle');
+      var heroAvailability = document.getElementById('heroAvailability');
+      var typedElement = document.querySelector('.typed');
+
+      // Hero Name - toujours en majuscules
+      if (heroName) heroName.textContent = 'RAKOTONIAINA Harry Yves';
+
+      // Hero Title - toujours en majuscules
+      if (heroTitle) {
+        if (lang === 'fr') {
+          heroTitle.innerHTML = '<strong>TECHNICIEN SUPPORT IT | SYSTÈMES & APPLICATIONS</strong>';
+        } else if (lang === 'en') {
+          heroTitle.innerHTML = '<strong>IT SUPPORT TECHNICIAN | SYSTEMS & APPLICATIONS</strong>';
+        } else if (lang === 'de') {
+          heroTitle.innerHTML = '<strong>IT-SUPPORT-TECHNIKER | SYSTEME & ANWENDUNGEN</strong>';
+        } else if (lang === 'mg') {
+          heroTitle.innerHTML = '<strong>TEKNISIANA FANOHANANA IT | RAHAFITRA SY RINDRA</strong>';
+        }
+      }
+
+      // Hero Availability
+      if (heroAvailability) {
+        heroAvailability.textContent = lang === 'fr' ? '- Disponible pour une mobilité internationale | Autorisation de travail requise -' :
+          lang === 'en' ? '- Available for international mobility | Work authorization required -' :
+          lang === 'de' ? '- Verfügbar für internationale Mobilität | Arbeitserlaubnis erforderlich -' :
+          '- Misy ho an\'ny fivezivezena iraisam-pirenena | Mila alalana hiasa -';
+      }
+
+      // Textes longs
+      var aboutText = document.getElementById('aboutText');
+      if (aboutText) {
+        aboutText.textContent = lang === 'fr' ? 'Passionné par l\'informatique depuis toujours, j\'ai concrétisé mon intérêt en obtenant un diplôme dans le domaine, avec une spécialisation en développement et en gestion des systèmes d\'information (IT). Cette formation m\'a permis d\'acquérir de solides compétences techniques et une compréhension approfondie des enjeux informatiques actuels. Je suis constamment à la recherche de nouveaux défis et opportunités pour mettre en pratique mes connaissances et contribuer à des projets innovants.' :
+          lang === 'en' ? 'Passionate about IT since always, I have concretized my interest by obtaining a degree in the field, with a specialization in development and information systems management (IT). This training has allowed me to acquire solid technical skills and a deep understanding of current IT issues. I am constantly looking for new challenges and opportunities to put my knowledge into practice and contribute to innovative projects.' :
+          lang === 'de' ? 'Leidenschaftlich interessiert an IT seit jeher, habe ich mein Interesse durch einen Abschluss in diesem Bereich mit Spezialisierung auf Entwicklung und Informationssystemmanagement (IT) konkretisiert. Diese Ausbildung hat es mir ermöglicht, solide technische Fähigkeiten und ein tiefes Verständnis für aktuelle IT-Fragen zu erwerben. Ich bin ständig auf der Suche nach neuen Herausforderungen und Möglichkeiten, mein Wissen in die Praxis umzusetzen und zu innovativen Projekten beizutragen.' :
+          'Tia ny informatika hatramin\'ny fony aho, dia nahavita ny fianarako tamin\'ny famoronana sy fitantanana rafitra fampahalalam-baovao (IT). Io fianarana io dia nahafahako nahazo fahaizana ara-teknika matanjaka sy fahatakarana lalina momba ny olana ara-informatika ankehitriny. Mitady fanamby sy fahafahana vaovao hatrany aho mba hampiharana ny fahalalako sy handray anjara amin\'ny tetikasa vaovao.';
+      }
+
+      var skillsText = document.getElementById('skillsText');
+      if (skillsText) {
+        skillsText.textContent = lang === 'fr' ? 'Un ensemble des compétences en constante évolution pour relever les défis de demain.' :
+          lang === 'en' ? 'A set of constantly evolving skills to meet the challenges of tomorrow.' :
+          lang === 'de' ? 'Ein Satz von sich ständig weiterentwickelnden Fähigkeiten, um die Herausforderungen von morgen zu meistern.' :
+          'Fahaizana miovaova hatrany hanatratrana ny fanamby ho avy.';
+      }
+
+      var resumeText = document.getElementById('resumeText');
+      if (resumeText) {
+        resumeText.textContent = lang === 'fr' ? 'Dynamique et rigoureux coordinateur du support informatique et applicatif, je suis prêt à mettre mon autonomie et mes compétences en gestion et en optimisation des processus au service de votre entreprise, et à continuer d\'évoluer.' :
+          lang === 'en' ? 'Dynamic and rigorous IT and application support coordinator, I am ready to put my autonomy and skills in process management and optimization at the service of your company, and to continue to evolve.' :
+          lang === 'de' ? 'Dynamischer und gründlicher IT- und Anwendungssupport-Koordinator, ich bin bereit, meine Autonomie und Fähigkeiten im Prozessmanagement und in der Optimierung in den Dienst Ihres Unternehmens zu stellen und mich weiterzuentwickeln.' :
+          'Mpandrindra mavitrika sy hentitra amin\'ny fanohanana informatika sy rindranasa, vonona ny hampiasa ny fahaleovan-tenako sy ny fahaizako amin\'ny fitantanana sy fanatsarana ny fizotran\'ny asa ho an\'ny orinasanao, ary hanohy hivoatra.';
+      }
+
+      var portfolioText = document.getElementById('portfolioText');
+      if (portfolioText) {
+        portfolioText.textContent = lang === 'fr' ? 'Découvrez ici mes réalisations et mon parcours professionnel à travers une sélection de mes meilleurs travaux.' :
+          lang === 'en' ? 'Discover here my achievements and my professional career through a selection of my best work.' :
+          lang === 'de' ? 'Entdecken Sie hier meine Leistungen und meinen beruflichen Werdegang anhand einer Auswahl meiner besten Arbeiten.' :
+          'Tadiavo eto ny zava-bitako sy ny dianako matihanina amin\'ny alalan\'ny fifantenana ny asako tsara indrindra.';
+      }
+
+      var servicesText = document.getElementById('servicesText');
+      if (servicesText) {
+        servicesText.textContent = lang === 'fr' ? 'Je vous propose un accompagnement personnalisé pour la gestion de votre support informatique et le développement de vos projets web.' :
+          lang === 'en' ? 'I offer you personalized support for the management of your IT support and the development of your web projects.' :
+          lang === 'de' ? 'Ich biete Ihnen personalisierte Unterstützung für die Verwaltung Ihres IT-Supports und die Entwicklung Ihrer Webprojekte.' :
+          'Manolotra fanampiana manokana ho an\'ny fitantanana ny fanohanana informatika sy ny famoronana tetikasa web aho.';
+      }
+
+      var contactText = document.getElementById('contactText');
+      if (contactText) {
+        contactText.textContent = lang === 'fr' ? 'N\'hésitez pas à me contacter pour toute question ou demande d\'information.' :
+          lang === 'en' ? 'Feel free to contact me for any questions or requests for information.' :
+          lang === 'de' ? 'Zögern Sie nicht, mich bei Fragen oder Informationsanfragen zu kontaktieren.' :
+          'Aza misalasala mifandray amiko raha misy fanontaniana na fangatahana fampahalalana.';
+      }
+
+      // Mettre à jour l'effet typed
+      if (typedElement) {
+        var items = t.hero_typed_items.split(', ').map(function(item) { return item.trim(); });
+        typedElement.setAttribute('data-typed-items', t.hero_typed_items);
+        
+        if (window.typedInstance) {
+          window.typedInstance.destroy();
+        }
+        
+        if (typeof Typed !== 'undefined') {
+          window.typedInstance = new Typed('.typed', {
+            strings: items,
+            typeSpeed: 80,
+            backSpeed: 50,
+            backDelay: 1500,
+            startDelay: 500,
+            loop: true,
+            showCursor: true,
+            cursorChar: '|',
+            autoInsertCss: true,
+            smartBackspace: true
+          });
+        }
+      }
+
+      // Sauvegarder la langue
+      localStorage.setItem('preferredLanguage', lang);
     }
 
-    // ----- VALIDER AVEC LA TOUCHE ENTRÉE -----
-    if (adminPasswordInput) {
-      adminPasswordInput.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-          adminLoginBtn.click();
-        }
+    // ==========================================================
+    // INITIALISATION
+    // ==========================================================
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var savedLang = localStorage.getItem('preferredLanguage') || 'fr';
+      
+      document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.dataset.lang === savedLang);
       });
-    }
+      
+      setLanguage(savedLang);
 
-    // ----- BOUTON FLOTTANT ADMIN -----
-    var adminToggleBtn = document.getElementById('adminToggle');
-    if (adminToggleBtn) {
-      adminToggleBtn.addEventListener('click', function() {
-        if (sessionStorage.getItem('admin_logged') === 'true') {
-          storedMessagesContainer.style.display = 'block';
-          loadMessages();
-          showInfoModal('Bienvenue dans l\'espace administrateur.', 'info');
-        } else {
-          var modal = new bootstrap.Modal(adminModalEl);
-          modal.show();
-          adminPasswordInput.value = '';
-          adminError.style.display = 'none';
-        }
+      document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var lang = this.dataset.lang;
+          setLanguage(lang);
+        });
       });
-    }
+    });
 
-    // ----- RESTAURER LA SESSION -----
-    if (sessionStorage.getItem('admin_logged') === 'true') {
-      storedMessagesContainer.style.display = 'block';
-      adminMenuLink.innerHTML = '<i class="bi bi-check-circle navicon"></i> Espace Privée(con)';
-      adminMenuLink.style.color = '#28a745';
-      var adminToggle = document.getElementById('adminToggle');
-      if (adminToggle) {
-        adminToggle.innerHTML = '<i class="fas fa-unlock"></i>';
-        adminToggle.classList.remove('btn-outline-secondary');
-        adminToggle.classList.add('btn-success');
-        adminToggle.style.color = '#fff';
-      }
-      loadMessages();
-    }
-
-    // ----- CHARGER LES MESSAGES -----
-    function loadMessages() {
-      var stored = localStorage.getItem('contactMessages');
-      if (!stored) {
-        messagesList.innerHTML = '<p class="text-muted">Aucun message enregistré.</p>';
-        return;
-      }
-      try {
-        var messages = JSON.parse(stored);
-        if (messages.length === 0) {
-          messagesList.innerHTML = '<p class="text-muted">Aucun message enregistré.</p>';
-          return;
-        }
-        var html = '<div class="table-responsive">' +
-          '<table class="table table-hover">' +
-          '<thead><tr><th>#</th><th>Date</th><th>Nom</th><th>Email</th><th>Sujet</th><th>Message</th></tr></thead>' +
-          '<tbody>';
-        for (var i = 0; i < messages.length; i++) {
-          var msg = messages[i];
-          html += '<tr>' +
-            '<td>' + (i + 1) + '</td>' +
-            '<td>' + (msg.date || '-') + '</td>' +
-            '<td>' + msg.name + '</td>' +
-            '<td>' + msg.email + '</td>' +
-            '<td>' + msg.subject + '</td>' +
-            '<td>' + msg.message.substring(0, 60) + (msg.message.length > 60 ? '…' : '') + '</td>' +
-            '</tr>';
-        }
-        html += '</tbody></table></div>';
-        messagesList.innerHTML = html;
-      } catch (e) {
-        messagesList.innerHTML = '<p class="text-danger">Erreur de chargement des messages.</p>';
-      }
-    }
-
-    // ----- TÉLÉCHARGER LES MESSAGES -----
-    function downloadMessages() {
-      var stored = localStorage.getItem('contactMessages');
-      if (!stored) {
-        showInfoModal('Aucun message à télécharger.', 'warning');
-        return;
-      }
-      var messages = JSON.parse(stored);
-      if (messages.length === 0) {
-        showInfoModal('Aucun message à télécharger.', 'warning');
-        return;
-      }
-      var txt = '=== MESSAGES ENREGISTRÉS ===\n\n';
-      for (var i = 0; i < messages.length; i++) {
-        var msg = messages[i];
-        txt += 'Message ' + (i + 1) + '\n';
-        txt += 'Date   : ' + (msg.date || 'Non spécifiée') + '\n';
-        txt += 'Nom    : ' + msg.name + '\n';
-        txt += 'Email  : ' + msg.email + '\n';
-        txt += 'Sujet  : ' + msg.subject + '\n';
-        txt += 'Message: ' + msg.message + '\n';
-        txt += '--------------------------\n\n';
-      }
-      var blob = new Blob([txt], { type: 'text/plain;charset=utf-8' });
-      var link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = 'messages_' + new Date().toISOString().slice(0, 10) + '.txt';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(link.href);
-      showInfoModal('Téléchargement terminé avec succès.', 'success');
-    }
-
-    // ----- EFFACER TOUS LES MESSAGES -----
-    function clearMessages() {
-      var stored = localStorage.getItem('contactMessages');
-      if (!stored || JSON.parse(stored).length === 0) {
-        showInfoModal('Aucun message à supprimer.', 'warning');
-        return;
-      }
-      if (confirm('Supprimer définitivement tous les messages ?')) {
-        localStorage.removeItem('contactMessages');
-        loadMessages();
-        showInfoModal('Tous les messages ont été supprimés.', 'success');
-      }
-    }
-
-    // ----- DÉCONNEXION -----
-    function logout() {
-      storedMessagesContainer.style.display = 'none';
-      adminMenuLink.innerHTML = '<i class="bi bi-hdd-stack navicon"></i> Espace Privée';
-      adminMenuLink.style.color = '';
-      var adminToggle = document.getElementById('adminToggle');
-      if (adminToggle) {
-        adminToggle.innerHTML = '<i class="fas fa-lock"></i>';
-        adminToggle.classList.remove('btn-success');
-        adminToggle.classList.add('btn-outline-secondary');
-        adminToggle.style.color = '';
-      }
-      sessionStorage.removeItem('admin_logged');
-      messagesList.innerHTML = '<p class="text-muted">Aucun message enregistré.</p>';
-      showInfoModal('Vous êtes déconnecté.', 'info');
-    }
-
-    // ----- GESTION DU FORMULAIRE DE CONTACT -----
-    function handleSubmit(event) {
-      event.preventDefault();
-
-      var name = document.getElementById('name-field').value.trim();
-      var email = document.getElementById('email-field').value.trim();
-      var subject = document.getElementById('subject-field').value.trim();
-      var message = document.getElementById('message-field').value.trim();
-
-      if (!name || !email || !subject || !message) {
-        var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
-        errorModal.show();
-        return false;
-      }
-
-      var newMessage = {
-        date: new Date().toISOString().slice(0, 10) + ' ' + new Date().toTimeString().slice(0, 8),
-        name: name,
-        email: email,
-        subject: subject,
-        message: message
-      };
-
-      var messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
-      messages.push(newMessage);
-      localStorage.setItem('contactMessages', JSON.stringify(messages));
-
-      document.getElementById('confirmName').textContent = name;
-      document.getElementById('confirmEmail').textContent = email;
-      document.getElementById('confirmSubject').textContent = subject;
-      document.getElementById('confirmMessage').textContent = message;
-
-      var successModal = new bootstrap.Modal(document.getElementById('successModal'));
-      successModal.show();
-
-      document.getElementById('contactForm').reset();
-
-      if (sessionStorage.getItem('admin_logged') === 'true') {
-        loadMessages();
-      }
-
-      return false;
-    }
-
-    console.log('%c✅ Espace Privée fonctionnel - Tous les boutons sont liés', 'font-size:16px;color:#28a745;font-weight:bold;');
+    console.log('✅ Traductions chargées - 4 langues disponibles (FR, EN, DE, MG)');
   </script>
 
 </body>
