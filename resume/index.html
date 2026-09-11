@@ -27,6 +27,7 @@
   <link href="assets/css/main.css" rel="stylesheet">
   <link href="assets/css/accordion.css" rel="stylesheet">
   <link href="assets/css/language.css" rel="stylesheet">
+  <link href="assets/css/css.css" rel="stylesheet">
 
   <style>
     /* ==========================================================
@@ -54,7 +55,6 @@
       border-top: 1px solid rgba(0, 0, 0, 0.04);
     }
 
-    /* Tous les modals */
     #adminModal .modal-content,
     #infoModal .modal-content,
     #myModal .modal-content,
@@ -80,7 +80,6 @@
       opacity: 1;
     }
 
-    /* Admin toggle button */
     #adminToggle {
       border-radius: 50% !important;
       border: none !important;
@@ -118,7 +117,6 @@
       color: #28a745;
     }
 
-    /* Language selector responsive */
     .language-selector {
       position: absolute;
       top: 20px;
@@ -284,7 +282,7 @@
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
         <h2 id="heroName">RAKOTONIAINA Harry Yves</h2>
-        <h4 class="h4" id="heroTitle"><strong>TECHNICIEN SUPPORT IT | SYSTÈMES & APPLICATIONS</strong></h4>
+        <h4 class="h4" id="heroTitle"><strong>TECHNICIEN SUPPORT IT & SYSTEMS | SUPPORT RESEAUX & APPLICATION</strong></h4>
         <h5 id="heroAvailability">- Disponible pour une mobilité internationale | Autorisation de travail requise -</h5>
         <p id="heroTyped">
           <span data-lang-key="hero_typed_prefix">Je suis </span>
@@ -536,7 +534,177 @@
               </ul>
             </div>
             <h3 class="resume-title" data-lang-key="resume_education">Education | Formation</h3>
+
             <div class="resume-item" id="resumeEducation">
+              <h4 data-lang-key="resume_edu_cisco">Formation Cisco Network Academy: Certificat et badge de réussite</h4>
+              <h5>Septembre 2026 - </h5>
+                <ul>
+                <li data-lang-key="resume_cisco_1">Networking Basics.</li>
+                <li data-lang-key="resume_cisco_2">Networking Devices and Initial Configuration</li>
+                <li data-lang-key="resume_cisco_3">Computer Hardware Basics.</li>
+                <li data-lang-key="resume_cisco_4">Introduction to Cybersecurity.</li>
+                <li data-lang-key="resume_cisco_5">Junior Cybersecurity Analyst Career Path</li>
+              </ul>
+              <button class="btn-open-modal" id="openCertModal" data-lang-key="btn_view_badges">Voir et verify mes badges</button>
+            </div>
+
+            <!-- ===== GRANDE MODAL (contient la page Certificate) ===== -->
+            <div class="modal-overlay" id="certModal">
+                <div class="modal-large">
+                    <button class="modal-close" id="closeCertModal" title="Fermer">&times;</button>
+
+                    <div class="container">
+
+                        <!-- En-tête -->
+                        <header class="page-header">
+                            <div class="header-left">
+                                <h1 class="page-title" data-lang-key="cert_modal_title">Certifications & Badges</h1>
+                            </div>
+                        </header>
+
+                        <!-- Grille de certificats -->
+                        <section class="certificates-grid">
+
+                            <!-- Carte 1 -->
+                            <article class="cert-card">
+                                <div class="cert-image">
+                                    <img src="assets/img/computer-hardware-basics.png" alt="Certificate">
+                                </div>
+                                <div class="cert-body">
+                                    <h3 class="cert-title">
+                                        <span class="verified-badge">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                            <span data-lang-key="cert_verified">Verified</span>
+                                        </span>
+                                    </h3>
+                                    <div class="cert-footer">
+                                        <button class="verify-link" data-url="https://www.credly.com/badges/e886359c-1b86-4bde-b0ca-f123516f25eb/public_url" data-lang-key="cert_verify_link">Verify link</button>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Carte 2 -->
+                            <article class="cert-card">
+                                <div class="cert-image">
+                                    <img src="assets/img/introduction-to-cybersecurity.png" alt="Certificate">
+                                </div>
+                                <div class="cert-body">
+                                    <h3 class="cert-title">
+                                        <span class="verified-badge">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                            <span data-lang-key="cert_verified">Verified</span>
+                                        </span>
+                                    </h3>
+                                    <div class="cert-footer">
+                                        <button class="verify-link" data-url="https://www.credly.com/badges/0884e9f8-d0fa-4a4e-aff9-2dc795b67a5d/public_url" data-lang-key="cert_verify_link">Verify link</button>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Carte 3 -->
+                            <article class="cert-card">
+                                <div class="cert-image">
+                                    <img src="assets/img/networking-basics.png" alt="Certificate">
+                                </div>
+                                <div class="cert-body">
+                                    <h3 class="cert-title">
+                                        <span class="verified-badge">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                            <span data-lang-key="cert_verified">Verified</span>
+                                        </span>
+                                    </h3>
+                                    <div class="cert-footer">
+                                        <button class="verify-link" data-url="https://www.credly.com/badges/cd4f0d74-7fac-414e-bbaa-851ecd981aca/public_url" data-lang-key="cert_verify_link">Verify link</button>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Carte 4 -->
+                            <article class="cert-card">
+                                <div class="cert-image">
+                                    <img src="assets/img/networking-devices-and-initial-configuration.png" alt="Certificate">
+                                </div>
+                                <div class="cert-body">
+                                    <h3 class="cert-title">
+                                        <span class="verified-badge">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                            <span data-lang-key="cert_verified">Verified</span>
+                                        </span>
+                                    </h3>
+                                    <div class="cert-footer">
+                                        <button class="verify-link" data-url="https://www.credly.com/badges/4af5d83b-b4ea-4137-9563-f1fa87f002d7/public_url" data-lang-key="cert_verify_link">Verify link</button>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Carte 5 -->
+                            <article class="cert-card">
+                                <div class="cert-image">
+                                    <img src="assets/img/endpoint-security.png" alt="Certificate">
+                                </div>
+                                <div class="cert-body">
+                                    <h3 class="cert-title">
+                                        <span class="verified-badge">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                            <span data-lang-key="cert_verified">Verified</span>
+                                        </span>
+                                    </h3>
+                                    <div class="cert-footer">
+                                        <button class="verify-link" data-url="https://www.credly.com/badges/bbd9760d-67c5-4a77-bd9a-025d7fc1f6a4/public_url" data-lang-key="cert_verify_link">Verify link</button>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Carte 6 -->
+                            <article class="cert-card">
+                                <div class="cert-image">
+                                    <img src="assets/img/junior-cybersecurity-analyst-career-path.1.png" alt="Certificate">
+                                </div>
+                                <div class="cert-body">
+                                    <h3 class="cert-title">
+                                        <span class="verified-badge">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                            <span data-lang-key="cert_verified">Verified</span>
+                                        </span>
+                                    </h3>
+                                    <div class="cert-footer">
+                                        <button class="verify-link" data-url="https://www.credly.com/badges/6f12c965-cf50-45a0-b0ac-da93123d8250/public_url" data-lang-key="cert_verify_link">Verify link</button>
+                                    </div>
+                                </div>
+                            </article>
+                            
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== PETITE MODAL (lien de vérification) ===== -->
+            <div class="modal-overlay small-overlay" id="linkModal">
+                <div class="modal-small">
+                    <button class="modal-close" id="closeLinkModal" title="Fermer">&times;</button>
+                    <h3 class="modal-small-title" data-lang-key="cert_link_modal_title">🔗 Verification Link</h3>
+                    <p class="modal-small-text" data-lang-key="cert_link_modal_text">Copiez ce lien pour vérifier le certificat et le badges:</p>
+                    <div class="link-box">
+                        <input type="text" id="verifyUrlInput" value="https://example.com/verify/1987" readonly>
+                        <button class="btn-copy" id="copyUrlBtn" data-lang-key="cert_copy">Copy</button>
+                    </div>
+                    <p class="copy-feedback" id="copyFeedback"></p>
+                </div>
+            </div>
+
+            <div class="resume-item" id="resumeEducationDeutsch">
               <h4 data-lang-key="resume_edu_1">Formation Deutsch: Actuellement chez DLMZ Tsimbazaza</h4>
               <h5>Octobre 2025 - </h5>
               <p><em>DLMZ (Deutsch Lernen Mit Ziel)</em></p>
@@ -1060,6 +1228,7 @@
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/script.js"></script>
 
   <!-- ==========================================================
        SCRIPT DE TRADUCTION COMPLET
@@ -1123,7 +1292,13 @@
         // Resume
         resume_title: 'Résumé',
         resume_objective: 'Objectif',
-        resume_education: 'Éducation | Formation',
+        resume_education: 'Education | Formation',
+        resume_edu_cisco: 'Formation Cisco Network Academy: Certificat et badge de réussite',
+        resume_cisco_1: 'Networking Basics.',
+        resume_cisco_2: 'Networking Devices and Initial Configuration.',
+        resume_cisco_3: 'Computer Hardware Basics.',
+        resume_cisco_4: 'Introduction to Cybersecurity.',
+        resume_cisco_5: 'Junior Cybersecurity Analyst Career Path.',
         resume_edu_1: 'Formation Deutsch : Actuellement chez DLMZ Tsimbazaza',
         resume_edu_2: 'Formation en ligne : Certificat de réussite pour Advanced Technical SQL',
         resume_edu_3: 'Formation Anglais : Certificat de scolarité pour les cours',
@@ -1235,7 +1410,15 @@
         messages_empty: 'Aucun message enregistré.',
         messages_download: 'Télécharger (.txt)',
         messages_clear: 'Effacer tout',
-        messages_logout: 'Déconnexion'
+        messages_logout: 'Déconnexion',
+        // Certifications Modal
+        btn_view_badges: 'Voir et verify mes badges',
+        cert_modal_title: 'Certifications & Badges',
+        cert_verified: 'Verified',
+        cert_verify_link: 'Verify link',
+        cert_link_modal_title: '🔗 Verification Link',
+        cert_link_modal_text: 'Copiez ce lien pour vérifier le certificat et le badges:',
+        cert_copy: 'Copy'
       },
       en: {
         // Navigation
@@ -1291,6 +1474,12 @@
         resume_title: 'Resume',
         resume_objective: 'Objective',
         resume_education: 'Education | Training',
+        resume_edu_cisco: 'Cisco Network Academy Training: Certificate and achievement badge',
+        resume_cisco_1: 'Networking Basics.',
+        resume_cisco_2: 'Networking Devices and Initial Configuration.',
+        resume_cisco_3: 'Computer Hardware Basics.',
+        resume_cisco_4: 'Introduction to Cybersecurity.',
+        resume_cisco_5: 'Junior Cybersecurity Analyst Career Path.',
         resume_edu_1: 'German Training: Currently at DLMZ Tsimbazaza',
         resume_edu_2: 'Online Training: Certificate of achievement for Advanced Technical SQL',
         resume_edu_3: 'English Training: School certificate for courses',
@@ -1402,7 +1591,15 @@
         messages_empty: 'No messages saved.',
         messages_download: 'Download (.txt)',
         messages_clear: 'Clear all',
-        messages_logout: 'Logout'
+        messages_logout: 'Logout',
+        // Certifications Modal
+        btn_view_badges: 'View and verify my badges',
+        cert_modal_title: 'Certifications & Badges',
+        cert_verified: 'Verified',
+        cert_verify_link: 'Verify link',
+        cert_link_modal_title: '🔗 Verification Link',
+        cert_link_modal_text: 'Copy this link to verify the certificate and badge:',
+        cert_copy: 'Copy'
       },
       de: {
         // Navigation
@@ -1458,6 +1655,12 @@
         resume_title: 'Lebenslauf',
         resume_objective: 'Ziel',
         resume_education: 'Ausbildung | Fortbildung',
+        resume_edu_cisco: 'Cisco Network Academy Ausbildung: Zertifikat und Erfolgsabzeichen',
+        resume_cisco_1: 'Netzwerkgrundlagen.',
+        resume_cisco_2: 'Netzwerkgeräte und Ersteinrichtung.',
+        resume_cisco_3: 'Grundlagen der Computerhardware.',
+        resume_cisco_4: 'Einführung in die Cybersicherheit.',
+        resume_cisco_5: 'Karriereweg Junior Cybersecurity Analyst.',
         resume_edu_1: 'Deutschkurs: Derzeit bei DLMZ Tsimbazaza',
         resume_edu_2: 'Online-Kurs: Zertifikat für Advanced Technical SQL',
         resume_edu_3: 'Englischkurs: Schulbescheinigung für Kurse',
@@ -1569,7 +1772,15 @@
         messages_empty: 'Keine Nachrichten gespeichert.',
         messages_download: 'Herunterladen (.txt)',
         messages_clear: 'Alles löschen',
-        messages_logout: 'Abmelden'
+        messages_logout: 'Abmelden',
+        // Certifications Modal
+        btn_view_badges: 'Meine Abzeichen anzeigen und überprüfen',
+        cert_modal_title: 'Zertifizierungen & Abzeichen',
+        cert_verified: 'Verifiziert',
+        cert_verify_link: 'Link überprüfen',
+        cert_link_modal_title: '🔗 Verifizierungslink',
+        cert_link_modal_text: 'Kopieren Sie diesen Link, um das Zertifikat und das Abzeichen zu überprüfen:',
+        cert_copy: 'Kopieren'
       },
       mg: {
         // Navigation
@@ -1593,60 +1804,66 @@
         about_diploma: 'Diploma',
         about_email: 'Mailaka',
         about_available: 'Misy',
-        about_degree: 'Diploma informatika + 4 taona traikefa',
+        about_degree: 'Diploma amin\'ny informatika + 4 taona traikefa',
         // Stats
-        stats_title: 'Zavatra azoko omena',
-        stats_subtitle: 'Fahaizana sy traikefa hanompoana ny tetikasanao',
+        stats_title: 'Izay azoko omena',
+        stats_subtitle: 'Fahaizana sy traikefa ho fanompoana ny tetikasanao',
         // Skills
         skills_title: 'Fahaizana',
-        skills_support_title: 'Fahaizana momba ny IT Support',
-        skills_support_1: 'Fitantanana rafitra fiasa (Windows, Linux).',
-        skills_support_2: 'Fitantanana tickets <strong>(GLPI*)</strong> sy olana.',
-        skills_support_3: 'Fikojakojana fitaovana IT.',
-        skills_support_4: 'Fanohanana teknika sy fanampiana ny mpampiasa.',
+        skills_support_title: 'Fahaizana amin\'ny Fanohanana IT',
+        skills_support_1: 'Fitantanana ny rafitra fiasa (Windows, Linux).',
+        skills_support_2: 'Fitantanana ny tickets <strong>(GLPI*)</strong> sy ny olana.',
+        skills_support_3: 'Fikojakojana ny fitaovana IT.',
+        skills_support_4: 'Fanohanana ara-teknika sy fanampiana ny mpampiasa.',
         skills_support_5: 'Fitantanana Active Directory.',
         skills_support_6: 'Fitantanana Microsoft ES 365.',
-        skills_support_7: 'Fandrindrana sy fametrahana fitaovana IT.',
-        skills_support_8: 'Tambo TCP/IP, DHCP, DNS, LAN.',
-        skills_apps_title: 'Fahaizana momba ny rindranasa',
+        skills_support_7: 'Fandrindrana sy fametrahana ny fitaovana IT.',
+        skills_support_8: 'Tambajotra TCP/IP, DHCP, DNS, LAN.',
+        skills_apps_title: 'Fahaizana amin\'ny rindranasa',
         skills_apps_1: 'Rindranasa birao:',
         skills_apps_2: 'Tahiry angona:',
         skills_apps_3: 'Fiteny fandaharana:',
         // Expertise
-        expertise_title: 'Ny sehatra ahafahako',
-        expertise_subtitle: 'Tsindrio ny sehatra iray hahitana antsipirihany',
-        accordion_1_title: 'Fahaizana Teknika',
-        accordion_1_text: 'Tadiavo ireo teknolojia, fitaovana ary sehatra ahafahako mamolavola, mamorona ary mitazona vahaolana informatika mahomby.',
-        accordion_2_title: 'Sehatra ahafahako',
-        accordion_2_text: 'Fijerena an\'habakabaka ny fahaizako amin\'ny famoronana rindrambaiko, fitantanana tahiry angona ary fitantanana rafitra informatika.',
+        expertise_title: 'Ny sehatra misy ny fahaizako',
+        expertise_subtitle: 'Tsindrio ny sehatra iray hijerena ny antsipiriany',
+        accordion_1_title: 'Fahaizana Ara-teknika',
+        accordion_1_text: 'Jereo ny teknolojia, fitaovana ary sehatra ampiasainako amin\'ny famolavolana, famoronana ary fikojakojana vahaolana informatika mahomby.',
+        accordion_2_title: 'Sehatra misy ny fahaizako',
+        accordion_2_text: 'Topi-maso ny fahaizako amin\'ny famoronana rindrambaiko, fitantanana tahiry angona ary fitantanana rafitra informatika.',
         accordion_3_title: 'IT & Teknolojia & Fahaizana',
         accordion_3_text: 'Vahaolana, frameworks ary teknolojia ampiasaina amin\'ny famoronana rindranasa, fitantanana angona ary fitantanana fotodrafitrasa IT.',
         // Resume
         resume_title: 'Fintinarana',
         resume_objective: 'Tanjona',
         resume_education: 'Fianarana | Fanofanana',
-        resume_edu_1: 'Fianarana Alemana: Amin\'izao fotoana izao ao amin\'ny DLMZ Tsimbazaza',
-        resume_edu_2: 'Fianarana an-tserasera: Taratasy fanamarinana fahombiazana ho an\'ny Advanced Technical SQL',
-        resume_edu_3: 'Fianarana Anglisy: Taratasy fanamarinana fianarana ho an\'ny taranja',
+        resume_edu_cisco: 'Fanofanana Cisco Network Academy: Taratasy fanamarinana sy badge fahombiazana',
+        resume_cisco_1: 'Fototra amin\'ny Tambajotra.',
+        resume_cisco_2: 'Fitaovana Tambajotra sy Fanamboarana voalohany.',
+        resume_cisco_3: 'Fototra amin\'ny Fitaovana solosaina.',
+        resume_cisco_4: 'Fampidirana amin\'ny Fiarovana an-tserasera.',
+        resume_cisco_5: 'Lalana ho an\'ny Junior Cybersecurity Analyst.',
+        resume_edu_1: 'Fanofanana Alemana: Ao amin\'ny DLMZ Tsimbazaza amin\'izao',
+        resume_edu_2: 'Fanofanana an-tserasera: Taratasy fanamarinana fahombiazana ho an\'ny Advanced Technical SQL',
+        resume_edu_3: 'Fanofanana Anglisy: Taratasy fanamarinana fianarana ho an\'ny taranja',
         resume_edu_4: 'Licence: Informatika Risika sy Fanapahan-kevitra',
-        resume_edu_5: 'Taratasy fanamarinana fahombiazana: 1ère Année Développement Web',
+        resume_edu_5: 'Taratasy fanamarinana fahombiazana: Taona voalohany amin\'ny Famoronana Tranonkala',
         resume_edu_6: 'Baccalauréat: Fianarana ankapobeny.',
         resume_download_btn: 'Alaina ny CV-ko',
         resume_download_title: 'Fandefasana',
-        resume_cv_fr: 'CV Version Fr',
-        resume_cv_fr_photo: 'CV Version Fr sary',
-        resume_cv_en: 'CV Version En',
+        resume_cv_fr: 'CV Dika Fr',
+        resume_cv_fr_photo: 'CV Dika Fr misy sary',
+        resume_cv_en: 'CV Dika En',
         resume_experience: 'Traikefa matihanina',
         resume_exp_1_title: 'Mpiofana Mpamorona S.I',
         resume_exp_1_date: 'Ravinala Airports | Martsa 2026 - Septambra 2026',
         resume_exp_1_1: 'Famoronana rindranasa natokana ho an\'ny Mpiasa ao amin\'ny Ravinala Airports.',
         resume_exp_1_2: 'Fametrahana ny dika vaovao V2.0',
-        resume_exp_1_3: 'Fanitsiana fiarovana.',
+        resume_exp_1_3: 'Fanitsiana ara-piarovana.',
         resume_exp_1_4: 'Famoronana sy fampidirana endri-javatra vaovao.',
         resume_exp_2_title: 'Fanohanana IT & Mpamorona',
         resume_exp_2_date: 'Freelance | Jolay 2025 - Febroary 2026',
         resume_exp_2_1: 'Mpanampy ara-teknika ho an\'ny mpampiasa manokana.',
-        resume_exp_2_2: 'Fikojakojana sy fanamboarana fitaovana informatika.',
+        resume_exp_2_2: 'Fikojakojana sy fanamboarana ny fitaovana informatika.',
         resume_exp_2_3: 'Famoronana tranonkala sy rindranasa (fiaraha-miasa).',
         resume_exp_3_title: 'Mpitantana Fanohanana IT sy Telecompensation',
         resume_exp_3_date: 'BGFIBank Madagascar | Avrily 2024 - Martsa 2025',
@@ -1655,22 +1872,22 @@
         resume_exp_3_3: 'Mpitantana ny telecompensation.',
         resume_exp_3_4: 'Fandrindrana mpanonta sy fametrahana milina vaovao.',
         resume_exp_3_5: 'Fitantanana olana sy famahana tickets.',
-        resume_exp_3_6: 'Fanohanana teknika sy fanampiana ny mpampiasa.',
+        resume_exp_3_6: 'Fanohanana ara-teknika sy fanampiana ny mpampiasa.',
         resume_exp_3_subtitle: 'Fanohanana rindranasa (Fisoloana ireo miala)',
         resume_exp_3_7: 'Fikarakarana famindrana vola maro.',
         resume_exp_3_8: 'Fanohanana Amplitude Bank.',
-        resume_exp_3_9: 'Famoronana sy fitantanana lisitry ny banky.',
+        resume_exp_3_9: 'Famoronana sy fitantanana ny lisitry ny banky.',
         resume_exp_3_10: 'Fandrindrana mpanonta sy fametrahana milina vaovao.',
         resume_exp_3_11: 'Mpitantana mpizara rindranasa (lisitra, SMS Banking).',
         resume_exp_4_title: 'Mpanampy IT',
         resume_exp_4_date: 'Mada-Marketing Call-Center | Novambra 2022 - Febroary 2023',
         resume_exp_4_1: 'Fanampiana sy fanohanana ny mpampiasa.',
         resume_exp_4_2: 'Fametrahana sy fandrindrana milina vaovao.',
-        resume_exp_4_3: 'Fikojakojana fitaovana informatika.',
+        resume_exp_4_3: 'Fikojakojana ny fitaovana informatika.',
         resume_exp_4_4: 'Mpitantana rafitra Linux.',
         resume_exp_5_title: 'Fanohanana IT',
-        resume_exp_5_date: 'Mpanampy amin\'ny M1Com Printing House | Septambra 2020 - Martsa 2022',
-        resume_exp_5_1: 'Fikojakojana fitaovana informatika.',
+        resume_exp_5_date: 'Mpanampy ao amin\'ny M1Com Printing House | Septambra 2020 - Martsa 2022',
+        resume_exp_5_1: 'Fikojakojana ny fitaovana informatika.',
         resume_exp_5_2: 'Helpdesk.',
         resume_exp_6_title: 'Mpiofana Mpamorona',
         resume_exp_6_date: 'Orinasa Fiantohana Aro | Avrily 2022 - Jona 2022',
@@ -1681,7 +1898,7 @@
         portfolio_title: 'Portfolio',
         portfolio_filter: 'Ireo famoronana rehetra ireo dia hita ao amin\'ny GitLab-ko ary koa ny tetikasa hafa.',
         portfolio_item_1_title: 'Nandritra ny fiofanana',
-        portfolio_item_1_text: 'Fiofanana famoronana rindranasa tranonkala Catalogue CDI (Foibe antontan-taratasy sy fampahalalam-baovao) an\'ny Orinasa Fiantohana Aro',
+        portfolio_item_1_text: 'Fiofanana famoronana rindranasa tranonkala Catalogue CDI (Foibe antontan-taratasy sy fampahalalam-baovao) ho an\'ny Orinasa Fiantohana Aro',
         portfolio_item_2_title: 'Nandritra ny fifanarahana',
         portfolio_item_2_text: 'Famoronana lisitry ny banky, tetikasa anatiny ao amin\'ny BGFIBank Madagascar',
         portfolio_item_3_title: 'Fiaraha-miasa amin\'ny namana',
@@ -1699,7 +1916,7 @@
         service_2_title: 'Fanohanana IT',
         service_2_text: 'Fanampiana informatika lavitra.',
         service_3_title: 'Fikojakojana IT',
-        service_3_text: 'Fandinihana sy fanamboarana fitaovana informatika.',
+        service_3_text: 'Fandinihana sy fanamboarana ny fitaovana informatika.',
         service_4_title: 'Freelance',
         service_4_text: 'Misy ho freelance.',
         // Contact
@@ -1727,16 +1944,24 @@
         // Admin
         admin_title: 'Fidirana administrateur',
         admin_password_label: 'Ampidiro ny tenimiafina:',
-        admin_error: 'Tenimiafina diso.',
-        admin_cancel: 'Afoina',
-        admin_validate: 'Hamafisina',
+        admin_error: 'Diso ny tenimiafina.',
+        admin_cancel: 'Aoka ihany',
+        admin_validate: 'Hamafiso',
         info_title: 'Fampahalalana',
         // Messages
         messages_title: 'Hafatra voatahiry',
         messages_empty: 'Tsy misy hafatra voatahiry.',
         messages_download: 'Alaina (.txt)',
-        messages_clear: 'Fafana rehetra',
-        messages_logout: 'Hiala'
+        messages_clear: 'Fafana daholo',
+        messages_logout: 'Hiala',
+        // Certifications Modal
+        btn_view_badges: 'Hijery sy hanamarina ny badge-ko',
+        cert_modal_title: 'Fanamarinana & Badge',
+        cert_verified: 'Voamarina',
+        cert_verify_link: 'Rohy fanamarinana',
+        cert_link_modal_title: '🔗 Rohy Fanamarinana',
+        cert_link_modal_text: 'Adikao ity rohy ity mba hanamarinana ny taratasy sy ny badge:',
+        cert_copy: 'Adikao'
       }
     };
 
@@ -1745,7 +1970,6 @@
     // ==========================================================
 
     function setLanguage(lang) {
-      // Mettre à jour les boutons
       document.querySelectorAll('.lang-btn').forEach(function(btn) {
         btn.classList.toggle('active', btn.dataset.lang === lang);
       });
@@ -1763,32 +1987,19 @@
 
       // Mettre à jour les textes spécifiques sans data-lang-key
       var heroName = document.getElementById('heroName');
-      var heroTitle = document.getElementById('heroTitle');
       var heroAvailability = document.getElementById('heroAvailability');
       var typedElement = document.querySelector('.typed');
 
-      // Hero Name - toujours en majuscules
       if (heroName) heroName.textContent = 'RAKOTONIAINA Harry Yves';
 
-      // Hero Title - toujours en majuscules
-      if (heroTitle) {
-        if (lang === 'fr') {
-          heroTitle.innerHTML = '<strong>TECHNICIEN SUPPORT IT | SYSTÈMES & APPLICATIONS</strong>';
-        } else if (lang === 'en') {
-          heroTitle.innerHTML = '<strong>IT SUPPORT TECHNICIAN | SYSTEMS & APPLICATIONS</strong>';
-        } else if (lang === 'de') {
-          heroTitle.innerHTML = '<strong>IT-SUPPORT-TECHNIKER | SYSTEME & ANWENDUNGEN</strong>';
-        } else if (lang === 'mg') {
-          heroTitle.innerHTML = '<strong>TEKNISIANA FANOHANANA IT | RAHAFITRA SY RINDRA</strong>';
-        }
-      }
+      // ⚠️ Le bloc qui écrasait #heroTitle a été SUPPRIMÉ
+      // → Votre titre HTML est maintenant respecté en permanence
 
-      // Hero Availability
       if (heroAvailability) {
         heroAvailability.textContent = lang === 'fr' ? '- Disponible pour une mobilité internationale | Autorisation de travail requise -' :
           lang === 'en' ? '- Available for international mobility | Work authorization required -' :
           lang === 'de' ? '- Verfügbar für internationale Mobilität | Arbeitserlaubnis erforderlich -' :
-          '- Misy ho an\'ny fivezivezena iraisam-pirenena | Mila alalana hiasa -';
+          '- Misokatra ho an\'ny fifindrà-monina iraisam-pirenena | Mila alalana hiasa -';
       }
 
       // Textes longs
@@ -1797,7 +2008,7 @@
         aboutText.textContent = lang === 'fr' ? 'Passionné par l\'informatique depuis toujours, j\'ai concrétisé mon intérêt en obtenant un diplôme dans le domaine, avec une spécialisation en développement et en gestion des systèmes d\'information (IT). Cette formation m\'a permis d\'acquérir de solides compétences techniques et une compréhension approfondie des enjeux informatiques actuels. Je suis constamment à la recherche de nouveaux défis et opportunités pour mettre en pratique mes connaissances et contribuer à des projets innovants.' :
           lang === 'en' ? 'Passionate about IT since always, I have concretized my interest by obtaining a degree in the field, with a specialization in development and information systems management (IT). This training has allowed me to acquire solid technical skills and a deep understanding of current IT issues. I am constantly looking for new challenges and opportunities to put my knowledge into practice and contribute to innovative projects.' :
           lang === 'de' ? 'Leidenschaftlich interessiert an IT seit jeher, habe ich mein Interesse durch einen Abschluss in diesem Bereich mit Spezialisierung auf Entwicklung und Informationssystemmanagement (IT) konkretisiert. Diese Ausbildung hat es mir ermöglicht, solide technische Fähigkeiten und ein tiefes Verständnis für aktuelle IT-Fragen zu erwerben. Ich bin ständig auf der Suche nach neuen Herausforderungen und Möglichkeiten, mein Wissen in die Praxis umzusetzen und zu innovativen Projekten beizutragen.' :
-          'Tia ny informatika hatramin\'ny fony aho, dia nahavita ny fianarako tamin\'ny famoronana sy fitantanana rafitra fampahalalam-baovao (IT). Io fianarana io dia nahafahako nahazo fahaizana ara-teknika matanjaka sy fahatakarana lalina momba ny olana ara-informatika ankehitriny. Mitady fanamby sy fahafahana vaovao hatrany aho mba hampiharana ny fahalalako sy handray anjara amin\'ny tetikasa vaovao.';
+          'Tia ny informatika hatramin\'ny fony aho, ary nahatanteraka izany tamin\'ny alalan\'ny fahazoana diplaoma amin\'ity sehatra ity, miaraka amin\'ny fahaizana manokana amin\'ny famoronana sy fitantanana rafitra fampahalalam-baovao (IT). Io fanofanana io dia nahafahako nahazo fahaizana ara-teknika matanjaka sy fahatakarana lalina momba ny olana ara-informatika ankehitriny. Mitady fanamby sy fahafahana vaovao hatrany aho mba hampiharana ny fahalalako sy handray anjara amin\'ny tetikasa vaovao.';
       }
 
       var skillsText = document.getElementById('skillsText');
@@ -1805,7 +2016,7 @@
         skillsText.textContent = lang === 'fr' ? 'Un ensemble des compétences en constante évolution pour relever les défis de demain.' :
           lang === 'en' ? 'A set of constantly evolving skills to meet the challenges of tomorrow.' :
           lang === 'de' ? 'Ein Satz von sich ständig weiterentwickelnden Fähigkeiten, um die Herausforderungen von morgen zu meistern.' :
-          'Fahaizana miovaova hatrany hanatratrana ny fanamby ho avy.';
+          'Fahaizana mivoatra tsy tapaka hamaliana ny fanamby rahampitso.';
       }
 
       var resumeText = document.getElementById('resumeText');
@@ -1821,7 +2032,7 @@
         portfolioText.textContent = lang === 'fr' ? 'Découvrez ici mes réalisations et mon parcours professionnel à travers une sélection de mes meilleurs travaux.' :
           lang === 'en' ? 'Discover here my achievements and my professional career through a selection of my best work.' :
           lang === 'de' ? 'Entdecken Sie hier meine Leistungen und meinen beruflichen Werdegang anhand einer Auswahl meiner besten Arbeiten.' :
-          'Tadiavo eto ny zava-bitako sy ny dianako matihanina amin\'ny alalan\'ny fifantenana ny asako tsara indrindra.';
+          'Jereo eto ny zava-bitako sy ny dianako matihanina amin\'ny alalan\'ny fifantenana ny asako tsara indrindra.';
       }
 
       var servicesText = document.getElementById('servicesText');
@@ -1829,7 +2040,7 @@
         servicesText.textContent = lang === 'fr' ? 'Je vous propose un accompagnement personnalisé pour la gestion de votre support informatique et le développement de vos projets web.' :
           lang === 'en' ? 'I offer you personalized support for the management of your IT support and the development of your web projects.' :
           lang === 'de' ? 'Ich biete Ihnen personalisierte Unterstützung für die Verwaltung Ihres IT-Supports und die Entwicklung Ihrer Webprojekte.' :
-          'Manolotra fanampiana manokana ho an\'ny fitantanana ny fanohanana informatika sy ny famoronana tetikasa web aho.';
+          'Manolotra fanaraha-maso manokana ho an\'ny fitantanana ny fanohanana informatika sy ny fampandrosoana ny tetikasa web anao aho.';
       }
 
       var contactText = document.getElementById('contactText');
@@ -1865,7 +2076,11 @@
         }
       }
 
-      // Sauvegarder la langue
+      // ==========================================================
+      // ✅ NOTIFIER LES AUTRES COMPOSANTS (carrousel, etc.) DU CHANGEMENT
+      // ==========================================================
+      window.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang: lang } }));
+
       localStorage.setItem('preferredLanguage', lang);
     }
 
