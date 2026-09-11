@@ -1064,51 +1064,147 @@ console.log('%c✅ Espace Privée fonctionnel - Fermeture propre du modal', 'fon
 // ==========================================================
 
 (function() {
-  // Liste des témoignages professionnels
-  const testimonials = [
-    {
-      text: "Grâce à une expertise polyvalente en développement logiciel, administration de bases de données et support informatique, je suis capable d'intervenir sur différentes composantes d'un système d'information, de sa conception à sa maintenance.",
-      author: "RAKOTONIAINA Harry Yves",
-      role: "Coordinateur Support IT & Développeur"
-    },
-    {
-      text: "Développeur full-stack passionné, je conçois des solutions web sur mesure alliant performance, sécurité et expérience utilisateur. Mon approche agile garantit des livrables de qualité dans les délais impartis.",
-      author: "RAKOTONIAINA Harry Yves",
-      role: "Full-Stack Developer"
-    },
-    {
-      text: "Expert en support IT et en gestion d'infrastructures, j'optimise les processus et assure la continuité des services. Ma capacité à résoudre les problèmes complexes rapidement est un atout majeur pour toute équipe.",
-      author: "RAKOTONIAINA Harry Yves",
-      role: "IT Support"
-    },
-    {
-      text: "Polyvalent et rigoureux, je maîtrise l'ensemble du cycle de vie d'un projet : de l'analyse des besoins au déploiement, en passant par le développement et la maintenance. Un interlocuteur fiable pour vos projets numériques.",
-      author: "RAKOTONIAINA Harry Yves",
-      role: "Technical Lead"
-    },
-    {
-      text: "Passionné par l'innovation et les nouvelles technologies, je suis constamment en veille pour intégrer les meilleures pratiques et outils. Mon objectif : apporter une valeur ajoutée tangible à chaque projet.",
-      author: "RAKOTONIAINA Harry Yves",
-      role: "Tech Innovator & Solution Architect"
-    }
-  ];
+  // ==========================================================
+  // TRADUCTIONS DES TÉMOIGNAGES (FR / EN / DE / MG)
+  // ==========================================================
+  const TESTIMONIALS_TRANSLATIONS = {
+    fr: [
+      {
+        text: "Grâce à une expertise polyvalente en développement logiciel, administration de bases de données et support informatique, je suis capable d'intervenir sur différentes composantes d'un système d'information, de sa conception à sa maintenance.",
+        author: "RAKOTONIAINA Harry Yves",
+        role: "Coordinateur Support IT & Développeur"
+      },
+      {
+        text: "Développeur full-stack passionné, je conçois des solutions web sur mesure alliant performance, sécurité et expérience utilisateur. Mon approche agile garantit des livrables de qualité dans les délais impartis.",
+        author: "RAKOTONIAINA Harry Yves",
+        role: "Full-Stack Developer"
+      },
+      {
+        text: "Expert en support IT et en gestion d'infrastructures, j'optimise les processus et assure la continuité des services. Ma capacité à résoudre les problèmes complexes rapidement est un atout majeur pour toute équipe.",
+        author: "RAKOTONIAINA Harry Yves",
+        role: "IT Support"
+      },
+      {
+        text: "Polyvalent et rigoureux, je maîtrise l'ensemble du cycle de vie d'un projet : de l'analyse des besoins au déploiement, en passant par le développement et la maintenance. Un interlocuteur fiable pour vos projets numériques.",
+        author: "RAKOTONIAINA Harry Yves",
+        role: "Technical Lead"
+      },
+      {
+        text: "Passionné par l'innovation et les nouvelles technologies, je suis constamment en veille pour intégrer les meilleures pratiques et outils. Mon objectif : apporter une valeur ajoutée tangible à chaque projet.",
+        author: "RAKOTONIAINA Harry Yves",
+        role: "Tech Innovator & Solution Architect"
+      }
+    ],
+    en: [
+      {
+        text: "With versatile expertise in software development, database administration and IT support, I am able to work on different components of an information system, from design to maintenance.",
+        author: "RAKOTONIAINA Harry Yves",
+        role: "IT Support Coordinator & Developer"
+      },
+      {
+        text: "Passionate full-stack developer, I design custom web solutions combining performance, security and user experience. My agile approach guarantees quality deliverables within the given deadlines.",
+        author: "RAKOTONIAINA Harry Yves",
+        role: "Full-Stack Developer"
+      },
+      {
+        text: "Expert in IT support and infrastructure management, I optimize processes and ensure service continuity. My ability to solve complex problems quickly is a major asset for any team.",
+        author: "RAKOTONIAINA Harry Yves",
+        role: "IT Support"
+      },
+      {
+        text: "Versatile and rigorous, I master the entire lifecycle of a project: from needs analysis to deployment, including development and maintenance. A reliable contact for your digital projects.",
+        author: "RAKOTONIAINA Harry Yves",
+        role: "Technical Lead"
+      },
+      {
+        text: "Passionate about innovation and new technologies, I am constantly monitoring to integrate best practices and tools. My goal: to bring tangible added value to each project.",
+        author: "RAKOTONIAINA Harry Yves",
+        role: "Tech Innovator & Solution Architect"
+      }
+    ],
+    de: [
+      {
+        text: "Dank meiner vielseitigen Expertise in Softwareentwicklung, Datenbankverwaltung und IT-Support kann ich an verschiedenen Komponenten eines Informationssystems arbeiten, von der Konzeption bis zur Wartung.",
+        author: "RAKOTONIAINA Harry Yves",
+        role: "IT-Support-Koordinator & Entwickler"
+      },
+      {
+        text: "Leidenschaftlicher Full-Stack-Entwickler, ich entwerfe maßgeschneiderte Web-Lösungen, die Leistung, Sicherheit und Benutzererfahrung vereinen. Mein agiler Ansatz garantiert qualitativ hochwertige Ergebnisse innerhalb der vorgegebenen Fristen.",
+        author: "RAKOTONIAINA Harry Yves",
+        role: "Full-Stack-Entwickler"
+      },
+      {
+        text: "Experte für IT-Support und Infrastrukturmanagement, ich optimiere Prozesse und gewährleiste die Servicekontinuität. Meine Fähigkeit, komplexe Probleme schnell zu lösen, ist ein großer Vorteil für jedes Team.",
+        author: "RAKOTONIAINA Harry Yves",
+        role: "IT-Support"
+      },
+      {
+        text: "Vielseitig und gründlich beherrsche ich den gesamten Lebenszyklus eines Projekts: von der Bedarfsanalyse über die Entwicklung und Wartung bis hin zum Deployment. Ein zuverlässiger Ansprechpartner für Ihre digitalen Projekte.",
+        author: "RAKOTONIAINA Harry Yves",
+        role: "Technical Lead"
+      },
+      {
+        text: "Leidenschaftlich für Innovation und neue Technologien, bin ich ständig auf der Suche, um Best Practices und Tools zu integrieren. Mein Ziel: jedem Projekt einen greifbaren Mehrwert zu bieten.",
+        author: "RAKOTONIAINA Harry Yves",
+        role: "Tech Innovator & Solution Architect"
+      }
+    ],
+    mg: [
+      {
+        text: "Noho ny fahaizako miasa amin'ny sehatra maro toy ny famoronana rindrambaiko, fitantanana tahiry angona ary fanohanana ara-teknika, afaka manao zavatra amin'ny singa samihafa amin'ny rafitra fampahalalam-baovao aho, hatramin'ny famolavolana ka hatramin'ny fikojakojana.",
+        author: "RAKOTONIAINA Harry Yves",
+        role: "Mpandrindra Fanohanana IT & Mpamorona"
+      },
+      {
+        text: "Mpamorona full-stack feno hafanam-po, mamolavola vahaolana web mifanaraka amin'ny filàna, mampifangaro ny fahombiazana, fiarovana ary traikefa ho an'ny mpampiasa. Ny fomba agile ampiasainako dia manome antoka ny vokatra tsara kalitao amin'ny fotoana voatondro.",
+        author: "RAKOTONIAINA Harry Yves",
+        role: "Mpamorona Full-Stack"
+      },
+      {
+        text: "Manam-pahaizana amin'ny fanohanana IT sy fitantanana fotodrafitrasa, manatsara ny fizotran'ny asa aho ary miantoka ny fitohizan'ny serivisy. Ny fahaizako mamaha haingana ny olana sarotra dia tombony lehibe ho an'ny ekipa rehetra.",
+        author: "RAKOTONIAINA Harry Yves",
+        role: "Fanohanana IT"
+      },
+      {
+        text: "Miovaova sy hentitra, mahafehy ny tsingerin'ny fiainan'ny tetikasa iray manontolo aho: manomboka amin'ny famakafakana ny filàna ka hatramin'ny fametrahana, mandalo amin'ny famoronana sy fikojakojana. Mpiara-miasa azo itokisana ho an'ny tetikasa nomerika.",
+        author: "RAKOTONIAINA Harry Yves",
+        role: "Mpitarika Teknika"
+      },
+      {
+        text: "Feno hafanam-po amin'ny fanavaozana sy ny teknolojia vaovao, mijery tsy tapaka aho mba hampiditra ny fomba fiasa sy fitaovana tsara indrindra. Ny tanjoko: mitondra tombony azo tsapain-tanana ho an'ny tetikasa tsirairay.",
+        author: "RAKOTONIAINA Harry Yves",
+        role: "Mpamorona Teknolojia & Mpangataka Vahaolana"
+      }
+    ]
+  };
 
+  // ==========================================================
+  // ÉTAT DU CARROUSEL
+  // ==========================================================
+  let currentLang = localStorage.getItem('preferredLanguage') || 'fr';
+  let testimonials = TESTIMONIALS_TRANSLATIONS[currentLang];
   let currentIndex = 0;
   let isTransitioning = false;
   let autoPlayInterval = null;
 
+  // Éléments DOM
   const textEl = document.getElementById('testimonialText');
   const authorNameEl = document.getElementById('authorName');
   const authorRoleEl = document.getElementById('authorRole');
   const dots = document.querySelectorAll('.dot');
 
-  // Mise à jour du témoignage
+  // ==========================================================
+  // MISE À JOUR DU TÉMOIGNAGE
+  // ==========================================================
   function updateTestimonial(index, animate = true) {
     if (isTransitioning) return;
     isTransitioning = true;
 
     const data = testimonials[index];
-    if (!data) return;
+    if (!data) {
+      isTransitioning = false;
+      return;
+    }
 
     // Mettre à jour les dots
     dots.forEach((dot, i) => {
@@ -1138,14 +1234,15 @@ console.log('%c✅ Espace Privée fonctionnel - Fermeture propre du modal', 'fon
     }
   }
 
-  // Aller au témoignage suivant
+  // ==========================================================
+  // NAVIGATION
+  // ==========================================================
   function nextTestimonial() {
     if (isTransitioning) return;
     currentIndex = (currentIndex + 1) % testimonials.length;
     updateTestimonial(currentIndex, true);
   }
 
-  // Aller à un témoignage spécifique
   function goToTestimonial(index) {
     if (isTransitioning || index === currentIndex) return;
     currentIndex = index;
@@ -1153,7 +1250,6 @@ console.log('%c✅ Espace Privée fonctionnel - Fermeture propre du modal', 'fon
     resetAutoPlay();
   }
 
-  // Réinitialiser l'autoplay
   function resetAutoPlay() {
     if (autoPlayInterval) {
       clearInterval(autoPlayInterval);
@@ -1161,7 +1257,21 @@ console.log('%c✅ Espace Privée fonctionnel - Fermeture propre du modal', 'fon
     autoPlayInterval = setInterval(nextTestimonial, 5000);
   }
 
-  // Initialisation
+  // ==========================================================
+  // CHANGEMENT DE LANGUE
+  // ==========================================================
+  function changeLanguage(lang) {
+    if (!TESTIMONIALS_TRANSLATIONS[lang]) return;
+    currentLang = lang;
+    testimonials = TESTIMONIALS_TRANSLATIONS[lang];
+    currentIndex = 0;
+    isTransitioning = false;
+    updateTestimonial(0, true);
+  }
+
+  // ==========================================================
+  // INITIALISATION
+  // ==========================================================
   function init() {
     // Afficher le premier témoignage
     updateTestimonial(0, false);
@@ -1179,15 +1289,24 @@ console.log('%c✅ Espace Privée fonctionnel - Fermeture propre du modal', 'fon
 
     // Pause sur hover
     const card = document.getElementById('testimonialCard');
-    card.addEventListener('mouseenter', function() {
-      if (autoPlayInterval) {
-        clearInterval(autoPlayInterval);
-        autoPlayInterval = null;
-      }
-    });
-    card.addEventListener('mouseleave', function() {
-      if (!autoPlayInterval) {
-        resetAutoPlay();
+    if (card) {
+      card.addEventListener('mouseenter', function() {
+        if (autoPlayInterval) {
+          clearInterval(autoPlayInterval);
+          autoPlayInterval = null;
+        }
+      });
+      card.addEventListener('mouseleave', function() {
+        if (!autoPlayInterval) {
+          resetAutoPlay();
+        }
+      });
+    }
+
+    // Écouter les changements de langue
+    window.addEventListener('languageChanged', function(e) {
+      if (e.detail && e.detail.lang) {
+        changeLanguage(e.detail.lang);
       }
     });
   }
