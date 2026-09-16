@@ -74,12 +74,11 @@ body {
     transform: scale(0.95);
     transition: transform 0.3s ease;
 
-    /* ✅ Masquer la scrollbar (Firefox + IE/Edge) */
+    /* ✅ Masquer la scrollbar */
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
 
-/* ✅ Masquer la scrollbar (Chrome / Safari) */
 .modal-large::-webkit-scrollbar {
     display: none;
     width: 0;
@@ -213,7 +212,7 @@ body {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 22px;
-    margin-top: -1rem;
+    margin-top: 0;
 }
 
 /* ===== Carte certificat ===== */
@@ -225,6 +224,7 @@ body {
     transition: all 0.25s ease;
     display: flex;
     flex-direction: column;
+    height: 100%;               /* ✅ Toutes les cartes ont la même hauteur */
 }
 
 .cert-card:hover {
@@ -233,22 +233,32 @@ body {
     border-color: #bae6fd;
 }
 
+/* ===== Image du badge (AGRANDIE + TAILLE UNIFORME) ===== */
 .cert-image {
     width: 100%;
-    aspect-ratio: 4 / 3;
+    height: 190px;              /* ✅ Hauteur uniforme pour toutes les cartes */
     background: #fafafa;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px;
+    padding: 14px;
     border-bottom: 1px solid #f1f2f4;
+    overflow: hidden;
+    flex-shrink: 0;             /* ✅ Empêche le rétrécissement */
 }
 
 .cert-image img {
+    width: 100%;                /* ✅ Remplit toute la zone */
+    height: 100%;               /* ✅ Remplit toute la zone */
     max-width: 100%;
     max-height: 100%;
-    object-fit: contain;
+    object-fit: contain;        /* ✅ Image entière visible, taille uniforme */
     display: block;
+    transition: transform 0.3s ease;
+}
+
+.cert-card:hover .cert-image img {
+    transform: scale(1.05);     /* Petit zoom au survol */
 }
 
 .cert-body {
@@ -256,6 +266,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    flex-grow: 1;               /* ✅ Remplit l'espace restant */
+    justify-content: space-between;
 }
 
 .cert-title {
@@ -398,12 +410,18 @@ body {
 @media (max-width: 1024px) {
     .certificates-grid {
         grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+    }
+    .cert-image {
+        height: 170px;          /* ✅ Légèrement plus petit */
+        padding: 12px;
     }
 }
 
 @media (max-width: 768px) {
     .certificates-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
     }
     .page-header {
         flex-direction: column;
@@ -415,13 +433,826 @@ body {
     .modal-large {
         padding: 22px;
     }
+    .cert-image {
+        height: 150px;          /* ✅ Encore un peu plus petit */
+        padding: 10px;
+    }
+    .cert-title {
+        font-size: 13px;
+    }
 }
 
 @media (max-width: 480px) {
     .certificates-grid {
         grid-template-columns: 1fr;
+        gap: 14px;
     }
     .modal-large {
         padding: 18px;
     }
+    .cert-image {
+        height: 200px;          /* ✅ Plus grand en 1 colonne pour l'équilibre */
+        padding: 14px;
+    }
+    .page-title {
+        font-size: 18px;
+    }
+    .cert-title {
+        font-size: 13px;
+    }
 }
+
+/* ==========================================================
+   BOUTONS CV — STYLE UNIFIÉ
+   ========================================================== */
+
+/* Groupe de boutons */
+.cv-buttons-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* Style commun aux 2 boutons */
+.cv-buttons-group .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 32px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  border-radius: 50px;
+  border: 2px solid #149ddd;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 1.2;
+  font-family: var(--heading-font, 'Raleway', sans-serif);
+}
+
+/* ✅ BOUTON "TÉLÉCHARGER MON CV" — PLEIN (SOLID) */
+.cv-buttons-group .btn-info,
+.cv-buttons-group .btn.bordered-10:not(.btn-outline-primary) {
+  background: linear-gradient(135deg, #149ddd, #1b5d83);
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(20, 157, 221, 0.30);
+}
+
+.cv-buttons-group .btn-info:hover,
+.cv-buttons-group .btn.bordered-10:not(.btn-outline-primary):hover {
+  background: linear-gradient(135deg, #1b5d83, #149ddd);
+  color: #ffffff !important;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(20, 157, 221, 0.40);
+}
+
+/* ✅ BOUTON "GÉNÉRER MON CV (PDF)" — OUTLINE */
+.cv-buttons-group .btn-outline-primary {
+  background: transparent;
+  color: #149ddd !important;
+}
+
+.cv-buttons-group .btn-outline-primary:hover {
+  background: #149ddd;
+  color: #ffffff !important;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(20, 157, 221, 0.40);
+}
+
+/* Responsive : les boutons passent en pleine largeur sur mobile */
+@media (max-width: 576px) {
+  .cv-buttons-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .cv-buttons-group .btn {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+/* ==========================================================
+   GRAND MODAL — LECTEUR PDF
+   ========================================================== */
+
+.pdf-viewer-dialog {
+  max-width: 1100px !important;
+  width: 95% !important;
+  height: 92vh;
+  margin: 4vh auto !important;
+}
+
+.pdf-viewer-modal {
+  border-radius: 20px !important;
+  border: none !important;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.30) !important;
+}
+
+/* ----- Header ----- */
+.pdf-viewer-header {
+  background: linear-gradient(135deg, #1b5d83, #149ddd) !important;
+  padding: 16px 22px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  border-bottom: none !important;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.pdf-viewer-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.10), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.pdf-viewer-header-icon {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.20);
+  border: 1px solid rgba(255, 255, 255, 0.30);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.pdf-viewer-header-icon i {
+  font-size: 1.35rem;
+  color: #ffffff;
+}
+
+.pdf-viewer-header-text {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.pdf-viewer-modal .modal-title {
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  margin: 0 0 2px 0 !important;
+  letter-spacing: 0.3px;
+  font-family: var(--heading-font, 'Raleway', sans-serif);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pdf-viewer-subtitle {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.80);
+  margin: 0;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ----- Actions header ----- */
+.pdf-viewer-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.pdf-viewer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none !important;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: var(--heading-font, 'Raleway', sans-serif);
+  letter-spacing: 0.3px;
+}
+
+.pdf-btn-download {
+  background: #ffffff;
+  color: #1b5d83 !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.10);
+}
+
+.pdf-btn-download:hover {
+  background: #f0f9ff;
+  color: #149ddd !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(255, 255, 255, 0.25);
+}
+
+.pdf-btn-open {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.30);
+}
+
+.pdf-btn-open:hover {
+  background: rgba(255, 255, 255, 0.30);
+  color: #ffffff !important;
+  transform: translateY(-2px);
+}
+
+.pdf-viewer-close {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #ffffff;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.pdf-viewer-close:hover {
+  background: rgba(255, 255, 255, 0.30);
+  transform: rotate(90deg);
+}
+
+/* ----- Body (zone PDF) ----- */
+.pdf-viewer-body {
+  flex: 1;
+  padding: 0 !important;
+  background: #475569;
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.pdf-viewer-body iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  background: #ffffff;
+}
+
+/* ----- Loader ----- */
+.pdf-viewer-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: #f8fafc;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+.pdf-viewer-loading.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pdf-viewer-loading i {
+  font-size: 2.5rem;
+  color: #149ddd;
+  animation: spinPdf 1s linear infinite;
+}
+
+.pdf-viewer-loading p {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0;
+  font-weight: 500;
+}
+
+@keyframes spinPdf {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ----- Ajustement du petit modal (icône eye au lieu de download) ----- */
+.cv-download-link .cv-file-action i {
+  transition: all 0.3s ease;
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+@media (max-width: 991px) {
+  .pdf-viewer-dialog {
+    max-width: 95% !important;
+    height: 90vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .pdf-viewer-dialog {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100vh;
+    margin: 0 !important;
+  }
+
+  .pdf-viewer-modal {
+    border-radius: 0 !important;
+    height: 100vh;
+  }
+
+  .pdf-viewer-header {
+    padding: 12px 14px !important;
+    gap: 10px !important;
+  }
+
+  .pdf-viewer-header-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    border-radius: 10px;
+  }
+
+  .pdf-viewer-header-icon i {
+    font-size: 1.1rem;
+  }
+
+  .pdf-viewer-modal .modal-title {
+    font-size: 0.95rem !important;
+  }
+
+  .pdf-viewer-subtitle {
+    font-size: 0.72rem;
+  }
+
+  .pdf-viewer-btn span {
+    display: none;   /* Cache le texte des boutons sur mobile */
+  }
+
+  .pdf-viewer-btn {
+    padding: 9px 11px;
+    min-width: 38px;
+    justify-content: center;
+  }
+
+  .pdf-viewer-btn i {
+    font-size: 1rem;
+  }
+
+  .pdf-viewer-close {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pdf-viewer-header-icon {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+  }
+
+  .pdf-viewer-header-icon i {
+    font-size: 1rem;
+  }
+
+  .pdf-viewer-modal .modal-title {
+    font-size: 0.88rem !important;
+  }
+
+  .pdf-viewer-subtitle {
+    display: none;   /* Cache le sous-titre sur très petit écran */
+  }
+}
+
+/* ==========================================================
+   MODAL DE TÉLÉCHARGEMENT CV — DESIGN PROFESSIONNEL
+   ========================================================== */
+
+/* ----- Contenu du modal ----- */
+.cv-download-modal {
+  border-radius: 20px !important;
+  border: none !important;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.20) !important;
+}
+
+/* ----- Header ----- */
+.cv-download-header {
+  background: linear-gradient(135deg, #1b5d83, #149ddd) !important;
+  padding: 22px 26px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  border-bottom: none !important;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Effet décoratif */
+.cv-download-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.10), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Icône du header (cercle) */
+.cv-download-header-icon {
+  width: 46px;
+  height: 46px;
+  min-width: 46px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.20);
+  border: 1px solid rgba(255, 255, 255, 0.30);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.cv-download-header-icon i {
+  font-size: 1.4rem;
+  color: #ffffff;
+}
+
+/* Texte du header */
+.cv-download-header-text {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.cv-download-modal .modal-title {
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  margin: 0 0 3px 0 !important;
+  letter-spacing: 0.3px;
+  font-family: var(--heading-font, 'Raleway', sans-serif);
+}
+
+.cv-download-subtitle {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.80);
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Bouton fermer */
+.cv-download-header .btn-close {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-radius: 50% !important;
+  width: 36px !important;
+  height: 36px !important;
+  padding: 0 !important;
+  opacity: 1 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  filter: none !important;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.cv-download-header .btn-close i {
+  font-size: 0.95rem;
+  color: #ffffff;
+}
+
+.cv-download-header .btn-close:hover {
+  background: rgba(255, 255, 255, 0.30) !important;
+  transform: rotate(90deg);
+}
+
+/* ----- Body ----- */
+.cv-download-body {
+  padding: 22px 22px 24px !important;
+  background: #ffffff;
+}
+
+/* ----- Liste ----- */
+.cv-download-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ----- Item ----- */
+.cv-download-item {
+  margin: 0;
+  padding: 0;
+}
+
+.cv-download-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border: 2px solid #e8eef4;
+  border-radius: 14px;
+  text-decoration: none !important;
+  background: #ffffff;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.cv-download-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #149ddd, #1b5d83);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.35s ease;
+}
+
+.cv-download-link:hover {
+  border-color: #149ddd;
+  background: linear-gradient(135deg, rgba(20, 157, 221, 0.04), rgba(27, 93, 131, 0.02));
+  transform: translateX(4px);
+  box-shadow: 0 8px 24px rgba(20, 157, 221, 0.12);
+}
+
+.cv-download-link:hover::before {
+  transform: scaleY(1);
+}
+
+/* ----- Icône fichier (carré) ----- */
+.cv-file-icon {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(20, 157, 221, 0.12), rgba(27, 93, 131, 0.08));
+  border: 1px solid rgba(20, 157, 221, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.cv-file-icon i {
+  font-size: 1.3rem;
+  color: #149ddd;
+  transition: all 0.3s ease;
+}
+
+.cv-download-link:hover .cv-file-icon {
+  background: linear-gradient(135deg, #149ddd, #1b5d83);
+  border-color: transparent;
+  transform: rotate(-6deg) scale(1.05);
+}
+
+.cv-download-link:hover .cv-file-icon i {
+  color: #ffffff;
+}
+
+/* ----- Info fichier ----- */
+.cv-file-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cv-file-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1a2a3a;
+  line-height: 1.3;
+  transition: color 0.25s ease;
+}
+
+.cv-download-link:hover .cv-file-name {
+  color: #1b5d83;
+}
+
+/* ----- Meta (badges + type) ----- */
+.cv-file-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.cv-file-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  line-height: 1;
+  color: #ffffff;
+}
+
+.cv-badge-fr {
+  background: linear-gradient(135deg, #3b82f6, #1e40af);
+}
+
+.cv-badge-en {
+  background: linear-gradient(135deg, #dc2626, #991b1b);
+}
+
+.cv-badge-photo {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.cv-file-type {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #94a3b8;
+  letter-spacing: 0.5px;
+}
+
+/* ----- Bouton download ----- */
+.cv-file-action {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.cv-file-action i {
+  font-size: 1.05rem;
+  color: #64748b;
+  transition: all 0.3s ease;
+}
+
+.cv-download-link:hover .cv-file-action {
+  background: linear-gradient(135deg, #149ddd, #1b5d83);
+  transform: scale(1.08);
+  box-shadow: 0 4px 14px rgba(20, 157, 221, 0.35);
+}
+
+.cv-download-link:hover .cv-file-action i {
+  color: #ffffff;
+  animation: bounceDown 0.6s ease;
+}
+
+@keyframes bounceDown {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(3px); }
+  100% { transform: translateY(0); }
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+@media (max-width: 576px) {
+  .cv-download-header {
+    padding: 18px 18px !important;
+    gap: 12px !important;
+  }
+
+  .cv-download-header-icon {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 10px;
+  }
+
+  .cv-download-header-icon i {
+    font-size: 1.2rem;
+  }
+
+  .cv-download-modal .modal-title {
+    font-size: 1rem !important;
+  }
+
+  .cv-download-subtitle {
+    font-size: 0.75rem;
+  }
+
+  .cv-download-header .btn-close {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .cv-download-body {
+    padding: 16px 16px 20px !important;
+  }
+
+  .cv-download-list {
+    gap: 10px;
+  }
+
+  .cv-download-link {
+    padding: 12px 14px;
+    gap: 12px;
+    border-radius: 12px;
+  }
+
+  .cv-file-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    border-radius: 9px;
+  }
+
+  .cv-file-icon i {
+    font-size: 1.1rem;
+  }
+
+  .cv-file-name {
+    font-size: 0.88rem;
+  }
+
+  .cv-file-action {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+  }
+
+  .cv-file-action i {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .cv-download-link {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .cv-file-icon {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+  }
+
+  .cv-file-icon i {
+    font-size: 1rem;
+  }
+
+  .cv-file-name {
+    font-size: 0.82rem;
+  }
+
+  .cv-file-badge {
+    font-size: 0.6rem;
+    padding: 2px 6px;
+  }
+
+  .cv-file-action {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+  }
+}
+

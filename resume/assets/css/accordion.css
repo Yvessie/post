@@ -2212,3 +2212,288 @@ h1, h2, h3, h4, h5, h6 {
         width: 20px;
       }
     }
+
+        /* ==========================================================
+       MENU MOBILE — TOGGLE HAMBURGER
+       ========================================================== */
+
+    /* Le bouton hamburger visible seulement sur mobile/tablette */
+    .header-toggle {
+      display: none;
+    }
+
+    @media (max-width: 1199px) {
+      /* Afficher le bouton hamburger */
+      .header-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        z-index: 9999;
+        width: 44px;
+        height: 44px;
+        background: #149ddd;
+        color: #ffffff;
+        border-radius: 50%;
+        font-size: 1.4rem;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(20, 157, 221, 0.4);
+        transition: all 0.3s ease;
+        font-style: normal;
+      }
+
+      .header-toggle:hover {
+        background: #0d7ab5;
+        transform: scale(1.08);
+      }
+
+      /* Le header est caché par défaut à gauche */
+      #header {
+        left: -300px;
+        transition: left 0.3s ease;
+      }
+
+      /* Quand body a la classe 'header-show', le header glisse */
+      body.header-show #header {
+        left: 0;
+      }
+
+      /* Overlay sombre quand le menu est ouvert */
+      body.header-show::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 996;
+      }
+    }
+
+    /* Sur desktop : le bouton hamburger disparaît */
+    @media (min-width: 1200px) {
+      .header-toggle {
+        display: none !important;
+      }
+    }
+
+    /* ==========================================================
+   PORTFOLIO - ONGLETS (TABS)
+   ========================================================== */
+.portfolio-tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 0 auto 30px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  width: fit-content;
+  max-width: 100%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(20, 157, 221, 0.10);
+}
+
+.portfolio-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border: none;
+  background: transparent;
+  color: #4a5568;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.3px;
+  font-family: var(--heading-font, 'Raleway', sans-serif);
+  white-space: nowrap;
+}
+
+.portfolio-tab:hover {
+  background: rgba(20, 157, 221, 0.08);
+  color: #1b5d83;
+}
+
+.portfolio-tab.active {
+  background: linear-gradient(135deg, #1b5d83, #149ddd);
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(20, 157, 221, 0.30);
+  transform: translateY(-1px);
+}
+
+.portfolio-tab.active:hover {
+  background: linear-gradient(135deg, #1b5d83, #149ddd);
+  color: #ffffff;
+}
+
+/* Contenu des onglets */
+.portfolio-tab-content {
+  display: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.portfolio-tab-content.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================
+   PORTFOLIO - ÉTAT VIDE (IT-Support)
+   ========================================================== */
+.portfolio-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 30px;
+  margin: 20px auto;
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(20, 157, 221, 0.10);
+}
+
+.empty-icon {
+  margin-bottom: 20px;
+}
+
+.empty-icon i {
+  font-size: 4rem;
+  color: rgba(20, 157, 221, 0.35);
+  background: rgba(20, 157, 221, 0.08);
+  padding: 24px;
+  border-radius: 50%;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.portfolio-empty-state:hover .empty-icon i {
+  color: rgba(20, 157, 221, 0.55);
+  background: rgba(20, 157, 221, 0.12);
+  transform: scale(1.05);
+}
+
+.empty-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1b5d83;
+  margin-bottom: 12px;
+  font-family: var(--heading-font, 'Raleway', sans-serif);
+}
+
+.empty-text {
+  font-size: 1rem;
+  color: #4a5568;
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto 24px;
+}
+
+.empty-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 32px;
+  background: linear-gradient(135deg, #1b5d83, #149ddd);
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  box-shadow: 0 6px 20px rgba(20, 157, 221, 0.30);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.empty-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(20, 157, 221, 0.40);
+  color: #ffffff;
+}
+
+/* ==========================================================
+   PORTFOLIO - RESPONSIVE
+   ========================================================== */
+@media (max-width: 768px) {
+  .portfolio-tabs {
+    padding: 6px;
+    gap: 6px;
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .portfolio-tab {
+    flex: 1;
+    justify-content: center;
+    padding: 10px 16px;
+    font-size: 0.85rem;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .portfolio-empty-state {
+    padding: 40px 20px;
+    border-radius: 20px;
+  }
+
+  .empty-icon i {
+    font-size: 3rem;
+    padding: 18px;
+  }
+
+  .empty-title {
+    font-size: 1.2rem;
+  }
+
+  .empty-text {
+    font-size: 0.9rem;
+  }
+
+  .empty-btn {
+    padding: 10px 24px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .portfolio-tab {
+    padding: 8px 12px;
+    font-size: 0.78rem;
+    gap: 4px;
+  }
+
+  .portfolio-empty-state {
+    padding: 30px 16px;
+  }
+
+  .empty-icon i {
+    font-size: 2.5rem;
+    padding: 14px;
+  }
+
+  .empty-title {
+    font-size: 1.05rem;
+  }
+
+  .empty-text {
+    font-size: 0.85rem;
+  }
+
+  .empty-btn {
+    padding: 9px 20px;
+    font-size: 0.85rem;
+  }
+}
+
