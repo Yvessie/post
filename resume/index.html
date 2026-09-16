@@ -2803,6 +2803,78 @@
     });
   </script>
 
+  <!-- ==========================================================
+     ✅ FIX : Nettoyage complet des modals (blur résiduel)
+     ========================================================== -->
+<script>
+  (function () {
+    'use strict';
+
+    function cleanupModalArtifacts() {
+      const body = document.body;
+
+      // 1. Retirer modal-open
+      body.classList.remove('modal-open');
+      body.style.overflow = '';
+      body.style.paddingRight = '';
+
+      // 2. Supprimer les backdrops résiduels
+      document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+
+      // 3. Nettoyer les backdrop-filter inline sur tous les modals
+      document.querySelectorAll('.modal, .modal-dialog, .modal-content, .modal-backdrop').forEach(el => {
+        el.style.backdropFilter = '';
+        el.style.webkitBackdropFilter = '';
+        el.style.filter = '';
+      });
+
+      // 4. Nettoyer html
+      document.documentElement.style.overflow = '';
+      document.documentElement.style.paddingRight = '';
+
+      console.log('🧹 Modals nettoyés');
+    }
+
+    // Écouter les fermetures de tous les modals Bootstrap
+    document.addEventListener('hidden.bs.modal', function () {
+      setTimeout(cleanupModalArtifacts, 80);
+    });
+
+    // Sécurité : nettoyer sur clic de fermeture
+    document.addEventListener('click', function (e) {
+      const t = e.target;
+      const isCloseAction =
+        t.classList.contains('modal-close') ||
+        t.closest('.modal-close') ||
+        t.classList.contains('btn-close') ||
+        t.closest('.btn-close') ||
+        t.classList.contains('modal-overlay') ||
+        t.getAttribute('data-bs-dismiss') === 'modal' ||
+        t.closest('[data-bs-dismiss="modal"]');
+
+      if (isCloseAction) {
+        setTimeout(cleanupModalArtifacts, 150);
+      }
+    });
+
+    // Sécurité : Observer les mutations du body pour détecter modal-open fantôme
+    const observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (m) {
+        if (m.attributeName === 'class') {
+          const hasModals = document.querySelector('.modal.show');
+          if (!hasModals && document.body.classList.contains('modal-open')) {
+            cleanupModalArtifacts();
+          }
+        }
+      });
+    });
+
+    observer.observe(document.body, { attributes: true });
+
+    console.log('✅ Fix modal cleanup initialisé');
+  })();
+</script>
+
   <!-- ✅ NOUVEAU : Chatbot -->
   <script src="assets/js/chatbot-data.js"></script>   
   <script src="assets/js/chatbot.js"></script>
