@@ -1256,3 +1256,214 @@ body {
   }
 }
 
+/* ==========================================================
+   ✅ HEADER — RESPONSIVE HAUTEUR (empêche le scroll)
+   ========================================================== */
+
+/* ===== Base : le header occupe 100% de la hauteur ===== */
+#header {
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden;                 /* ✅ Empêche le scroll */
+  height: 100vh;                    /* ✅ Toujours 100% de la hauteur */
+  padding: 15px;                    /* Padding réduit par défaut */
+  box-sizing: border-box;
+}
+
+/* ===== Le menu de navigation prend l'espace restant ===== */
+#header .navmenu {
+  flex: 1 1 auto;
+  overflow-y: auto;                 /* ✅ Scroll UNIQUEMENT dans le menu si besoin */
+  overflow-x: hidden;
+  min-height: 0;                    /* ✅ CRUCIAL pour le flex */
+  padding: 8px 0;
+  margin: 10px 0;
+  scrollbar-width: none;            /* ✅ Cache la scrollbar Firefox */
+  -ms-overflow-style: none;         /* ✅ Cache la scrollbar IE/Edge */
+}
+
+#header .navmenu::-webkit-scrollbar {
+  display: none;                    /* ✅ Cache la scrollbar Chrome/Safari */
+  width: 0;
+  height: 0;
+}
+
+/* ===== La liste du menu ne doit pas déborder ===== */
+#header .navmenu ul {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* ==========================================================
+   📱 RESPONSIVE — Adaptation progressive selon la hauteur
+   ========================================================== */
+
+/* Écrans normaux (≥ 700px) : tout affiché normalement */
+@media (min-width: 1200px) and (min-height: 700px) {
+  #header {
+    padding: 20px 15px;
+  }
+}
+
+/* Écrans moyens (600-700px) : on réduit légèrement */
+@media (max-height: 700px) {
+  #header {
+    padding: 12px 10px;
+  }
+
+  #header .profile-img img {
+    height: 110px !important;
+    width: 108px !important;
+    border-width: 4px !important;
+  }
+
+  #header .social-links {
+    margin: 10px 0 8px;
+  }
+
+  #header .social-links .social-link {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+
+  #header .navmenu ul li a {
+    padding: 9px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Petits écrans (500-600px) : on réduit plus */
+@media (max-height: 600px) {
+  #header {
+    padding: 10px 8px;
+  }
+
+  #header .profile-img {
+    margin-top: 5px;
+  }
+
+  #header .profile-img img {
+    height: 80px !important;
+    width: 78px !important;
+    border-width: 3px !important;
+  }
+
+  #header .social-links {
+    margin: 6px 0 4px;
+    gap: 4px;
+  }
+
+  #header .social-links .social-link {
+    width: 30px;
+    height: 30px;
+    font-size: 0.85rem;
+    border-radius: 8px;
+  }
+
+  #header .navmenu {
+    margin: 6px 0;
+    padding: 4px 0;
+  }
+
+  #header .navmenu ul li a {
+    padding: 7px 10px;
+    font-size: 0.82rem;
+    gap: 8px;
+  }
+
+  #header .navmenu ul li a .navicon {
+    font-size: 0.9rem;
+    width: 18px;
+  }
+}
+
+/* Très petits écrans (< 500px) : version compacte */
+@media (max-height: 500px) {
+  #header {
+    padding: 8px 6px;
+  }
+
+  #header .profile-img {
+    display: none;                  /* ✅ On cache la photo si vraiment trop petit */
+  }
+
+  #header .social-links {
+    margin: 4px 0;
+    gap: 3px;
+  }
+
+  #header .social-links .social-link {
+    width: 28px;
+    height: 28px;
+    font-size: 0.8rem;
+    border-radius: 7px;
+  }
+
+  #header .navmenu ul li a {
+    padding: 6px 8px;
+    font-size: 0.78rem;
+    gap: 6px;
+  }
+
+  #header .navmenu ul li a .navicon {
+    font-size: 0.85rem;
+    width: 16px;
+  }
+
+  #header .navmenu ul li a .navicon {
+    display: none;                  /* ✅ On cache les icônes pour gagner de la place */
+  }
+}
+
+/* Écrans très courts en mode paysage (< 450px de hauteur) */
+@media (max-height: 450px) {
+  #header {
+    padding: 6px 5px;
+  }
+
+  #header .social-links {
+    display: none;                  /* ✅ On cache les réseaux sociaux si vraiment trop court */
+  }
+
+  #header .navmenu ul li a {
+    padding: 5px 8px;
+    font-size: 0.75rem;
+  }
+}
+
+/* ==========================================================
+   ✅ HEADER MOBILE — Gestion spéciale quand menu ouvert
+   ========================================================== */
+@media (max-width: 1199px) {
+  /* Sur mobile, le header est en position fixed à gauche */
+  #header {
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Le menu devient scrollable si vraiment trop long */
+  #header .navmenu {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;  /* ✅ Scroll fluide iOS */
+  }
+}
+
+/* ==========================================================
+   ✅ AJUSTEMENT DES ICÔNES RÉSEAUX SOCIAUX (pour petits écrans)
+   ========================================================== */
+@media (max-width: 400px) {
+  #header .social-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  #header .social-links .social-link {
+    flex-shrink: 0;
+  }
+}
