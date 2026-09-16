@@ -28,6 +28,8 @@
   <link href="assets/css/accordion.css" rel="stylesheet">
   <link href="assets/css/language.css" rel="stylesheet">
   <link href="assets/css/css.css" rel="stylesheet">
+  <link href="assets/css/generic-css.css" rel="stylesheet">
+  <link href="assets/css/chatbot.css" rel="stylesheet">
 
   <style>
     /* ==========================================================
@@ -233,10 +235,22 @@
     </a>
 
     <div class="social-links text-center">
-      <a href="https://m.me/HarrysHRak" class="instagram"><i class="bi bi-messenger"></i></a>
-      <a href="https://wa.me/261335247704" class="instagram"><i class="bi bi-whatsapp"></i></a>
-      <a href="https://gitlab.com/harsdev1" class="instagram"><i class="bi bi-gitlab"></i></a>
-      <a href="https://www.linkedin.com/in/rakotoniaina-harry-yves-840ab4223/" class="linkedin"><i class="bi bi-linkedin"></i></a>
+        <a href="https://m.me/HarrysHRak" class="social-link social-messenger" target="_blank" rel="noopener" aria-label="Messenger">
+          <i class="bi bi-messenger"></i>
+        </a>
+        <a href="https://wa.me/261335247704" class="social-link social-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <i class="bi bi-whatsapp"></i>
+        </a>
+        <a href="https://gitlab.com/harsdev1" class="social-link social-gitlab" target="_blank" rel="noopener" aria-label="GitLab">
+          <i class="bi bi-gitlab"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/rakotoniaina-harry-yves-840ab4223/" class="social-link social-linkedin" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <i class="bi bi-linkedin"></i>
+        </a>
+        <!-- ✅ Nouveau : Credly -->
+        <a href="https://www.credly.com/users/rakotoniaina-harry-yves/badges/credly" class="social-link social-credly" target="_blank" rel="noopener" aria-label="Credly">
+          <i class="bi bi-patch-check-fill"></i>
+        </a>
     </div>
 
     <nav id="navmenu" class="navmenu">
@@ -259,6 +273,13 @@
     <section id="hero" class="hero section dark-background">
       <canvas id="networkCanvas"></canvas>
       <div class="hero-overlay"></div>
+      <!-- ===== ONDES RÉSEAU (DÉCORATION) ===== -->
+      <div class="hero-waves" aria-hidden="true">
+        <span class="hero-wave"></span>
+        <span class="hero-wave"></span>
+        <span class="hero-wave"></span>
+        <span class="hero-wave"></span>
+      </div>
 
       <!-- ====== SÉLECTEUR DE LANGUE ====== -->
       <div class="language-selector">
@@ -289,6 +310,14 @@
           <span class="typed" data-typed-items="Développeur, Technicien Support IT, Freelanceur"></span>
         </p>
       </div>
+      <!-- block de souris qui faire defile -->
+      <!-- ===== INDICATEUR SCROLL ===== -->
+      <a href="#about" class="scroll-indicator" aria-label="Défiler vers le bas">
+        <div class="mouse">
+          <div class="mouse-wheel"></div>
+        </div>
+        <span class="scroll-text" data-lang-key="scroll_down">Défiler</span>
+      </a>
     </section>
 
     <!-- About Section -->
@@ -302,43 +331,96 @@
       <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row gy-4 justify-content-center align-items-stretch">
           <div class="col-lg-4 col-md-6">
-            <div class="about-image-wrapper">
-              <img src="assets/img/iharrys.jpg" class="img-fluid about-img" alt="Photo de profil">
-              <div class="image-overlay">
-                <span class="badge bg-primary" data-lang-key="about_badge">Open to #work</span>
+              <div class="about-image-wrapper">
+                <img src="assets/img/iharrys.jpg" class="img-fluid about-img" alt="Photo de profil">
+                <div class="image-overlay">
+                  <span class="badge bg-primary" data-lang-key="about_badge">Open to #work</span>
+                </div>
               </div>
             </div>
-          </div>
+          
           <div class="col-lg-8 col-md-6">
             <div class="about-content-wrapper">
-              <h2 class="about-title" data-lang-key="about_subtitle">De petits détails.</h2>
-              <hr class="about-divider">
-              <div class="row info-grid">
-                <div class="col-lg-6">
-                  <ul class="info-list">
-                    <li><i class="bi bi-telephone-fill"></i> <strong data-lang-key="about_phone">Téléphone</strong></li>
-                    <li><i class="bi bi-geo-alt-fill"></i> <strong data-lang-key="about_city">Ville</strong></li>
-                    <li><i class="bi bi-briefcase-fill"></i> <strong data-lang-key="about_freelance">Freelance</strong></li>
-                    <li><i class="bi bi-award-fill"></i> <strong data-lang-key="about_diploma">Diplôme</strong></li>
-                    <li><i class="bi bi-envelope-fill"></i> <strong data-lang-key="about_email">Email</strong></li>
-                  </ul>
-                </div>
-                <div class="col-lg-6">
-                  <ul class="info-list values">
-                    <li><span>+261 33 52 477 04</span></li>
-                    <li><span>Antananarivo, Madagascar</span></li>
-                    <li><span data-lang-key="about_available">Disponible</span></li>
-                    <li><span data-lang-key="about_degree">Licence en informatique + 4 ans d'expérience</span></li>
-                    <li><span>rakotoniainaharryyves@gmail.com</span></li>
-                  </ul>
-                </div>
+
+              <!-- ===== TITRE ===== -->
+              <div class="about-title-wrap">
+                <h2 class="about-title" data-lang-key="about_subtitle">De petits détails.</h2>
+                <span class="about-title-line"></span>
               </div>
-              <div class="about-description">
-                <p class="p-3 shadow-lg" id="aboutDescription">
+
+              <!-- ===== GRILLE D'INFORMATIONS ===== -->
+              <div class="about-info-grid">
+
+                <!-- Téléphone -->
+                <div class="about-info-card">
+                  <div class="about-info-icon">
+                    <i class="bi bi-telephone-fill"></i>
+                  </div>
+                  <div class="about-info-text">
+                    <span class="about-info-label" data-lang-key="about_phone">Téléphone</span>
+                    <span class="about-info-value">+261 33 52 477 04</span>
+                  </div>
+                </div>
+
+                <!-- Ville -->
+                <div class="about-info-card">
+                  <div class="about-info-icon">
+                    <i class="bi bi-geo-alt-fill"></i>
+                  </div>
+                  <div class="about-info-text">
+                    <span class="about-info-label" data-lang-key="about_city">Ville</span>
+                    <span class="about-info-value">Antananarivo, Madagascar</span>
+                  </div>
+                </div>
+
+                <!-- Freelance -->
+                <div class="about-info-card">
+                  <div class="about-info-icon">
+                    <i class="bi bi-briefcase-fill"></i>
+                  </div>
+                  <div class="about-info-text">
+                    <span class="about-info-label" data-lang-key="about_freelance">Freelance</span>
+                    <span class="about-info-value" data-lang-key="about_available">Disponible</span>
+                  </div>
+                </div>
+
+                <!-- Diplôme -->
+                <div class="about-info-card">
+                  <div class="about-info-icon">
+                    <i class="bi bi-award-fill"></i>
+                  </div>
+                  <div class="about-info-text">
+                    <span class="about-info-label" data-lang-key="about_diploma">Diplôme</span>
+                    <span class="about-info-value" data-lang-key="about_degree">Licence en informatique + 4 ans d'expérience</span>
+                  </div>
+                </div>
+
+                <!-- Email -->
+                <div class="about-info-card">
+                  <div class="about-info-icon">
+                    <i class="bi bi-envelope-fill"></i>
+                  </div>
+                  <div class="about-info-text">
+                    <span class="about-info-label" data-lang-key="about_email">Email</span>
+                    <span class="about-info-value">rakotoniainaharryyves@gmail.com</span>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- ===== CITATION / DESCRIPTION ===== -->
+              <div class="about-quote">
+                <span class="about-quote-mark">
+                  <i class="bi bi-quote"></i>
+                </span>
+                <p class="about-quote-text" id="aboutDescription">
                   Développeur et technicien Support IT avec Licence 3 en informatique mention <strong>Risque et Décision</strong>. Je suis passionné par la création de solutions web et la résolution de problèmes techniques. Disponible pour des projets freelance, je suis toujours prêt à relever de nouveaux défis.
                 </p>
               </div>
+
             </div>
+          </div>
+
           </div>
         </div>
       </div>
@@ -395,98 +477,197 @@
       </div>
       <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row skills-content skills-animation">
-          <div class="col-lg-6 card p-4 bordered text-black">
-            <h6 class="text-black fw-bold bg-info p-3 rounded-5 text-white shadow-lg">
-              <i class="fas fa-desktop me-2"></i><span data-lang-key="skills_support_title">SUPPORT & SYSTEMES</span>
-            </h6>
-            <ul class="list-unstyled" id="skillsSupportList">
-              <li class="py-0">•<i class="fas fa-check-circle text-primary me-2"></i><span data-lang-key="skills_support_1">Windows / Linux.</span></li>
-              <li class="py-0">•<i class="fas fa-check-circle text-primary me-2"></i><span data-lang-key="skills_support_2">Gestion des tickets <strong><i>"GLPI"</i></strong></span></li>
-              <li class="py-0">•<i class="fas fa-check-circle text-primary me-2"></i><span data-lang-key="skills_support_3">Maintenance et déploiement des postes.</span></li>
-              <li class="py-0">•<i class="fas fa-check-circle text-primary me-2"></i><span data-lang-key="skills_support_4">Support utilisateurs & gestion des incidents.</span></li>
-              <li class="py-0">•<i class="fas fa-check-circle text-primary me-2"></i><span data-lang-key="skills_support_5">Gestion Active Directory.</span></li>
-              <li class="py-0">•<i class="fas fa-check-circle text-primary me-2"></i><span data-lang-key="skills_support_6">Administration Microsoft 365.</span></li>
-              <li class="py-0">•<i class="fas fa-check-circle text-primary me-2"></i><span data-lang-key="skills_support_7">Virtualisation: Proxmox, Vmware.</span></li>
-              <li class="py-0">•<i class="fas fa-ellipsis-h text-primary me-2"></i><span data-lang-key="skills_support_8">Réseaux: TCP/IP, DHCP, DNS, LAN.</span></li>
-            </ul>
-          </div>
-          <div class="col-lg-6 card p-4 bordered text-black">
-            <h6 class="text-black fw-bold bg-info p-3 rounded-5 text-white shadow-lg">
-              <i class="fas fa-code me-2"></i><span data-lang-key="skills_apps_title">APPLICATIONS & BASES DE DONNEES:</span>
-            </h6>
-            <ul class="list-unstyled" id="skillsAppsList">
-              <li class="py-1"><i class="fas fa-laptop me-2 text-primary"></i><strong data-lang-key="skills_apps_1">Base de données:</strong></li>
-              <ul class="list-unstyled ps-4">
-                  <li class="py-0">SQL Server / Informix</li>
-                  <li class="py-0">PostgreSQL</li>
+
+          <!-- ============================================================
+               CARTE 1 — SUPPORT & SYSTÈMES
+               ============================================================ -->
+          <div class="col-lg-6">
+            <div class="skill-card">
+
+              <div class="skill-card-header">
+                <div class="skill-card-icon">
+                  <i class="fas fa-desktop"></i>
+                </div>
+                <h6 class="skill-card-title" data-lang-key="skills_support_title">SUPPORT & SYSTÈMES</h6>
+              </div>
+
+              <div class="skill-card-body">
+                <ul class="skill-list" id="skillsSupportList">
+                  <li class="skill-item">
+                    <span class="skill-icon"><i class="fas fa-check"></i></span>
+                    <span class="skill-text" data-lang-key="skills_support_1">Windows / Linux.</span>
+                  </li>
+                  <li class="skill-item">
+                    <span class="skill-icon"><i class="fas fa-ticket-alt"></i></span>
+                    <span class="skill-text" data-lang-key="skills_support_2">Gestion des tickets <strong><i>"GLPI"</i></strong></span>
+                  </li>
+                  <li class="skill-item">
+                    <span class="skill-icon"><i class="fas fa-tools"></i></span>
+                    <span class="skill-text" data-lang-key="skills_support_3">Maintenance et déploiement des postes.</span>
+                  </li>
+                  <li class="skill-item">
+                    <span class="skill-icon"><i class="fas fa-headset"></i></span>
+                    <span class="skill-text" data-lang-key="skills_support_4">Support utilisateurs & gestion des incidents.</span>
+                  </li>
+                  <li class="skill-item">
+                    <span class="skill-icon"><i class="fas fa-users-cog"></i></span>
+                    <span class="skill-text" data-lang-key="skills_support_5">Gestion Active Directory.</span>
+                  </li>
+                  <li class="skill-item">
+                    <span class="skill-icon"><i class="fas fa-cloud"></i></span>
+                    <span class="skill-text" data-lang-key="skills_support_6">Administration Microsoft 365.</span>
+                  </li>
+                  <li class="skill-item">
+                    <span class="skill-icon"><i class="fas fa-server"></i></span>
+                    <span class="skill-text" data-lang-key="skills_support_7">Virtualisation: Proxmox, Vmware.</span>
+                  </li>
+                  <li class="skill-item">
+                    <span class="skill-icon"><i class="fas fa-network-wired"></i></span>
+                    <span class="skill-text" data-lang-key="skills_support_8">Réseaux: TCP/IP, DHCP, DNS, LAN.</span>
+                  </li>
                 </ul>
-              <li class="py-1 mt-2"><i class="fas fa-database me-2 text-primary"></i><strong data-lang-key="skills_apps_2">Développement & scripting:</strong></li>
-                <ul class="list-unstyled ps-4">
-                  <li class="py-0">Javascript / React-js /.Net C#.</li>
-                  <li class="py-0">Python / Django / Flask.</li>
-                  <li class="py-0">Git.</li>
-                  <li class="py-0">Bash, Powershell</li>
-                </ul>
-            </ul>
+              </div>
+
+            </div>
           </div>
-        </div>
+
+          <!-- ============================================================
+               CARTE 2 — APPLICATIONS & BASES DE DONNÉES
+               ============================================================ -->
+          <div class="col-lg-6">
+            <div class="skill-card">
+
+              <div class="skill-card-header">
+                <div class="skill-card-icon">
+                  <i class="fas fa-code"></i>
+                </div>
+                <h6 class="skill-card-title" data-lang-key="skills_apps_title">APPLICATIONS & BASES DE DONNÉES</h6>
+              </div>
+
+              <div class="skill-card-body">
+                <ul class="skill-list" id="skillsAppsList">
+                  <li class="skill-group">
+                    <span class="skill-icon skill-icon-lg"><i class="fas fa-database"></i></span>
+                    <span class="skill-text" data-lang-key="skills_apps_1">Base de données:</span>
+                  </li>
+                  <li class="skill-sublist">
+                    <ul>
+                      <li>SQL Server / Informix</li>
+                      <li>PostgreSQL</li>
+                    </ul>
+                  </li>
+                  <li class="skill-group">
+                    <span class="skill-icon skill-icon-lg"><i class="fas fa-laptop-code"></i></span>
+                    <span class="skill-text" data-lang-key="skills_apps_2">Développement & scripting:</span>
+                  </li>
+                  <li class="skill-sublist">
+                    <ul>
+                      <li>HTML / CSS3</li>
+                      <li>JavaScript / React.js / .NET C#</li>
+                      <li>Python / Django / Flask</li>
+                      <li>Git</li>
+                      <li>Bash, PowerShell</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+
+        </div><!-- ✅ FERMETURE FINALE de .skills-content -->
 
         <section class="py-5">
           <h2 class="text-center mb-4 fw-bold" style="color: #050d18;" data-lang-key="expertise_title">Mes domaines d'expertise</h2>
           <p class="text-center text-muted mb-5" data-lang-key="expertise_subtitle">Cliquez sur une section pour explorer en détail</p>
           
           <div class="accordion-wrapper">
-            <!-- Accordéon 1 -->
-            <button class="accordion fw-bold active">
-              <span><i class="fas fa-laptop-code me-3"></i><span data-lang-key="accordion_1_title">Compétences Techniques</span></span>
-              <i class="fas fa-chevron-down arrow"></i>
-            </button>
-            <div class="panel active">
-              <p class="fw-semibold" data-lang-key="accordion_1_text">Découvrez les technologies, outils et domaines d'expertise que j'utilise pour concevoir, développer et maintenir des solutions informatiques performantes.</p>
-              <div class="row padding text-center">
-                <div class="col-sm-2 mt-2"><img src="assets/img/htmlcss.webp" alt="HTML/CSS" class="brand"></div>
-                <div class="col-sm-2 mt-2"><img src="assets/img/vue.png" alt="Vue.js" class="brand"></div>
-                <div class="col-sm-2 mt-2"><img src="assets/img/python_18894.webp" alt="Python" class="brand"></div>
-                <div class="col-sm-2 mt-2"><img src="assets/img/django.png" alt="Django" class="brand"></div>
-                <div class="col-sm-2 mt-2"><img src="assets/img/flask.jpg" alt="Flask" class="brand"></div>
-                <div class="col-sm-2 mt-2"><img src="assets/img/git.png" alt="Git" class="brand"></div>
-                <div class="col-sm-2 mt-2"><img src="assets/img/react.webp" alt="React" class="brand"></div>
-                <div class="col-sm-2 mt-2"><img src="assets/img/dotnet.png" alt=".NET" class="brand"></div>
+
+            <!-- ============================================================
+                 ACCORDÉON 1 — Compétences Techniques
+                 ============================================================ -->
+            <div class="accordion-item active">
+              <button class="accordion">
+                <span class="accordion-icon">
+                  <i class="fas fa-laptop-code"></i>
+                </span>
+                <span class="accordion-title" data-lang-key="accordion_1_title">Compétences Techniques</span>
+                <span class="accordion-arrow">
+                  <i class="fas fa-chevron-down"></i>
+                </span>
+              </button>
+              <div class="panel">
+                <div class="panel-content">
+                  <p class="panel-text fw-semibold" data-lang-key="accordion_1_text">Découvrez les technologies, outils et domaines d'expertise que j'utilise pour concevoir, développer et maintenir des solutions informatiques performantes.</p>
+                  <div class="brands-grid">
+                    <div class="brand-item"><img src="assets/img/htmlcss.webp" alt="HTML/CSS" class="brand"></div>
+                    <div class="brand-item"><img src="assets/img/vue.png" alt="Vue.js" class="brand"></div>
+                    <div class="brand-item"><img src="assets/img/python_18894.webp" alt="Python" class="brand"></div>
+                    <div class="brand-item"><img src="assets/img/django.png" alt="Django" class="brand"></div>
+                    <div class="brand-item"><img src="assets/img/flask.jpg" alt="Flask" class="brand"></div>
+                    <div class="brand-item"><img src="assets/img/git.png" alt="Git" class="brand"></div>
+                    <div class="brand-item"><img src="assets/img/react.webp" alt="React" class="brand"></div>
+                    <div class="brand-item"><img src="assets/img/dotnet.png" alt=".NET" class="brand"></div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <!-- Accordéon 2 -->
-            <button class="accordion fw-bold">
-              <span><i class="fas fa-database me-3"></i><span data-lang-key="accordion_2_title">Domaines d'Expertise</span></span>
-              <i class="fas fa-chevron-down arrow"></i>
-            </button>
-            <div class="panel">
-              <p class="fw-semibold" data-lang-key="accordion_2_text">Une vue d'ensemble de mes compétences en développement logiciel, administration de bases de données et gestion des systèmes informatiques.</p>
-              <div class="row padding text-center">
-                <div class="col-sm-2 mt-2"><img src="assets/img/dot.webp" alt="MySQL" class="brand"></div>
-                <div class="col-sm-2 mt-2"><img src="assets/img/postgres.jpg" alt="PostgreSQL" class="brand"></div>
-                <div class="col-sm-2 mt-2"><img src="assets/img/sql.svg" alt="SQL Server" class="brand"></div>
+            <!-- ============================================================
+                 ACCORDÉON 2 — Domaines d'Expertise
+                 ============================================================ -->
+            <div class="accordion-item">
+              <button class="accordion">
+                <span class="accordion-icon">
+                  <i class="fas fa-database"></i>
+                </span>
+                <span class="accordion-title" data-lang-key="accordion_2_title">Domaines d'Expertise</span>
+                <span class="accordion-arrow">
+                  <i class="fas fa-chevron-down"></i>
+                </span>
+              </button>
+              <div class="panel">
+                <div class="panel-content">
+                  <p class="panel-text fw-semibold" data-lang-key="accordion_2_text">Une vue d'ensemble de mes compétences en développement logiciel, administration de bases de données et gestion des systèmes informatiques.</p>
+                  <div class="brands-grid">
+                    <div class="brand-item"><img src="assets/img/dot.webp" alt="MySQL" class="brand"></div>
+                    <div class="brand-item"><img src="assets/img/postgres.jpg" alt="PostgreSQL" class="brand"></div>
+                    <div class="brand-item"><img src="assets/img/sql.svg" alt="SQL Server" class="brand"></div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <!-- Accordéon 3 -->
-            <button class="accordion fw-bold">
-              <span><i class="fas fa-network-wired me-3"></i><span data-lang-key="accordion_3_title">IT & Technologies & Savoir-Faire</span></span>
-              <i class="fas fa-chevron-down arrow"></i>
-            </button>
-            <div class="panel">
-              <p class="fw-semibold" data-lang-key="accordion_3_text">Solutions, frameworks et technologies utilisés pour le développement d'applications, la gestion des données et l'administration des infrastructures IT</p>
-              <div class="row padding text-center">
-                <div class="col-sm-2 mt-2"><img src="assets/img/images.jpeg" alt="Réseau" class="brand"></div>
-                <div class="col-sm-2 mt-2"><img src="assets/img/Windows-10-Linux.jpg" alt="Windows/Linux" class="brand"></div>
-                <div class="col-sm-2 mt-2"><img src="assets/img/ad.png" alt="Active Directory" class="brand"></div>
-                <div class="col-sm-2 mt-2"><img src="assets/img/support.jpg" alt="Support" class="brand"></div>
-                <div class="col-sm-2 mt-2"><img src="assets/img/office.jpeg" alt="Office 365" class="brand"></div>
-                <div class="col-sm-2 mt-2"><img src="assets/img/bashpower.jpg" alt="Bash/PowerShell" class="brand"></div>
-                <div class="col-sm-2 mt-2"><img src="assets/img/setting.jpg" alt="Configuration" class="brand"></div>
-                <div class="col-sm-2 mt-2"><img src="assets/img/wind.png" alt="Windows Server" class="brand"></div>
+            <!-- ============================================================
+                 ACCORDÉON 3 — IT & Technologies & Savoir-Faire
+                 ============================================================ -->
+            <div class="accordion-item">
+              <button class="accordion">
+                <span class="accordion-icon">
+                  <i class="fas fa-network-wired"></i>
+                </span>
+                <span class="accordion-title" data-lang-key="accordion_3_title">IT & Technologies & Savoir-Faire</span>
+                <span class="accordion-arrow">
+                  <i class="fas fa-chevron-down"></i>
+                </span>
+              </button>
+              <div class="panel">
+                <div class="panel-content">
+                  <p class="panel-text fw-semibold" data-lang-key="accordion_3_text">Solutions, frameworks et technologies utilisés pour le développement d'applications, la gestion des données et l'administration des infrastructures IT</p>
+                  <div class="brands-grid">
+                    <div class="brand-item"><img src="assets/img/images.jpeg" alt="Réseau" class="brand"></div>
+                    <div class="brand-item"><img src="assets/img/Windows-10-Linux.jpg" alt="Windows/Linux" class="brand"></div>
+                    <div class="brand-item"><img src="assets/img/ad.png" alt="Active Directory" class="brand"></div>
+                    <div class="brand-item"><img src="assets/img/support.jpg" alt="Support" class="brand"></div>
+                    <div class="brand-item"><img src="assets/img/office.jpeg" alt="Office 365" class="brand"></div>
+                    <div class="brand-item"><img src="assets/img/bashpower.jpg" alt="Bash/PowerShell" class="brand"></div>
+                    <div class="brand-item"><img src="assets/img/setting.jpg" alt="Configuration" class="brand"></div>
+                    <div class="brand-item"><img src="assets/img/wind.png" alt="Windows Server" class="brand"></div>
+                  </div>
+                </div>
               </div>
             </div>
+
           </div>
         </section>
       </div>
@@ -496,25 +677,9 @@
     <section id="resume" class="resume section">
       <div class="container section-title" data-aosX="fade-up">
         <h2 data-lang-key="resume_title">Résumé</h2>
-        <p class="p-3 text-justify-sty shadow-lg w-100 text-black" id="resumeText" 
-         style="width: 100% !important; 
-                max-width: 100% !important; 
-                display: block; 
-                box-sizing: border-box; 
-                text-align: justify; 
-                background: rgba(255, 255, 255, 0.85);
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
-                color: #000000 !important; 
-                border-radius: 15px; 
-                padding: 24px 30px !important; 
-                line-height: 1.8; 
-                font-size: 1.05rem; 
-                margin: 0 auto;
-                border: 1px solid rgba(20, 157, 221, 0.10);
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);">
-        Dynamique et rigoureux coordinateur du support informatique et applicatif, je suis prêt à mettre mon autonomie et mes compétences en gestion et en optimisation des processus au service de votre entreprise, et à continuer d'évoluer.
-      </p>
+          <p class="p-3 text-justify-sty shadow-lg w-100 text-black" id="resumeText">
+            Dynamique et rigoureux coordinateur du support informatique et applicatif, je suis prêt à mettre mon autonomie et mes compétences en gestion et en optimisation des processus au service de votre entreprise, et à continuer d'évoluer.
+          </p>
       </div>
       <div class="container">
         <div class="row">
@@ -540,6 +705,9 @@
                 <li data-lang-key="resume_cisco_3">Computer Hardware Basics.</li>
                 <li data-lang-key="resume_cisco_4">Introduction to Cybersecurity.</li>
                 <li data-lang-key="resume_cisco_5">Junior Cybersecurity Analyst Career Path</li>
+                <li data-lang-key="resume_cisco_6">Ethical hacker</li>
+                <li data-lang-key="resume_cisco_7">Operating Systems Support</li>
+                <li data-lang-key="resume_cisco_8">IT Customer Support Basics</li>
               </ul>
               <button class="btn-open-modal" id="openCertModal" data-lang-key="btn_view_badges">Vérification</button>
             </div>
@@ -680,6 +848,66 @@
                                     </div>
                                 </div>
                             </article>
+
+                            <!-- Carte 7 - Ethical Hacker -->
+                          <article class="cert-card">
+                              <div class="cert-image">
+                                  <img src="assets/img/ethical-hacker.png" alt="Ethical Hacker">
+                              </div>
+                              <div class="cert-body">
+                                  <h3 class="cert-title">
+                                      <span class="verified-badge">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                              <polyline points="20 6 9 17 4 12"></polyline>
+                                          </svg>
+                                          <span data-lang-key="cert_verified">Verified</span>
+                                      </span>
+                                  </h3>
+                                  <div class="cert-footer">
+                                      <button class="verify-link" data-url="https://www.credly.com/badges/2229d588-426d-4110-bf50-351d164e2bfd/public_url" data-lang-key="cert_verify_link">Verify link</button>
+                                  </div>
+                              </div>
+                          </article>
+
+                          <!-- Carte 8 - Operating Systems Support -->
+                          <article class="cert-card">
+                              <div class="cert-image">
+                                  <img src="assets/img/operating-systems-support.png" alt="Operating Systems Support">
+                              </div>
+                              <div class="cert-body">
+                                  <h3 class="cert-title">
+                                      <span class="verified-badge">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                              <polyline points="20 6 9 17 4 12"></polyline>
+                                          </svg>
+                                          <span data-lang-key="cert_verified">Verified</span>
+                                      </span>
+                                  </h3>
+                                  <div class="cert-footer">
+                                      <button class="verify-link" data-url="https://www.credly.com/badges/820ad090-46d8-43f6-88ca-11e63f8f6c72/public_url" data-lang-key="cert_verify_link">Verify link</button>
+                                  </div>
+                              </div>
+                          </article>
+
+                          <!-- Carte 9 - IT Customer Support Basics -->
+                          <article class="cert-card">
+                              <div class="cert-image">
+                                  <img src="assets/img/it-customer-support-basics.png" alt="IT Customer Support Basics">
+                              </div>
+                              <div class="cert-body">
+                                  <h3 class="cert-title">
+                                      <span class="verified-badge">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                              <polyline points="20 6 9 17 4 12"></polyline>
+                                          </svg>
+                                          <span data-lang-key="cert_verified">Verified</span>
+                                      </span>
+                                  </h3>
+                                  <div class="cert-footer">
+                                      <button class="verify-link" data-url="https://www.credly.com/badges/b24962ff-dd48-4657-9270-e611f3b01ec4/public_url" data-lang-key="cert_verify_link">Verify link</button>
+                                  </div>
+                              </div>
+                          </article>
                             
                         </section>
                     </div>
@@ -733,34 +961,159 @@
               <p><em>LPR (Lycée Privé Ranaivosoa)</em></p>
             </div>
 
+            
             <hr class="">
-            <button type="button" class="fw-bold btn btn-lg btn-info bordered-10" data-bs-toggle="modal" data-bs-target="#myModal">
-              <span data-lang-key="resume_download_btn">Télécharger mon CV</span>
-            </button>
-            <div class="modal fade" id="myModal">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title" data-lang-key="resume_download_title">Téléchargement</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"><i class="fw-bold bi bi-x-lg"></i></button>
+            <div class="cv-buttons-group">
+              <button type="button" class="fw-bold btn btn-lg btn-info bordered-10" data-bs-toggle="modal" data-bs-target="#myModal">
+                <span data-lang-key="resume_download_btn">Télécharger mon CV</span>
+              </button>
+              <button type="button" class="fw-bold btn btn-lg btn-outline-primary bordered-10" id="generateCvBtn" data-lang-key="resume_generate_btn">
+                Générer mon CV (PDF)
+              </button>
+            </div>
+
+            <!-- MODAL CV DOWNLOAD -->
+            <!-- ============================================================
+                 PETIT MODAL — CHOIX DU CV
+                 ============================================================ -->
+            <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content cv-download-modal">
+
+                  <!-- Header -->
+                  <div class="modal-header cv-download-header">
+                    <div class="cv-download-header-icon">
+                      <i class="bi bi-file-earmark-arrow-down-fill"></i>
+                    </div>
+                    <div class="cv-download-header-text">
+                      <h4 class="modal-title" id="myModalLabel" data-lang-key="resume_download_title">Téléchargement</h4>
+                      <p class="cv-download-subtitle" data-lang-key="resume_download_subtitle">Choisissez la version de mon CV</p>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer">
+                      <i class="bi bi-x-lg"></i>
+                    </button>
                   </div>
-                  <div class="modal-body">
-                    <ul class="list-group">
-                      <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <a target="_blank" href="./HARRY YVES RAKOTONIAINA-Fr.pdf">🖹 <span data-lang-key="resume_cv_fr">CV Version Fr</span></a><i class="bi-cloud-download"></i>
+
+                  <!-- Body -->
+                  <div class="modal-body cv-download-body">
+                    <ul class="cv-download-list">
+
+                      <!-- CV FR -->
+                      <li class="cv-download-item">
+                        <a href="#" class="cv-download-link"
+                           data-pdf-url="./HARRY YVES RAKOTONIAINA-Fr.pdf"
+                           data-pdf-title="CV Version Fr">
+                          <span class="cv-file-icon">
+                            <i class="bi bi-file-earmark-pdf-fill"></i>
+                          </span>
+                          <span class="cv-file-info">
+                            <span class="cv-file-name" data-lang-key="resume_cv_fr">CV Version Fr</span>
+                            <span class="cv-file-meta">
+                              <span class="cv-file-badge cv-badge-fr">FR</span>
+                              <span class="cv-file-type">PDF</span>
+                            </span>
+                          </span>
+                          <span class="cv-file-action">
+                            <i class="bi bi-eye-fill"></i>
+                          </span>
+                        </a>
                       </li>
-                      <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <a target="_blank" href="./HARRY YVES RAKOTONIAINA-Fr_bild.pdf">🖹 <span data-lang-key="resume_cv_fr_photo">CV Version Fr photo</span></a><i class="bi-cloud-download"></i>
+
+                      <!-- CV FR photo -->
+                      <li class="cv-download-item">
+                        <a href="#" class="cv-download-link"
+                           data-pdf-url="./HARRY YVES RAKOTONIAINA-Fr_bild.pdf"
+                           data-pdf-title="CV Version Fr photo">
+                          <span class="cv-file-icon">
+                            <i class="bi bi-file-earmark-pdf-fill"></i>
+                          </span>
+                          <span class="cv-file-info">
+                            <span class="cv-file-name" data-lang-key="resume_cv_fr_photo">CV Version Fr photo</span>
+                            <span class="cv-file-meta">
+                              <span class="cv-file-badge cv-badge-fr">FR</span>
+                              <span class="cv-file-badge cv-badge-photo">PHOTO</span>
+                              <span class="cv-file-type">PDF</span>
+                            </span>
+                          </span>
+                          <span class="cv-file-action">
+                            <i class="bi bi-eye-fill"></i>
+                          </span>
+                        </a>
                       </li>
-                      <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <a target="_blank" href="./HARRY YVES RAKOTONIAINA-EN.pdf">🖹 <span data-lang-key="resume_cv_en">CV Version En</span></a><i class="bi-cloud-download"></i>
+
+                      <!-- CV EN -->
+                      <li class="cv-download-item">
+                        <a href="#" class="cv-download-link"
+                           data-pdf-url="./HARRY YVES RAKOTONIAINA-EN.pdf"
+                           data-pdf-title="CV Version En">
+                          <span class="cv-file-icon">
+                            <i class="bi bi-file-earmark-pdf-fill"></i>
+                          </span>
+                          <span class="cv-file-info">
+                            <span class="cv-file-name" data-lang-key="resume_cv_en">CV Version En</span>
+                            <span class="cv-file-meta">
+                              <span class="cv-file-badge cv-badge-en">EN</span>
+                              <span class="cv-file-type">PDF</span>
+                            </span>
+                          </span>
+                          <span class="cv-file-action">
+                            <i class="bi bi-eye-fill"></i>
+                          </span>
+                        </a>
                       </li>
+
                     </ul>
                   </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- ============================================================
+                 GRAND MODAL — LECTEUR PDF INTÉGRÉ
+                 ============================================================ -->
+            <div class="modal fade" id="pdfViewerModal" tabindex="-1" aria-labelledby="pdfViewerLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered pdf-viewer-dialog">
+                <div class="modal-content pdf-viewer-modal">
+
+                  <!-- Header -->
+                  <div class="modal-header pdf-viewer-header">
+                    <div class="pdf-viewer-header-icon">
+                      <i class="bi bi-file-earmark-pdf-fill"></i>
+                    </div>
+                    <div class="pdf-viewer-header-text">
+                      <h4 class="modal-title" id="pdfViewerLabel">CV Preview</h4>
+                      <p class="pdf-viewer-subtitle" id="pdfViewerSubtitle">Aperçu du document</p>
+                    </div>
+                    <div class="pdf-viewer-actions">
+                      <a href="#" id="pdfDownloadBtn" class="pdf-viewer-btn pdf-btn-download" download>
+                        <i class="bi bi-cloud-arrow-down-fill"></i>
+                        <span data-lang-key="resume_pdf_download">Télécharger</span>
+                      </a>
+                      <a href="#" id="pdfOpenBtn" class="pdf-viewer-btn pdf-btn-open" target="_blank" rel="noopener">
+                        <i class="bi bi-box-arrow-up-right"></i>
+                        <span data-lang-key="resume_pdf_open">Ouvrir</span>
+                      </a>
+                      <button type="button" class="pdf-viewer-close" data-bs-dismiss="modal" aria-label="Fermer">
+                        <i class="bi bi-x-lg"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Body -->
+                  <div class="modal-body pdf-viewer-body">
+                    <div class="pdf-viewer-loading" id="pdfViewerLoading">
+                      <i class="bi bi-arrow-clockwise"></i>
+                      <p data-lang-key="resume_pdf_loading">Chargement du document...</p>
+                    </div>
+                    <iframe id="pdfViewerFrame" src="" title="PDF Viewer" loading="lazy"></iframe>
+                  </div>
+
                 </div>
               </div>
             </div>
           </div>
+
           <div class="col-lg-6 text-black" data-aosX="fade-up" data-aosX-delay="200">
             <h3 class="resume-title" data-lang-key="resume_experience">Expérience Professionnelle</h3>
             <div class="resume-item" id="resumeExperience">
@@ -871,71 +1224,138 @@
         </p>
       </div>
       <div class="container">
-        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-          <ul class="portfolio-filters isotope-filters" data-aosX="fade-up" data-aosX-delay="100">
-            <li data-filter="*" class="filter-active text-black fw-bold" data-lang-key="portfolio_filter">Tous ces développements sont disponibles sur mon GitLab ainsi que d'autres projets. ( <i class="bi bi-gitlab" data-bs-toggle="tooltip" title="iharry RAKOTONIAINA - @iharrysh"></i> )</li>
-            <li data-filter=".filter-app"></li>
-            <li data-filter=".filter-product"></li>
-            <li data-filter=".filter-branding"></li>
-            <li data-filter=".filter-books"></li>
-          </ul>
-          <div class="row gy-4 isotope-container" data-aosX="fade-up" data-aosX-delay="200">
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <div class="portfolio-content h-100">
-                <img src="assets/img/catalogue.jpeg" class="img-fluid rounded-5" alt="">
-                <div class="portfolio-info">
-                  <h4 data-lang-key="portfolio_item_1_title">Durant mon stage</h4>
-                  <p class="" data-lang-key="portfolio_item_1_text">Stage de développement d'une application web Catalogue CDI (Centre de Documentation et d'Information) pour la compagnie Assurance Aro</p>
+
+        <!-- ============================================================
+             ONGLETS PORTFOLIO (TABS)
+             ============================================================ -->
+        <div class="portfolio-tabs" data-aosX="fade-up" data-aosX-delay="100">
+          <button class="portfolio-tab active" data-tab="dev" data-lang-key="portfolio_tab_dev">
+            💻 Développement
+          </button>
+          <button class="portfolio-tab" data-tab="support" data-lang-key="portfolio_tab_support">
+            🛠️ IT-Support
+          </button>
+        </div>
+
+        <!-- ============================================================
+             CONTENU : ONGLET DÉVELOPPEMENT
+             ============================================================ -->
+                <div class="portfolio-tab-content active" id="tab-dev">
+
+          <!-- Bandeau d'information GitLab -->
+          <div class="portfolio-note" data-aosX="fade-up" data-aosX-delay="100">
+            <i class="bi bi-gitlab"></i>
+            <span data-lang-key="portfolio_filter">Tous ces développements sont disponibles sur mon GitLab ainsi que d'autres projets.</span>
+          </div>
+
+          <!-- Grille des projets -->
+          <div class="portfolio-grid" data-aosX="fade-up" data-aosX-delay="200">
+
+            <!-- Projet 1 -->
+            <article class="portfolio-card filter-app">
+              <div class="portfolio-card-image">
+                <img src="assets/img/catalogue.jpeg" alt="Catalogue CDI">
+                <div class="portfolio-card-overlay">
+                  <span class="portfolio-card-tag" data-lang-key="portfolio_item_1_title">Durant mon stage</span>
                 </div>
               </div>
-            </div>
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <div class="portfolio-content h-100">
-                <img src="assets/img/ann.png" class="rounded-5 img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4 data-lang-key="portfolio_item_2_title">Durant mon contrat</h4>
-                  <p class="" data-lang-key="portfolio_item_2_text">Développement d'annuaire bancaire, un projet interne chez BGFIBank Madagascar</p>
+              <div class="portfolio-card-body">
+                <h4 class="portfolio-card-title" data-lang-key="portfolio_item_1_title">Durant mon stage</h4>
+                <p class="portfolio-card-desc" data-lang-key="portfolio_item_1_text">Stage de développement d'une application web Catalogue CDI (Centre de Documentation et d'Information) pour la compagnie Assurance Aro</p>
+              </div>
+            </article>
+
+            <!-- Projet 2 -->
+            <article class="portfolio-card filter-product">
+              <div class="portfolio-card-image">
+                <img src="assets/img/ann.png" alt="Annuaire bancaire">
+                <div class="portfolio-card-overlay">
+                  <span class="portfolio-card-tag" data-lang-key="portfolio_item_2_title">Durant mon contrat</span>
                 </div>
               </div>
-            </div>
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <div class="portfolio-content h-100">
-                <img src="assets/img/kar.png" class="rounded-5 img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4 data-lang-key="portfolio_item_3_title">Collaborations entre amis</h4>
-                  <p class="" data-lang-key="portfolio_item_3_text">Développement du site web de l'Hôtel Karthala. Un site vitrine pour la présentation de l'hôtel</p>
+              <div class="portfolio-card-body">
+                <h4 class="portfolio-card-title" data-lang-key="portfolio_item_2_title">Durant mon contrat</h4>
+                <p class="portfolio-card-desc" data-lang-key="portfolio_item_2_text">Développement d'annuaire bancaire, un projet interne chez BGFIBank Madagascar</p>
+              </div>
+            </article>
+
+            <!-- Projet 3 -->
+            <article class="portfolio-card filter-branding">
+              <div class="portfolio-card-image">
+                <img src="assets/img/kar.png" alt="Hôtel Karthala">
+                <div class="portfolio-card-overlay">
+                  <span class="portfolio-card-tag" data-lang-key="portfolio_item_3_title">Collaborations entre amis</span>
                 </div>
               </div>
-            </div>
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-              <div class="portfolio-content h-100">
-                <img src="assets/img/choix.png" class="rounded-5 img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4 data-lang-key="portfolio_item_4_title">Collaborations entre amis</h4>
-                  <p class="" data-lang-key="portfolio_item_4_text">Participation au développement du site web de l'association Guide du Choix 2024. Une association bénévole</p>
+              <div class="portfolio-card-body">
+                <h4 class="portfolio-card-title" data-lang-key="portfolio_item_3_title">Collaborations entre amis</h4>
+                <p class="portfolio-card-desc" data-lang-key="portfolio_item_3_text">Développement du site web de l'Hôtel Karthala. Un site vitrine pour la présentation de l'hôtel</p>
+              </div>
+            </article>
+
+            <!-- Projet 4 -->
+            <article class="portfolio-card filter-books">
+              <div class="portfolio-card-image">
+                <img src="assets/img/choix.png" alt="Guide du Choix 2024">
+                <div class="portfolio-card-overlay">
+                  <span class="portfolio-card-tag" data-lang-key="portfolio_item_4_title">Collaborations entre amis</span>
                 </div>
               </div>
-            </div>
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <div class="portfolio-content h-100">
-                <img src="assets/img/ecom.png" class="rounded-5 img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4 data-lang-key="portfolio_item_5_title">Collaborations entre amis</h4>
-                  <p class="" data-lang-key="portfolio_item_5_text">Création d'un site e-commerce, un projet entre amis pour concevoir une boutique en ligne pour leurs produits</p>
+              <div class="portfolio-card-body">
+                <h4 class="portfolio-card-title" data-lang-key="portfolio_item_4_title">Collaborations entre amis</h4>
+                <p class="portfolio-card-desc" data-lang-key="portfolio_item_4_text">Participation au développement du site web de l'association Guide du Choix 2024. Une association bénévole</p>
+              </div>
+            </article>
+
+            <!-- Projet 5 -->
+            <article class="portfolio-card filter-app">
+              <div class="portfolio-card-image">
+                <img src="assets/img/ecom.png" alt="Site e-commerce">
+                <div class="portfolio-card-overlay">
+                  <span class="portfolio-card-tag" data-lang-key="portfolio_item_5_title">Collaborations entre amis</span>
                 </div>
               </div>
-            </div>
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <div class="portfolio-content h-100">
-                <img src="assets/img/dev.png" class="rounded-5 img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4 data-lang-key="portfolio_item_6_title">Durant mon stage</h4>
-                  <p class="" data-lang-key="portfolio_item_6_text">Application VINA - Une application d'évaluation des performances pour les RH de Ravinala Airports</p>
+              <div class="portfolio-card-body">
+                <h4 class="portfolio-card-title" data-lang-key="portfolio_item_5_title">Collaborations entre amis</h4>
+                <p class="portfolio-card-desc" data-lang-key="portfolio_item_5_text">Création d'un site e-commerce, un projet entre amis pour concevoir une boutique en ligne pour leurs produits</p>
+              </div>
+            </article>
+
+            <!-- Projet 6 -->
+            <article class="portfolio-card filter-product">
+              <div class="portfolio-card-image">
+                <img src="assets/img/dev.png" alt="Application VINA">
+                <div class="portfolio-card-overlay">
+                  <span class="portfolio-card-tag" data-lang-key="portfolio_item_6_title">Durant mon stage</span>
                 </div>
               </div>
-            </div>
+              <div class="portfolio-card-body">
+                <h4 class="portfolio-card-title" data-lang-key="portfolio_item_6_title">Durant mon stage</h4>
+                <p class="portfolio-card-desc" data-lang-key="portfolio_item_6_text">Application VINA - Une application d'évaluation des performances pour les RH de Ravinala Airports</p>
+              </div>
+            </article>
+
           </div>
         </div>
+
+        <!-- ============================================================
+             CONTENU : ONGLET IT-SUPPORT (Message vide)
+             ============================================================ -->
+        <div class="portfolio-tab-content" id="tab-support">
+          <div class="portfolio-empty-state" data-aosX="fade-up">
+            <div class="empty-icon">
+              <i class="bi bi-folder-x"></i>
+            </div>
+            <h3 class="empty-title" data-lang-key="portfolio_support_empty_title">Aucun projet publié</h3>
+            <p class="empty-text" data-lang-key="portfolio_support_empty_text">
+              Aucun projet IT-Support n'est publié pour le moment. Veuillez me contacter pour une référence ou plus d'informations.
+            </p>
+            <a href="#contact" class="empty-btn" data-lang-key="portfolio_support_empty_btn">
+              <i class="bi bi-envelope me-2"></i>Me contacter
+            </a>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -963,41 +1383,51 @@
           Je vous propose un accompagnement personnalisé pour la gestion de votre support informatique et le développement de vos projets web.
         </p>
       </div>
+
       <div class="container">
-        <div class="row gy-4">
-          <div class="col-lg-4 col-md-6 service-item d-flex" data-aosX="fade-up" data-aosX-delay="100">
-            <div class="icon flex-shrink-0"><i class="bi bi-code"></i></div>
-            <div>
-              <h4 class="title"><a href="" class="stretched-link" data-lang-key="service_1_title">Développement Web / Apps</a></h4>
-              <p class="description" data-lang-key="service_1_text">Je développe des sites web et applications adaptés à vos besoins.</p>
+        <div class="services-grid">
+
+          <!-- Service 1 -->
+          <div class="service-card" data-aosX="fade-up" data-aosX-delay="100">
+            <div class="service-icon">
+              <i class="bi bi-code"></i>
             </div>
+            <h4 class="service-title" data-lang-key="service_1_title">Développement Web / Apps</h4>
+            <p class="service-desc" data-lang-key="service_1_text">Je développe des sites web et applications adaptés à vos besoins.</p>
           </div>
-          <div class="col-lg-4 col-md-6 service-item d-flex" data-aosX="fade-up" data-aosX-delay="200">
-            <div class="icon flex-shrink-0"><i class="bi bi-telephone"></i></div>
-            <div>
-              <h4 class="title"><a href="" class="stretched-link" data-lang-key="service_2_title">Support IT</a></h4>
-              <p class="description" data-lang-key="service_2_text">Assistance informatique à distance.</p>
+
+          <!-- Service 2 -->
+          <div class="service-card" data-aosX="fade-up" data-aosX-delay="200">
+            <div class="service-icon">
+              <i class="bi bi-telephone"></i>
             </div>
+            <h4 class="service-title" data-lang-key="service_2_title">Support IT</h4>
+            <p class="service-desc" data-lang-key="service_2_text">Assistance informatique à distance.</p>
           </div>
-          <div class="col-lg-4 col-md-6 service-item d-flex" data-aosX="fade-up" data-aosX-delay="300">
-            <div class="icon flex-shrink-0"><i class="bi bi-gear"></i></div>
-            <div>
-              <h4 class="title"><a href="" class="stretched-link" data-lang-key="service_3_title">Maintenance IT</a></h4>
-              <p class="description" data-lang-key="service_3_text">La vérification et la réparation des équipements informatiques.</p>
+
+          <!-- Service 3 -->
+          <div class="service-card" data-aosX="fade-up" data-aosX-delay="300">
+            <div class="service-icon">
+              <i class="bi bi-gear"></i>
             </div>
+            <h4 class="service-title" data-lang-key="service_3_title">Maintenance IT</h4>
+            <p class="service-desc" data-lang-key="service_3_text">La vérification et la réparation des équipements informatiques.</p>
           </div>
-          <div class="col-lg-4 col-md-6 service-item d-flex" data-aosX="fade-up" data-aosX-delay="400">
-            <div class="icon flex-shrink-0"><i class="bi bi-house"></i></div>
-            <div>
-              <h4 class="title"><a href="" class="stretched-link" data-lang-key="service_4_title">Freelance</a></h4>
-              <p class="description" data-lang-key="service_4_text">Disponible en freelance.</p>
+
+          <!-- Service 4 -->
+          <div class="service-card" data-aosX="fade-up" data-aosX-delay="400">
+            <div class="service-icon">
+              <i class="bi bi-house"></i>
             </div>
+            <h4 class="service-title" data-lang-key="service_4_title">Freelance</h4>
+            <p class="service-desc" data-lang-key="service_4_text">Disponible en freelance.</p>
           </div>
+
         </div>
       </div>
     </section>
 
-    <!-- Contact Section -->
+        <!-- Contact Section -->
     <section id="contact" class="contact section light-background" style="background-color: transparent;">
       <div class="container section-title" data-aosX="fade-up">
         <h2 data-lang-key="contact_title">Contact</h2>
@@ -1021,61 +1451,111 @@
           N'hésitez pas à me contacter pour toute question ou demande d'information.
         </p>
       </div>
-      <div class="container" data-aosX="fade-up" data-aosX-delay="100" style="background-color: transparent;">
-        <div class="row gy-4">
-          <div class="col-lg-5">
-            <div class="info-wrap rounded-5">
-              <div class="info-item d-flex" data-aosX="fade-up" data-aosX-delay="200">
-                <i class="bi bi-geo-alt flex-shrink-0"></i>
-                <div>
-                  <h3 data-lang-key="contact_address">Adresse</h3>
-                  <p>Antananarivo, Madagascar</p>
-                </div>
-              </div>
-              <div class="info-item d-flex" data-aosX="fade-up" data-aosX-delay="300">
-                <i class="bi bi-telephone flex-shrink-0"></i>
-                <div>
-                  <h3 data-lang-key="contact_phone">Contacter</h3>
-                  <p><a href="https://wa.me/261349217224">+261 33 52 477 04</a></p>
-                </div>
-              </div>
-              <div class="info-item d-flex" data-aosX="fade-up" data-aosX-delay="400">
-                <i class="bi bi-envelope flex-shrink-0"></i>
-                <div>
-                  <h3 data-lang-key="contact_email_label">Email</h3>
-                  <p>rakotoniainaharryyves@gmail.com</p>
-                </div>
-              </div>
-              <img src="assets/img/services.jpg" class="img-fluid" alt="" style="border-radius: 20px; width: 100%; height: 270px; object-fit: cover;">
+
+      <div class="container" data-aosX="fade-up" data-aosX-delay="100">
+        <div class="contact-wrapper">
+
+          <!-- ============================================================
+               COLONNE GAUCHE : INFOS DE CONTACT
+               ============================================================ -->
+          <aside class="contact-info-panel">
+
+            <div class="contact-info-header">
+              <h3 data-lang-key="contact_info_title">Informations de contact</h3>
+              <p data-lang-key="contact_info_subtitle">Retrouvez-moi facilement via ces coordonnées.</p>
             </div>
-          </div>
-          <div class="col-lg-7">
-            <form id="contactForm" class="rounded-5 php-email-form" data-aosX="fade-up" data-aosX-delay="200" onsubmit="return handleSubmit(event)">
-              <div class="row gy-4">
-                <div class="col-md-6">
-                  <label for="name-field" class="pb-2" data-lang-key="contact_form_name">Votre nom</label>
-                  <input type="text" name="name" id="name-field" class="form-control rounded-5" required>
+
+            <!-- Adresse -->
+            <div class="contact-info-item" data-aosX="fade-up" data-aosX-delay="200">
+              <div class="contact-info-icon">
+                <i class="bi bi-geo-alt-fill"></i>
+              </div>
+              <div class="contact-info-content">
+                <h4 data-lang-key="contact_address">Adresse</h4>
+                <p>Antananarivo, Madagascar</p>
+              </div>
+            </div>
+
+            <!-- Téléphone -->
+            <div class="contact-info-item" data-aosX="fade-up" data-aosX-delay="300">
+              <div class="contact-info-icon">
+                <i class="bi bi-telephone-fill"></i>
+              </div>
+              <div class="contact-info-content">
+                <h4 data-lang-key="contact_phone">Contacter</h4>
+                <p><a href="https://wa.me/261349217224">+261 33 52 477 04</a></p>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="contact-info-item" data-aosX="fade-up" data-aosX-delay="400">
+              <div class="contact-info-icon">
+                <i class="bi bi-envelope-fill"></i>
+              </div>
+              <div class="contact-info-content">
+                <h4 data-lang-key="contact_email_label">Email</h4>
+                <p><a href="mailto:rakotoniainaharryyves@gmail.com">rakotoniainaharryyves@gmail.com</a></p>
+              </div>
+            </div>
+
+            <!-- Image -->
+            <div class="contact-info-image">
+              <img src="assets/img/services.jpg" alt="Contact">
+            </div>
+
+          </aside>
+
+          <!-- ============================================================
+               COLONNE DROITE : FORMULAIRE
+               ============================================================ -->
+          <div class="contact-form-panel">
+            <div class="contact-form-header">
+              <h3 data-lang-key="contact_form_title">Envoyez-moi un message</h3>
+              <p data-lang-key="contact_form_subtitle">Je vous répondrai dans les plus brefs délais.</p>
+            </div>
+
+            <form id="contactForm" class="contact-form" onsubmit="return handleSubmit(event)">
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="name-field" data-lang-key="contact_form_name">
+                    <i class="bi bi-person"></i> Votre nom
+                  </label>
+                  <input type="text" name="name" id="name-field" class="form-control" placeholder="Ex: Rakoto Jean" required>
                 </div>
-                <div class="col-md-6">
-                  <label for="email-field" class="pb-2" data-lang-key="contact_form_email">Votre Email</label>
-                  <input type="email" class="form-control rounded-5" name="email" id="email-field" required>
-                </div>
-                <div class="col-md-12">
-                  <label for="subject-field" class="pb-2" data-lang-key="contact_form_subject">Objet</label>
-                  <input type="text" class="form-control rounded-5" name="subject" id="subject-field" required>
-                </div>
-                <div class="col-md-12">
-                  <label for="message-field" class="pb-2" data-lang-key="contact_form_message">Message</label>
-                  <textarea class="form-control rounded-5" name="message" rows="10" id="message-field" required></textarea>
-                </div>
-                <div class="col-md-12 text-center">
-                  <button type="submit" class="btn btn-primary rounded-5" style="width: 50%;">
-                    <i class="fas fa-paper-plane me-2"></i><span data-lang-key="contact_form_send">Envoyer</span>
-                  </button>
+
+                <div class="form-group">
+                  <label for="email-field" data-lang-key="contact_form_email">
+                    <i class="bi bi-envelope"></i> Votre Email
+                  </label>
+                  <input type="email" name="email" id="email-field" class="form-control" placeholder="exemple@mail.com" required>
                 </div>
               </div>
+
+              <div class="form-group">
+                <label for="subject-field" data-lang-key="contact_form_subject">
+                  <i class="bi bi-tag"></i> Objet
+                </label>
+                <input type="text" name="subject" id="subject-field" class="form-control" placeholder="Ex: Demande de devis" required>
+              </div>
+
+              <div class="form-group">
+                <label for="message-field" data-lang-key="contact_form_message">
+                  <i class="bi bi-chat-left-text"></i> Message
+                </label>
+                <textarea name="message" id="message-field" class="form-control" rows="6" placeholder="Décrivez votre projet ou votre demande..." required></textarea>
+              </div>
+
+              <div class="form-submit">
+                <button type="submit" class="btn-send">
+                  <span data-lang-key="contact_form_send">Envoyer le message</span>
+                  <i class="bi bi-paper-plane-fill"></i>
+                </button>
+              </div>
+
             </form>
           </div>
+
         </div>
       </div>
     </section>
@@ -1134,27 +1614,53 @@
 
   <!-- Admin Modal -->
   <div class="modal fade" id="adminModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-sm">
-      <div class="modal-content">
-        <div class="modal-header bg-dark text-white">
-          <h5 class="modal-title"><i class="fas fa-shield-alt me-2"></i><span data-lang-key="admin_title">Accès administrateur</span></h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+  <div class="modal-dialog modal-dialog-centered admin-modal-dialog">
+    <div class="modal-content admin-modal-content">
+
+      <!-- Header -->
+      <div class="modal-header admin-modal-header">
+        <div class="admin-modal-header-icon">
+          <i class="bi bi-shield-lock-fill"></i>
         </div>
-        <div class="modal-body text-center py-4">
-          <i class="fas fa-key" style="font-size: 2.5rem; color: #6c757d;"></i>
-          <p class="mt-3 mb-2" data-lang-key="admin_password_label">Entrez le mot de passe :</p>
-          <input type="password" id="adminPassword" class="form-control form-control-lg" placeholder="Mot de passe">
-          <div id="adminError" class="text-danger mt-2 small" style="display: none;">❌ <span data-lang-key="admin_error">Mot de passe incorrect.</span></div>
+        <h5 class="modal-title admin-modal-title">
+          <span data-lang-key="admin_title">Accès administrateur</span>
+        </h5>
+        <button type="button" class="btn-close btn-close-white admin-modal-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body admin-modal-body">
+
+        <!-- Icône de sécurité principale -->
+        <div class="admin-security-icon">
+          <i class="bi bi-shield-fill-check"></i>
         </div>
-        <div class="modal-footer border-0 justify-content-center">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><span data-lang-key="admin_cancel">Annuler</span></button>
-          <button type="button" id="adminLoginBtn" class="btn btn-primary px-4">
-            <i class="fas fa-sign-in-alt me-2"></i><span data-lang-key="admin_validate">Valider</span>
-          </button>
+
+        <p class="admin-modal-text" data-lang-key="admin_password_label">Entrez le mot de passe :</p>
+
+        <input type="password" id="adminPassword" class="form-control admin-modal-input" placeholder="Mot de passe" autocomplete="current-password">
+
+        <div id="adminError" class="admin-modal-error" style="display: none;">
+          <i class="bi bi-x-circle-fill"></i>
+          <span data-lang-key="admin_error">Mot de passe incorrect.</span>
         </div>
       </div>
+
+      <!-- Footer -->
+      <div class="modal-footer admin-modal-footer">
+        <button type="button" class="admin-btn admin-btn-cancel" data-bs-dismiss="modal">
+          <i class="bi bi-x-lg"></i>
+          <span data-lang-key="admin_cancel">Annuler</span>
+        </button>
+        <button type="button" id="adminLoginBtn" class="admin-btn admin-btn-validate">
+          <i class="bi bi-box-arrow-in-right"></i>
+          <span data-lang-key="admin_validate">Valider</span>
+        </button>
+      </div>
+
     </div>
   </div>
+</div>
 
   <!-- ==========================================================
      MODALE D'INFORMATION
@@ -1227,18 +1733,81 @@
         <p>© <span>Copyright</span> <strong class="px-1 sitename">Hiz'arT</strong> <span>All Rights Reserved</span></p>
       </div>
       <div class="credits">
-        Harry Y.R <a href="#">v1.0-07.092026</a>
+        Harry Y.R <a href="#">v2.0-15.092026</a>
       </div>
     </div>
   </footer>
 
   <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" id="scroll-top" class="scroll-top" aria-label="Retour en haut">
+      <i class="bi bi-arrow-up"></i>
+  </a>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/script.js"></script>
+  <script src="assets/js/generate-cv.js"></script>
+
+
+  <!-- ✅ NOUVEAU : Toggle menu mobile -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const headerToggle = document.querySelector('.header-toggle');
+      const header = document.getElementById('header');
+      const body = document.body;
+
+      if (headerToggle && header) {
+        headerToggle.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          body.classList.toggle('header-show');
+          header.classList.toggle('header-open');
+        });
+
+        document.querySelectorAll('#navmenu a').forEach(function(link) {
+          link.addEventListener('click', function() {
+            if (window.innerWidth <= 1199) {
+              body.classList.remove('header-show');
+              header.classList.remove('header-open');
+            }
+          });
+        });
+
+        document.addEventListener('click', function(e) {
+          if (window.innerWidth <= 1199) {
+            if (!header.contains(e.target) && !headerToggle.contains(e.target)) {
+              body.classList.remove('header-show');
+              header.classList.remove('header-open');
+            }
+          }
+        });
+      }
+    });
+  </script>
+
+  <!-- ✅ NOUVEAU : Toggle des onglets Portfolio -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const tabs = document.querySelectorAll('.portfolio-tab');
+      const contents = document.querySelectorAll('.portfolio-tab-content');
+
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          const target = this.getAttribute('data-tab');
+
+          tabs.forEach(t => t.classList.remove('active'));
+          contents.forEach(c => c.classList.remove('active'));
+
+          this.classList.add('active');
+          const targetContent = document.getElementById('tab-' + target);
+          if (targetContent) {
+            targetContent.classList.add('active');
+          }
+        });
+      });
+    });
+  </script>
 
   <!-- ==========================================================
        SCRIPT DE TRADUCTION COMPLET
@@ -1312,6 +1881,9 @@
         resume_cisco_3: 'Computer Hardware Basics.',
         resume_cisco_4: 'Introduction to Cybersecurity.',
         resume_cisco_5: 'Junior Cybersecurity Analyst Career Path.',
+        resume_cisco_6: 'Ethical hacker.',
+        resume_cisco_7: 'Operating Systems Support.',
+        resume_cisco_8: 'IT Customer Support Basics.',
         resume_edu_1: 'Formation Deutsch: A2',
         resume_edu_1_date: 'Octobre 2025 - Février 2026',
         resume_edu_2: 'Codefinity: Certificat de réussite pour Advanced Technical SQL',
@@ -1387,6 +1959,12 @@
         portfolio_item_5_text: 'Création d\'un site e-commerce, un projet entre amis pour concevoir une boutique en ligne pour leurs produits',
         portfolio_item_6_title: 'Durant mon stage',
         portfolio_item_6_text: 'Application VINA - Une application d\'évaluation des performances pour les RH de Ravinala Airports',
+        // Portfolio Tabs (NOUVEAU)
+        portfolio_tab_dev: '💻 Développement',
+        portfolio_tab_support: '🛠️ IT-Support',
+        portfolio_support_empty_title: 'Aucun projet publié',
+        portfolio_support_empty_text: 'Aucun projet IT-Support n\'est publié pour le moment. Veuillez me contacter pour une référence ou plus d\'informations.',
+        portfolio_support_empty_btn: 'Me contacter',
         // Services
         services_title: 'Services',
         service_1_title: 'Développement Web / Apps',
@@ -1504,6 +2082,9 @@
         resume_cisco_3: 'Computer Hardware Basics.',
         resume_cisco_4: 'Introduction to Cybersecurity.',
         resume_cisco_5: 'Junior Cybersecurity Analyst Career Path.',
+        resume_cisco_6: 'Ethical Hacker.',
+        resume_cisco_7: 'Operating Systems Support.',
+        resume_cisco_8: 'IT Customer Support Basics.',
         resume_edu_1: 'German Training: A2',
         resume_edu_1_date: 'October 2025 - February 2026',
         resume_edu_2: 'Codefinity: Certificate of achievement for Advanced Technical SQL',
@@ -1579,6 +2160,12 @@
         portfolio_item_5_text: 'E-commerce site creation, a friends project to design an online store for their products',
         portfolio_item_6_title: 'During my internship',
         portfolio_item_6_text: 'VINA Application - A performance evaluation application for HR of Ravinala Airports',
+        // Portfolio Tabs (NOUVEAU)
+        portfolio_tab_dev: '💻 Development',
+        portfolio_tab_support: '🛠️ IT-Support',
+        portfolio_support_empty_title: 'No published projects',
+        portfolio_support_empty_text: 'No IT-Support project is currently published. Please contact me for a reference or more information.',
+        portfolio_support_empty_btn: 'Contact me',
         // Services
         services_title: 'Services',
         service_1_title: 'Web / Apps Development',
@@ -1696,6 +2283,9 @@
         resume_cisco_3: 'Grundlagen der Computerhardware.',
         resume_cisco_4: 'Einführung in die Cybersicherheit.',
         resume_cisco_5: 'Karriereweg Junior Cybersecurity Analyst.',
+        resume_cisco_6: 'Ethical Hacker.',
+        resume_cisco_7: 'Betriebssystem-Support.',
+        resume_cisco_8: 'IT-Kunden-Support-Grundlagen.',
         resume_edu_1: 'Deutschkurs: A2',
         resume_edu_1_date: 'Oktober 2025 - Februar 2026',
         resume_edu_2: 'Codefinity: Zertifikat für Advanced Technical SQL',
@@ -1771,6 +2361,12 @@
         portfolio_item_5_text: 'Erstellung einer E-Commerce-Website, ein Freundschaftsprojekt zur Gestaltung eines Online-Shops für ihre Produkte',
         portfolio_item_6_title: 'Während meines Praktikums',
         portfolio_item_6_text: 'VINA Anwendung - Eine Leistungsbewertungsanwendung für HR von Ravinala Airports',
+        // Portfolio Tabs (NOUVEAU)
+        portfolio_tab_dev: '💻 Entwicklung',
+        portfolio_tab_support: '🛠️ IT-Support',
+        portfolio_support_empty_title: 'Keine veröffentlichten Projekte',
+        portfolio_support_empty_text: 'Derzeit ist kein IT-Support-Projekt veröffentlicht. Bitte kontaktieren Sie mich für eine Referenz oder weitere Informationen.',
+        portfolio_support_empty_btn: 'Kontaktieren Sie mich',
         // Services
         services_title: 'Dienstleistungen',
         service_1_title: 'Web / Apps Entwicklung',
@@ -1888,6 +2484,9 @@
         resume_cisco_3: 'Fototra amin\'ny Fitaovana solosaina.',
         resume_cisco_4: 'Fampidirana amin\'ny Fiarovana an-tserasera.',
         resume_cisco_5: 'Lalana ho an\'ny Junior Cybersecurity Analyst.',
+        resume_cisco_6: 'Mpanao fitsapana ara-pitondrantena (Ethical Hacker).',
+        resume_cisco_7: 'Fanohanana ny Rafitra Fiasa.',
+        resume_cisco_8: 'Fototra amin\'ny Fanohanana Mpampiasa IT.',
         resume_edu_1: 'Fanofanana Alemana: A2',
         resume_edu_1_date: 'Oktobra 2025 - Febroary 2026',
         resume_edu_2: 'Codefinity: Taratasy fanamarinana fahombiazana ho an\'ny Advanced Technical SQL',
@@ -1963,6 +2562,12 @@
         portfolio_item_5_text: 'Famoronana tranonkala varotra an-tserasera, tetikasa namana hamoronana fivarotana an-tserasera ho an\'ny vokatra',
         portfolio_item_6_title: 'Nandritra ny fiofanana',
         portfolio_item_6_text: 'Rindranasa VINA - Rindranasa fanombanana ny zava-bitan\'ny mpiasa ho an\'ny HR an\'ny Ravinala Airports',
+        // Portfolio Tabs (NOUVEAU)
+        portfolio_tab_dev: '💻 Famoronana',
+        portfolio_tab_support: '🛠️ Fanohanana IT',
+        portfolio_support_empty_title: 'Tsy misy tetikasa navoaka',
+        portfolio_support_empty_text: 'Tsy misy tetikasa Fanohanana IT navoaka amin\'izao. Mifandraisa amiko raha mila fanondroana na fanazavana fanampiny.',
+        portfolio_support_empty_btn: 'Mifandraisa amiko',
         // Services
         services_title: 'Tolotra',
         service_1_title: 'Famoronana Web / Rindranasa',
@@ -2031,7 +2636,6 @@
       var t = TRANSLATIONS[lang];
       if (!t) return;
 
-      // Mettre à jour tous les éléments avec data-lang-key
       document.querySelectorAll('[data-lang-key]').forEach(function(el) {
         var key = el.getAttribute('data-lang-key');
         if (t[key] !== undefined) {
@@ -2039,15 +2643,11 @@
         }
       });
 
-      // Mettre à jour les textes spécifiques sans data-lang-key
       var heroName = document.getElementById('heroName');
       var heroAvailability = document.getElementById('heroAvailability');
       var typedElement = document.querySelector('.typed');
 
       if (heroName) heroName.textContent = 'RAKOTONIAINA Harry Yves';
-
-      // ⚠️ Le bloc qui écrasait #heroTitle a été SUPPRIMÉ
-      // → Votre titre HTML est maintenant respecté en permanence
 
       if (heroAvailability) {
         heroAvailability.textContent = lang === 'fr' ? '- Disponible pour une mobilité internationale -' :
@@ -2056,7 +2656,6 @@
           '- Misokatra ho an\'ny fifindrà-monina iraisam-pirenena -';
       }
 
-      // Textes longs
       var aboutText = document.getElementById('aboutText');
       if (aboutText) {
         aboutText.textContent = lang === 'fr' ? 'Passionné par l\'informatique depuis toujours, j\'ai concrétisé mon intérêt en obtenant un diplôme dans le domaine, avec une spécialisation en développement et en gestion des systèmes d\'information (IT). Cette formation m\'a permis d\'acquérir de solides compétences techniques et une compréhension approfondie des enjeux informatiques actuels. Je suis constamment à la recherche de nouveaux défis et opportunités pour mettre en pratique mes connaissances et contribuer à des projets innovants.' :
@@ -2105,7 +2704,6 @@
           'Aza misalasala mifandray amiko raha misy fanontaniana na fangatahana fampahalalana.';
       }
 
-      // Mettre à jour l'effet typed
       if (typedElement) {
         var items = t.hero_typed_items.split(', ').map(function(item) { return item.trim(); });
         typedElement.setAttribute('data-typed-items', t.hero_typed_items);
@@ -2130,9 +2728,7 @@
         }
       }
 
-      // Notifier les autres composants (carrousel, etc.) du changement
       window.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang: lang } }));
-
       localStorage.setItem('preferredLanguage', lang);
     }
 
@@ -2159,6 +2755,57 @@
 
     console.log('✅ Traductions chargées - 4 langues disponibles (FR, EN, DE, MG)');
   </script>
+
+    <div id="myChatbot">
+      <!-- Le contenu du chatbot sera injecté ici par JS -->
+    </div>
+
+    <!-- Scripts existants -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/generate-cv.js"></script>
+
+  <!-- ==========================================================
+     SCRIPT : Retour en haut de page
+     ========================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const scrollTopBtn = document.getElementById('scroll-top');
+
+      if (!scrollTopBtn) return;
+
+      // Afficher / masquer le bouton selon la position de scroll
+      function toggleScrollTopBtn() {
+        if (window.scrollY > 300) {
+          scrollTopBtn.classList.add('active');
+        } else {
+          scrollTopBtn.classList.remove('active');
+        }
+      }
+
+      // Scroll fluide vers le haut
+      scrollTopBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+
+      // Écouter le scroll
+      window.addEventListener('scroll', toggleScrollTopBtn, { passive: true });
+
+      // Vérifier au chargement
+      toggleScrollTopBtn();
+
+      console.log('✅ Bouton Scroll-to-Top initialisé');
+    });
+  </script>
+
+  <!-- ✅ NOUVEAU : Chatbot -->
+  <script src="assets/js/chatbot-data.js"></script>   
+  <script src="assets/js/chatbot.js"></script>
 
 </body>
 </html>
